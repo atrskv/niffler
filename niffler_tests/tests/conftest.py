@@ -4,24 +4,31 @@ import time
 import pytest
 import requests
 from dotenv import load_dotenv
-from selene import browser
+from selene import browser, have
 
 from niffler_tests.internal.models.user import User
 
 
 @pytest.fixture(scope="session", autouse=True)
-def load_env():
+def envs():
     _ = load_dotenv()
 
 
 @pytest.fixture(scope="function", autouse=False)
-def in_browser():
+def in_browser(envs):
     browser.config.base_url = f"{os.getenv('FRONTEND_URL')}"
     browser.config.timeout = 6.0
 
 
 @pytest.fixture(scope="function", autouse=False)
-def registered_user():
+def as_a_random_user():
+    user = User.create_random()
+
+    yield user
+
+
+@pytest.fixture(scope="function", autouse=False)
+def as_a_registered_user(envs, as_a_random_user):
     for attempt in range(5):
         session = requests.Session()
         session.get(
@@ -31,7 +38,7 @@ def registered_user():
 
         csrf_token = session.cookies.get("XSRF-TOKEN")
 
-        user = User.create_random()
+        user = as_a_random_user
         response = session.post(
             f"{os.getenv('AUTH_URL')}:{os.getenv('AUTH_PORT')}/register",
             data={
@@ -54,8 +61,8 @@ def registered_user():
 
 
 @pytest.fixture(scope="function", autouse=False)
-def as_logged_user(registered_user):
-    user = registered_user
+def as_a_logged_user(as_a_registered_user):
+    user = as_a_registered_user
 
     session = requests.Session()
     session.get(
@@ -88,12 +95,13 @@ def as_logged_user(registered_user):
         )
 
     browser.open(f"{os.getenv('FRONTEND_URL')}")
+    browser.wait_until(have.url_containing("/main"))
 
     yield user
 
 
 @pytest.fixture(autouse=True)
-def clean_all_state():
+def clean_all_state(envs):
     yield
 
     for url in [
@@ -104,3 +112,11 @@ def clean_all_state():
         browser.driver.delete_all_cookies()
         browser.driver.execute_script("localStorage.clear();")
         browser.driver.execute_script("sessionStorage.clear();")
+
+
+@pytest.fixture()
+def spending_page(in_browser, as_a_logged_user):
+    browser.open("/spending")
+    browser.wait_until(have.url_containing("/spending"))
+    user = as_a_logged_user
+    yield user
