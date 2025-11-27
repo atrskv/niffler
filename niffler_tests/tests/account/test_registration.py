@@ -1,11 +1,11 @@
 from selene import be, browser, have
 from selene.support.shared.jquery_style import s
 
-from niffler_tests.internal.models.user import User, fake
+from niffler_tests.internal.models.user import fake
 
 
-def test_register_an_user(in_browser):
-    user = User.create_random()
+def test_registering_a_user(in_browser, as_a_random_user):
+    user = as_a_random_user
 
     browser.open("/")
     s(".form__register").click()
@@ -21,8 +21,8 @@ def test_register_an_user(in_browser):
     s(".form_sign-in").should(be.visible)
 
 
-def test_register_an_user_with_a_short_username(in_browser):
-    user = User.create_random()
+def test_registering_with_a_short_username(in_browser, as_a_random_user):
+    user = as_a_random_user
 
     browser.open("/")
     s(".form__register").click()
@@ -39,8 +39,8 @@ def test_register_an_user_with_a_short_username(in_browser):
     )
 
 
-def test_register_an_user_with_a_long_username(in_browser):
-    user = User.create_random()
+def test_registering_with_a_long_username(in_browser, as_a_random_user):
+    user = as_a_random_user
     user.login = fake.pystr(min_chars=51, max_chars=51)
 
     browser.open("/")
@@ -58,8 +58,8 @@ def test_register_an_user_with_a_long_username(in_browser):
     )
 
 
-def test_register_an_user_with_a_short_password(in_browser):
-    user = User.create_random()
+def test_registering_with_a_short_password(in_browser, as_a_random_user):
+    user = as_a_random_user
 
     browser.open("/")
     s(".form__register").click()
@@ -76,8 +76,8 @@ def test_register_an_user_with_a_short_password(in_browser):
     )
 
 
-def test_register_an_user_with_a_password_mismatch(in_browser):
-    user = User.create_random()
+def test_registering_with_a_password_mismatch(in_browser, as_a_random_user):
+    user = as_a_random_user
 
     browser.open("/")
     s(".form__register").click()
@@ -90,8 +90,8 @@ def test_register_an_user_with_a_password_mismatch(in_browser):
     s(".form__error").should(have.exact_text("Passwords should be equal"))
 
 
-def test_register_an_user_that_already_exists(in_browser, registered_user):
-    user = registered_user
+def test_registering_an_existing_user(in_browser, as_a_registered_user):
+    user = as_a_registered_user
 
     browser.open("/")
     s(".form__register").click()
