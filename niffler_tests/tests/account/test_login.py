@@ -1,11 +1,9 @@
 from selene import be, browser, have
 from selene.support.shared.jquery_style import s
 
-from niffler_tests.internal.models.user import User
 
-
-def test_log_in_as_an_user(in_browser, registered_user):
-    user = registered_user
+def test_a_registered_user_logging_in(in_browser, as_a_registered_user):
+    user = as_a_registered_user
 
     browser.open("/")
     log_in_form = s(".form")
@@ -17,8 +15,8 @@ def test_log_in_as_an_user(in_browser, registered_user):
     s("#spendings").should(be.visible)
 
 
-def test_log_in_as_a_nonexistent_user(in_browser):
-    user = User.create_random()
+def test_a_random_user_logging_in(in_browser, as_a_random_user):
+    user = as_a_random_user
 
     browser.open("/")
     log_in_form = s(".form")
@@ -31,8 +29,8 @@ def test_log_in_as_a_nonexistent_user(in_browser):
     )
 
 
-def test_log_in_with_an_invalid_password(in_browser, registered_user):
-    user = registered_user
+def test_logging_in_with_invalid_password(in_browser, as_a_registered_user):
+    user = as_a_registered_user
 
     browser.open("/")
     log_in_form = s(".form")

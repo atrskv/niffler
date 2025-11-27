@@ -1,13 +1,15 @@
 from datetime import date
 
 from selene import have
-from selene.support.shared.jquery_style import s, ss
+from selene.support.shared.jquery_style import s
 
 from niffler_tests.internal.models.currency import Currency
 from niffler_tests.internal.models.user import fake
+from niffler_tests.tests.marks import pages
 
 
-def test_add_a_new_spending(in_browser, as_logged_user):
+@pages.spending
+def test_adding_a_new_spending():
     # GIVEN
     amount = str(fake.random_int(min=10, max=100))
     currency = fake.random_element(list(Currency))
@@ -20,9 +22,6 @@ def test_add_a_new_spending(in_browser, as_logged_user):
     description = fake.sentence()
 
     # WHEN
-    new_spending_button = ss("a").second
-    new_spending_button.click()
-
     s("#amount").set_value(amount)
     s("#currency").click()
     s("[role=listbox]").ss("li")[currency.value].click()
@@ -43,7 +42,8 @@ def test_add_a_new_spending(in_browser, as_logged_user):
     row.ss("td")[4].should(have.exact_text(display_date))
 
 
-def test_add_a_new_spending_without_amount(in_browser, as_logged_user):
+@pages.spending
+def test_adding_a_new_spending_without_amount():
     # GIVEN
     currency = fake.random_element(list(Currency))
     category = fake.word()
@@ -55,9 +55,6 @@ def test_add_a_new_spending_without_amount(in_browser, as_logged_user):
     description = fake.sentence()
 
     # WHEN
-    new_spending_button = ss("a").second
-    new_spending_button.click()
-
     s("#currency").click()
     s("[role=listbox]").ss("li")[currency.value].click()
     s("#category").type(category)
