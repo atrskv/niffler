@@ -29,6 +29,10 @@ def in_browser(envs):
     browser.config.base_url = f"{os.getenv('FRONTEND_URL')}"
     browser.config.timeout = 6.0
 
+    yield
+
+    browser.quit()
+
 
 @pytest.fixture(scope="function", autouse=False)
 def as_a_random_user():
@@ -122,8 +126,8 @@ def token(as_a_logged_user):
     raise Exception("Access token not found in sessionStorage!")
 
 
-@pytest.fixture(autouse=True)
-def clean_all_state(envs):
+@pytest.fixture(autouse=True, scope="function")
+def clean_all_state(in_browser, envs):
     yield
 
     for url in [
