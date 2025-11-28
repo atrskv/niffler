@@ -364,6 +364,17 @@ dev = ["pre-commit", "tox"]
 testing = ["coverage", "pytest", "pytest-benchmark"]
 
 [[package]]
+name = "polling2"
+version = "0.5.0"
+description = "Updated polling utility with many configurable options"
+optional = false
+python-versions = "*"
+files = [
+    {file = "polling2-0.5.0-py2.py3-none-any.whl", hash = "sha256:ad86d56fbd7502f0856cac2d0109d595c18fa6c7fb12c88cee5e5d16c17286c1"},
+    {file = "polling2-0.5.0.tar.gz", hash = "sha256:90b7da82cf7adbb48029724d3546af93f21ab6e592ec37c8c4619aedd010e342"},
+]
+
+[[package]]
 name = "pycparser"
 version = "2.23"
 description = "C parser in Python"
@@ -791,4 +802,4 @@ h11 = ">=0.16.0,<1"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "c81c656457b62f58603abfa9633b6d700048137f4650fea2eb07774014cd63db"
+content-hash = "3d6fb322e21ccf24f9417ad5480228bf3fb88a3c41153eeddd4a4e5af9ae0d9f"
