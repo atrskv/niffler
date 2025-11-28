@@ -41,3 +41,14 @@ def test_logging_in_with_invalid_password(in_browser, as_a_registered_user):
     s(".form__error").should(
         have.exact_text("Неверные учетные данные пользователя")
     )
+
+
+def test_logging_out(in_browser, as_a_logged_user):
+    user = as_a_logged_user
+
+    s("[aria-label=Menu]").click()
+    s(".MuiList-root").ss("li")[-1].click()
+    s(".MuiDialogActions-root").ss("button").second.click()
+
+    s(".header").should(have.exact_text("Log in"))
+    s(".form__register").should(have.exact_text("Create new account"))
