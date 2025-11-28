@@ -8,7 +8,7 @@ from selenium.webdriver import Keys
 
 from niffler_tests.internal.models.currency import Currency
 from niffler_tests.internal.models.user import fake
-from niffler_tests.tests.marks import pages
+from niffler_tests.tests.marks import pages, testdata
 
 
 @pages.spending
@@ -130,14 +130,10 @@ def test_adding_a_new_spend_with_existing_category(category):
     row.ss("td")[1].should(have.exact_text(category_name))
 
 
-@pytest.mark.parametrize(
-    "spends_with_single_category",
+@testdata.spends_with_single_category(
     [
-        [
-            {"amount": 100.0, "currency": "USD", "description": "Test desc"},
-        ]
-    ],
-    indirect=True,
+        {"amount": 100.0, "currency": "USD", "description": "Test desc"},
+    ]
 )
 def test_saving_a_spend_after_removing_a_category(
     spends_with_single_category,
@@ -155,14 +151,10 @@ def test_saving_a_spend_after_removing_a_category(
     s(".input__helper-text").should(have.exact_text("Please choose category"))
 
 
-@pytest.mark.parametrize(
-    "spends_with_single_category",
+@testdata.spends_with_single_category(
     [
-        [
-            {"amount": 200.0, "currency": "KZT", "description": "Test desc"},
-        ]
-    ],
-    indirect=True,
+        {"amount": 200.0, "currency": "KZT", "description": "Test desc"},
+    ]
 )
 def test_editing_a_spend_by_adding_a_new_category(
     spends_with_single_category,
@@ -178,6 +170,9 @@ def test_editing_a_spend_by_adding_a_new_category(
     s("#category").send_keys(Keys.DELETE)
     s("#category").type(new_category_name)
     s("#save").click()
+    alert = s(".MuiAlert-standardSuccess")
+    alert.with_(timeout=10).wait.for_(be.visible)
+    alert.with_(timeout=10).wait.for_(be.hidden)
 
     # THEN
     s("#legend-container").s("ul").ss("li").first.should(
@@ -187,14 +182,10 @@ def test_editing_a_spend_by_adding_a_new_category(
     row.ss("td")[1].should(have.exact_text(new_category_name))
 
 
-@pytest.mark.parametrize(
-    "spends_with_single_category",
+@testdata.spends_with_single_category(
     [
-        [
-            {"amount": 300.0, "currency": "USD", "description": "Test desc"},
-        ]
-    ],
-    indirect=True,
+        {"amount": 300.0, "currency": "USD", "description": "Test desc"},
+    ]
 )
 def test_removing_a_spend(
     spends_with_single_category,
@@ -213,14 +204,10 @@ def test_removing_a_spend(
     )
 
 
-@pytest.mark.parametrize(
-    "spends_with_single_category",
+@testdata.spends_with_single_category(
     [
-        [
-            {"amount": 300.0, "currency": "USD", "description": "Test desc"},
-        ]
-    ],
-    indirect=True,
+        {"amount": 300.0, "currency": "USD", "description": "Test desc"},
+    ]
 )
 def test_archiving_a_category(
     spends_with_single_category,
@@ -235,18 +222,14 @@ def test_archiving_a_category(
     s(".MuiDialogActions-root").wait.for_(be.not_.visible)
 
     alert = s(".MuiAlert-standardSuccess")
-    alert.should(be.visible)
+    alert.with_(timeout=10).should(be.visible)
     alert.with_(timeout=10).should(be.hidden)
 
 
-@pytest.mark.parametrize(
-    "spends_with_single_category",
+@testdata.spends_with_single_category(
     [
-        [
-            {"amount": 300.0, "currency": "USD", "description": "Test desc"},
-        ]
-    ],
-    indirect=True,
+        {"amount": 300.0, "currency": "USD", "description": "Test desc"},
+    ]
 )
 def test_renaming_a_category(
     spends_with_single_category,
@@ -263,8 +246,8 @@ def test_renaming_a_category(
 
     # THEN
     alert = s(".MuiAlert-standardSuccess")
-    alert.should(be.visible)
-    alert.with_(timeout=6).should(be.hidden)
+    alert.with_(timeout=10).should(be.visible)
+    alert.with_(timeout=10).should(be.hidden)
 
     # AND
     s("h1").click()
@@ -279,20 +262,12 @@ def test_renaming_a_category(
         pytest.xfail("Cannot rename category")
 
 
-@pytest.mark.parametrize(
-    "category",
-    ["For autotest"],
-    indirect=True,
-)
-@pytest.mark.parametrize(
-    "spends_with_single_category",
+@testdata.category("For autotest")
+@testdata.spends_with_single_category(
     [
-        [
-            {"amount": 123.0, "currency": "USD", "description": "Firt desc"},
-            {"amount": 321.0, "currency": "USD", "description": "Second desc"},
-        ],
-    ],
-    indirect=True,
+        {"amount": 123.0, "currency": "USD", "description": "Firt desc"},
+        {"amount": 321.0, "currency": "USD", "description": "Second desc"},
+    ]
 )
 def test_adding_spends_with_a_single_category(
     spends_with_single_category,
@@ -311,20 +286,12 @@ def test_adding_spends_with_a_single_category(
     rows = s("tbody").ss("tr").should(have.size(2))
 
 
-@pytest.mark.parametrize(
-    "category",
-    [["First category", "Second category"]],
-    indirect=True,
-)
-@pytest.mark.parametrize(
-    "spends_with_categories_1to1",
+@testdata.category(["First category", "Second category"])
+@testdata.spends_with_categories_1to1(
     [
-        [
-            {"amount": 333.0, "currency": "USD", "description": "Firt desc"},
-            {"amount": 211.0, "currency": "USD", "description": "Second desc"},
-        ],
+        {"amount": 333.0, "currency": "USD", "description": "Firt desc"},
+        {"amount": 211.0, "currency": "USD", "description": "Second desc"},
     ],
-    indirect=True,
 )
 def test_adding_spends_with_different_categories(
     spends_with_categories_1to1,

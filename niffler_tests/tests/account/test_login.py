@@ -19,7 +19,9 @@ def test_a_random_user_logging_in(in_browser, as_a_random_user):
     user = as_a_random_user
 
     browser.open("/")
+    
     log_in_form = s(".form")
+    log_in_form.wait.for_(be.visible)
     log_in_form.s("[name=username]").type(user.login)
     log_in_form.s("[name=password]").type(user.password)
     log_in_form.s(".form__submit").click()
