@@ -2,16 +2,20 @@ import os
 import random
 import time
 
+from grpc import insecure_channel
 import polling2
 import pytest
 import requests
 from dotenv import load_dotenv
 from selene import browser, have
 
-from niffler_tests.internal.clients.spends import SpendsHttpClient
-from niffler_tests.internal.models.currency import Currency
-from niffler_tests.internal.models.user import User, fake
-from niffler_tests.internal.utils import random_recent_days
+from internal.clients.pb.niffler_currency_pb2_pbreflect import (
+    NifflerCurrencyServiceClient,
+)
+from internal.clients.spends import SpendsHttpClient
+from internal.models.currency import Currency
+from internal.models.user import User, fake
+from internal.utils import random_recent_days
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -30,6 +34,15 @@ def in_browser(envs):
     browser.config.timeout = 6.0
 
     yield
+
+    for url in [
+        os.getenv("FRONTEND_URL"),
+        f"{os.getenv('AUTH_URL')}:{os.getenv('AUTH_PORT')}",
+    ]:
+        browser.open(url)
+        browser.driver.delete_all_cookies()
+        browser.driver.execute_script("localStorage.clear();")
+        browser.driver.execute_script("sessionStorage.clear();")
 
     browser.quit()
 
@@ -79,9 +92,7 @@ def as_a_logged_user(as_a_registered_user):
     user = as_a_registered_user
 
     session = requests.Session()
-    session.get(
-        f"{os.getenv('AUTH_URL')}:{os.getenv('AUTH_PORT')}/login", verify=False
-    )
+    session.get(f"{os.getenv('AUTH_URL')}:{os.getenv('AUTH_PORT')}/login", verify=False)
     csrf_token = session.cookies.get("XSRF-TOKEN")
 
     session.post(
@@ -124,20 +135,6 @@ def token(as_a_logged_user):
             return token
         time.sleep(2)
     raise Exception("Access token not found in sessionStorage!")
-
-
-@pytest.fixture(autouse=True, scope="function")
-def clean_all_state(in_browser, envs):
-    yield
-
-    for url in [
-        os.getenv("FRONTEND_URL"),
-        f"{os.getenv('AUTH_URL')}:{os.getenv('AUTH_PORT')}",
-    ]:
-        browser.open(url)
-        browser.driver.delete_all_cookies()
-        browser.driver.execute_script("localStorage.clear();")
-        browser.driver.execute_script("sessionStorage.clear();")
 
 
 @pytest.fixture(scope="function")
@@ -276,3 +273,9 @@ def spends_with_categories_1to1(request, spends_client, category):
         spends.append(spend)
 
     return spends[0] if len(spends) == 1 else spends
+
+
+@pytest.fixture(scope="session")
+def grpc_client() -> NifflerCurrencyServiceClient:
+    channel = insecure_channel("localhost:8092")
+    return NifflerCurrencyServiceClient(channel)
