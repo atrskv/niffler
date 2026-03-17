@@ -1,8 +1,8 @@
 import os
 import random
 import time
-
-from grpc import insecure_channel
+import grpc
+from grpc import insecure_channel, intercept_channel
 import polling2
 import pytest
 import requests
@@ -13,9 +13,13 @@ from internal.clients.pb.niffler_currency_pb2_pbreflect import (
     NifflerCurrencyServiceClient,
 )
 from internal.clients.spends import SpendsHttpClient
+from internal.grpc.interceptors.allure import AllureInterceptor
+from internal.grpc.interceptors.logging import LoggingInterceptor
 from internal.models.currency import Currency
 from internal.models.user import User, fake
 from internal.utils import random_recent_days
+
+INTERCEPTORS = [LoggingInterceptor(), AllureInterceptor()]
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -278,4 +282,5 @@ def spends_with_categories_1to1(request, spends_client, category):
 @pytest.fixture(scope="session")
 def grpc_client() -> NifflerCurrencyServiceClient:
     channel = insecure_channel("localhost:8092")
-    return NifflerCurrencyServiceClient(channel)
+    intercepted_channel = intercept_channel(channel, *INTERCEPTORS)
+    return NifflerCurrencyServiceClient(intercepted_channel)

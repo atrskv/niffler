@@ -6,5 +6,4 @@ from internal.clients.pb.niffler_currency_pb2_pbreflect import (
 
 def test_get_all_currencies(grpc_client: NifflerCurrencyServiceClient):
     response = grpc_client.get_all_currencies(empty_pb2.Empty())
-    # assert response.allCurrencies
-    print(response)
+    assert len(response.allCurrencies) == 4
