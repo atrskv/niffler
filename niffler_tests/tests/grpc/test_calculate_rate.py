@@ -6,7 +6,7 @@ import grpc
 import pytest
 
 
-def test_calculate_rate(grpc_client: NifflerCurrencyServiceClient) -> None:
+def test_calculate_rate(grpc_client: NifflerCurrencyServiceClient):
     response = grpc_client.calculate_rate(
         request=CalculateRequest(
             spendCurrency=CurrencyValues.EUR,
@@ -18,14 +18,29 @@ def test_calculate_rate(grpc_client: NifflerCurrencyServiceClient) -> None:
     assert response.calculatedAmount == 7200, "Expected 7200"
 
 
-def test_calculate_rate__without_desired_currency(
+def test_calculate_rate_without_desired_currency(
     grpc_client: NifflerCurrencyServiceClient,
-) -> None:
+):
     try:
         _ = grpc_client.calculate_rate(
             request=CalculateRequest(
                 spendCurrency=CurrencyValues.EUR,
                 amount=100.0,
+            )
+        )
+    except grpc.RpcError as e:
+        assert e.code() == grpc.StatusCode.UNKNOWN
+        assert e.details() == "Application error processing RPC"
+
+
+def test_calculate_rate_without_amount(
+    grpc_client: NifflerCurrencyServiceClient,
+):
+    try:
+        _ = grpc_client.calculate_rate(
+            request=CalculateRequest(
+                spendCurrency=CurrencyValues.EUR,
+                desiredCurrency=CurrencyValues.RUB,
             )
         )
     except grpc.RpcError as e:

@@ -8,7 +8,7 @@ from selenium.webdriver import Keys
 
 from internal.models.currency import Currency
 from internal.models.user import fake
-from tests.marks import pages, testdata
+from internal.marks import pages, testdata
 
 
 @pages.spending
@@ -205,7 +205,7 @@ def test_archiving_a_category(in_browser, spends_with_single_category):
     s(".MuiList-root").ss("li").first.click()
     s("[aria-label='Archive category']").click()
     s(".MuiPaper-root").wait.for_(be.visible)
-    s(".MuiDialogActions-root").ss("button").second.click()
+    s(".MuiDialogActions-root").ss("button").second.with_(click_by_js=True).click()
     s(".MuiDialogActions-root").wait.for_(be.not_.visible)
 
     alert = s(".MuiAlert-standardSuccess")
