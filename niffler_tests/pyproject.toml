@@ -16,6 +16,7 @@ python-dotenv = "^1.2.1"
 polling2 = "^0.5.0"
 pbreflect = "^1.1.1"
 allure-pytest = "^2.15.3"
+pydantic-settings = "^2.13.1"
 
 
 [build-system]

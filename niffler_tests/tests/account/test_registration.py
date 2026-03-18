@@ -1,7 +1,7 @@
 from selene import be, browser, have
 from selene.support.shared.jquery_style import s
 
-from niffler_tests.internal.models.user import fake
+from internal.models.user import fake
 
 
 def test_registering_a_user(in_browser, as_a_random_user):
@@ -33,9 +33,7 @@ def test_registering_with_a_short_username(in_browser, as_a_random_user):
     register_form.s(".form__submit").click()
 
     s(".form__error").should(
-        have.exact_text(
-            "Allowed username length should be from 3 to 50 characters"
-        )
+        have.exact_text("Allowed username length should be from 3 to 50 characters")
     )
 
 
@@ -52,9 +50,7 @@ def test_registering_with_a_long_username(in_browser, as_a_random_user):
     register_form.s(".form__submit").click()
 
     s(".form__error").should(
-        have.exact_text(
-            "Allowed username length should be from 3 to 50 characters"
-        )
+        have.exact_text("Allowed username length should be from 3 to 50 characters")
     )
 
 
@@ -70,9 +66,7 @@ def test_registering_with_a_short_password(in_browser, as_a_random_user):
     register_form.s(".form__submit").click()
 
     s(".form__error").should(
-        have.exact_text(
-            "Allowed password length should be from 3 to 12 characters"
-        )
+        have.exact_text("Allowed password length should be from 3 to 12 characters")
     )
 
 
@@ -101,6 +95,4 @@ def test_registering_an_existing_user(in_browser, as_a_registered_user):
     register_form.s("#passwordSubmit").type(user.password)
     register_form.s(".form__submit").click()
 
-    s(".form__error").should(
-        have.exact_text(f"Username `{user.login}` already exists")
-    )
+    s(".form__error").should(have.exact_text(f"Username `{user.login}` already exists"))
