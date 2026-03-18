@@ -1,20 +1,20 @@
 import os
 import random
 import time
-import grpc
+from google.protobuf import internal
 from grpc import insecure_channel, intercept_channel
 import polling2
 import pytest
 import requests
-from dotenv import load_dotenv
 from selene import browser, have
 
+from internal import settings
 from internal.clients.pb.niffler_currency_pb2_pbreflect import (
     NifflerCurrencyServiceClient,
 )
 from internal.clients.spends import SpendsHttpClient
-from internal.grpc.interceptors.allure import AllureInterceptor
-from internal.grpc.interceptors.logging import LoggingInterceptor
+from internal.interceptors.allure import AllureInterceptor
+from internal.interceptors.logging import LoggingInterceptor
 from internal.models.currency import Currency
 from internal.models.user import User, fake
 from internal.utils import random_recent_days
@@ -22,26 +22,21 @@ from internal.utils import random_recent_days
 INTERCEPTORS = [LoggingInterceptor(), AllureInterceptor()]
 
 
-@pytest.fixture(scope="session", autouse=True)
-def envs():
-    _ = load_dotenv()
-
-
 @pytest.fixture(scope="session")
-def gateway_url(envs):
-    return f"{os.getenv('GATEWAY_URL')}:{os.getenv('GATEWAY_PORT')}"
+def gateway_url():
+    return f"{settings.config.gateway_url}:{settings.config.gateway_port}"
 
 
 @pytest.fixture(scope="function", autouse=False)
-def in_browser(envs):
-    browser.config.base_url = f"{os.getenv('FRONTEND_URL')}"
-    browser.config.timeout = 6.0
+def in_browser():
+    browser.config.base_url = settings.config.frontend_url
+    browser.config.timeout = settings.config.timeout
 
     yield
 
     for url in [
-        os.getenv("FRONTEND_URL"),
-        f"{os.getenv('AUTH_URL')}:{os.getenv('AUTH_PORT')}",
+        settings.config.frontend_url,
+        f"{settings.config.auth_url}:{settings.config.auth_port}",
     ]:
         browser.open(url)
         browser.driver.delete_all_cookies()
@@ -59,11 +54,11 @@ def as_a_random_user():
 
 
 @pytest.fixture(scope="function", autouse=False)
-def as_a_registered_user(envs, as_a_random_user):
+def as_a_registered_user(as_a_random_user):
     for attempt in range(5):
         session = requests.Session()
         session.get(
-            f"{os.getenv('AUTH_URL')}:{os.getenv('AUTH_PORT')}/register",
+            f"{settings.config.auth_url}:{settings.config.auth_port}/register",
             verify=False,
         )
 
@@ -71,7 +66,7 @@ def as_a_registered_user(envs, as_a_random_user):
 
         user = as_a_random_user
         response = session.post(
-            f"{os.getenv('AUTH_URL')}:{os.getenv('AUTH_PORT')}/register",
+            f"{settings.config.auth_url}:{settings.config.auth_port}/register",
             data={
                 "username": user.login,
                 "password": user.password,
@@ -96,11 +91,13 @@ def as_a_logged_user(as_a_registered_user):
     user = as_a_registered_user
 
     session = requests.Session()
-    session.get(f"{os.getenv('AUTH_URL')}:{os.getenv('AUTH_PORT')}/login", verify=False)
+    session.get(
+        f"{settings.config.auth_url}:{settings.config.auth_port}/login", verify=False
+    )
     csrf_token = session.cookies.get("XSRF-TOKEN")
 
     session.post(
-        f"{os.getenv('AUTH_URL')}:{os.getenv('AUTH_PORT')}/login",
+        f"{settings.config.auth_url}:{settings.config.auth_port}/login",
         data={
             "_csrf": csrf_token,
             "username": user.login,
@@ -111,7 +108,7 @@ def as_a_logged_user(as_a_registered_user):
         verify=False,
     )
 
-    browser.open(f"{os.getenv('AUTH_URL')}")
+    browser.open(settings.config.auth_url)
 
     for cookie in session.cookies:
         browser.driver.add_cookie(
@@ -119,11 +116,11 @@ def as_a_logged_user(as_a_registered_user):
                 "name": cookie.name,
                 "value": cookie.value,
                 "path": cookie.path or "/",
-                "domain": cookie.domain or f"{os.getenv('AUTH_DOMAIN')}",
+                "domain": cookie.domain or settings.config.auth_domain,
             }
         )
 
-    browser.open(f"{os.getenv('FRONTEND_URL')}")
+    browser.open(settings.config.frontend_url)
     browser.wait_until(have.url_containing("/main"))
 
     yield user
@@ -281,6 +278,12 @@ def spends_with_categories_1to1(request, spends_client, category):
 
 @pytest.fixture(scope="session")
 def grpc_client() -> NifflerCurrencyServiceClient:
-    channel = insecure_channel("localhost:8092")
+
+    host = settings.config.currency_service_host
+
+    if settings.config.use_mock:
+        host = settings.config.wiremock_host
+
+    channel = insecure_channel(host)
     intercepted_channel = intercept_channel(channel, *INTERCEPTORS)
     return NifflerCurrencyServiceClient(intercepted_channel)
