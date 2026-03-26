@@ -15,6 +15,7 @@ class Config(BaseSettings):
     gateway_url: str | None = None
     gateway_port: str | None = None
     timeout: float = 5.0
+    spend_db_url: str | None = None
 
 
 config = Config(_env_file=dotenv.find_dotenv(f"config.{Config().context}.env"))

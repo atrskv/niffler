@@ -17,6 +17,9 @@ polling2 = "^0.5.0"
 pbreflect = "^1.1.1"
 allure-pytest = "^2.15.3"
 pydantic-settings = "^2.13.1"
+sqlalchemy = "^2.0.48"
+psycopg2-binary = "^2.9.11"
+sqlmodel = "^0.0.37"
 
 
 [build-system]

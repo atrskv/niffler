@@ -1,14 +1,12 @@
 import uuid
-from datetime import datetime
 from urllib.parse import urljoin
 
 import requests
 
+from internal.models.spend import CategoryAPI, SpendAPI, SpendAddAPI
+
 
 class SpendsHttpClient:
-    session: requests.Session
-    base_url: str
-
     def __init__(self, base_url: str, token: str):
         self.base_url = base_url
         self.session = requests.session()
@@ -20,78 +18,69 @@ class SpendsHttpClient:
             }
         )
 
-    def get_categories(self, exclude_archived=True):
+    def get_categories(self, exclude_archived: bool = True) -> list[CategoryAPI]:
         response = self.session.get(
-            urljoin(
-                self.base_url,
-                "/api/categories/all",
-            ),
+            urljoin(self.base_url, "/api/categories/all"),
             params={"excludeArchived": str(exclude_archived).lower()},
         )
-        response.raise_for_status()
+        self._raise_for_status(response)
+        return [CategoryAPI(**c) for c in response.json()]
 
-        return response.json()
-
-    def add_category(self, name: str):
+    def add_category(self, name: str) -> CategoryAPI:
+        payload = {
+            "id": str(uuid.uuid4()),
+            "name": name,
+        }
         response = self.session.post(
             urljoin(self.base_url, "/api/categories/add"),
-            json={
-                "id": str(uuid.uuid4()),
-                "name": name,
-            },
+            json=payload,
         )
-        response.raise_for_status()
+        self._raise_for_status(response)
+        return CategoryAPI(**response.json())
 
-        return response.json()
-
-    def add_spend(
-        self,
-        category_id: str,
-        category_name: str,
-        username: str,
-        currency: str,
-        amount: float,
-        description: str,
-        spend_date: datetime,
-        archived: bool = False,
-    ):
+    def add_spend(self, spend: SpendAddAPI, username: str) -> SpendAPI:
         request_body = {
-            "spendDate": spend_date.isoformat(),
+            "spendDate": spend.spendDate,
             "category": {
-                "id": category_id,
-                "name": category_name,
+                "name": spend.category,
                 "username": username,
-                "archived": archived,
             },
-            "currency": currency,
-            "amount": amount,
-            "description": description,
+            "currency": spend.currency,
+            "amount": spend.amount,
+            "description": spend.description,
             "username": username,
         }
 
-        endpoint_url = urljoin(self.base_url, "/api/spends/add")
-        response = self.session.post(endpoint_url, json=request_body)
-        response.raise_for_status()
+        response = self.session.post(
+            urljoin(self.base_url, "/api/spends/add"),
+            json=request_body,
+        )
 
-        return response.json()
+        self._raise_for_status(response)
+        return SpendAPI(**response.json())
 
     def get_spends(
         self,
         filter_period: str | None = None,
         filter_currency: str | None = None,
-    ):
+    ) -> list[SpendAPI]:
         params = {}
-
-        if filter_period is not None:
+        if filter_period:
             params["filterPeriod"] = filter_period
-
-        if filter_currency is not None:
+        if filter_currency:
             params["filterCurrency"] = filter_currency
 
         response = self.session.get(
             urljoin(self.base_url, "/api/spends/all"),
             params=params,
         )
-        response.raise_for_status()
+        self._raise_for_status(response)
+        return [SpendAPI(**s) for s in response.json()]
 
-        return response.json()
+    def _raise_for_status(self, response: requests.Response):
+        try:
+            response.raise_for_status()
+        except requests.HTTPError as e:
+            if response.status_code == 400:
+                e.add_note(response.text)
+            raise
