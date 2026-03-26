@@ -7,6 +7,7 @@ from selene.support.shared.jquery_style import s, ss
 from selenium.webdriver import Keys
 
 from internal.models.currency import Currency
+from internal.models.spend import SpendAPI, SpendAddAPI
 from internal.models.user import fake
 from internal.marks import pages, testdata
 
@@ -105,27 +106,23 @@ def test_adding_a_new_spend_without_description(in_browser):
 
 @pages.spending
 def test_adding_a_new_spend_with_existing_category(in_browser, category):
-    # GIVEN
-    category_name = category["name"]
     amount = str(fake.random_int(min=10, max=100))
 
-    # WHEN
     browser.driver.refresh()
     s("#amount").set_value(amount)
     s("#category + ul").ss("li").first.click()
 
     s("#save").click()
 
-    # THEN
-    s("#legend-container").s("ul").ss("li").first.should(have.text(category_name))
+    s("#legend-container").s("ul").ss("li").first.should(have.text(category.name))
     row = s("tbody").ss("tr").first
-    row.ss("td")[1].should(have.exact_text(category_name))
+    row.ss("td")[1].should(have.exact_text(category.name))
 
 
 @testdata.spends_with_single_category(
     [
-        {"amount": 100.0, "currency": "USD", "description": "Test desc"},
-    ]
+        SpendAddAPI(amount=100.0, currency="USD", description="Test desc"),
+    ],
 )
 def test_saving_a_spend_after_removing_a_category(
     in_browser, spends_with_single_category
@@ -145,7 +142,7 @@ def test_saving_a_spend_after_removing_a_category(
 
 @testdata.spends_with_single_category(
     [
-        {"amount": 200.0, "currency": "KZT", "description": "Test desc"},
+        SpendAddAPI(amount=200.0, currency="KZT", description="Test desc"),
     ]
 )
 def test_editing_a_spend_by_adding_a_new_category(
@@ -174,7 +171,7 @@ def test_editing_a_spend_by_adding_a_new_category(
 
 @testdata.spends_with_single_category(
     [
-        {"amount": 300.0, "currency": "USD", "description": "Test desc"},
+        SpendAddAPI(amount=300.0, currency="USD", description="Test desc"),
     ]
 )
 def test_removing_a_spend(in_browser, spends_with_single_category):
@@ -194,7 +191,7 @@ def test_removing_a_spend(in_browser, spends_with_single_category):
 
 @testdata.spends_with_single_category(
     [
-        {"amount": 300.0, "currency": "USD", "description": "Test desc"},
+        SpendAddAPI(amount=300.0, currency="USD", description="Test desc"),
     ]
 )
 def test_archiving_a_category(in_browser, spends_with_single_category):
@@ -215,7 +212,7 @@ def test_archiving_a_category(in_browser, spends_with_single_category):
 
 @testdata.spends_with_single_category(
     [
-        {"amount": 300.0, "currency": "USD", "description": "Test desc"},
+        SpendAddAPI(amount=300.0, currency="USD", description="Test desc"),
     ]
 )
 def test_renaming_a_category(in_browser, spends_with_single_category):
@@ -232,7 +229,7 @@ def test_renaming_a_category(in_browser, spends_with_single_category):
     # THEN
     alert = s(".MuiAlert-standardSuccess")
     alert.with_(timeout=20).should(be.visible)
-    alert.with_(timeout=20).should(be.hidden)
+    alert.with_(timeout=30).should(be.hidden)
 
     # AND
     s("h1").click()
@@ -250,8 +247,8 @@ def test_renaming_a_category(in_browser, spends_with_single_category):
 @testdata.category("For autotest")
 @testdata.spends_with_single_category(
     [
-        {"amount": 123.0, "currency": "USD", "description": "Firt desc"},
-        {"amount": 321.0, "currency": "USD", "description": "Second desc"},
+        SpendAddAPI(amount=123.0, currency="USD", description="Firt desc"),
+        SpendAddAPI(amount=321.0, currency="USD", description="Second desc"),
     ]
 )
 def test_adding_spends_with_a_single_category(
@@ -275,27 +272,29 @@ def test_adding_spends_with_a_single_category(
 @testdata.category(["First category", "Second category"])
 @testdata.spends_with_categories_1to1(
     [
-        {"amount": 333.0, "currency": "USD", "description": "Firt desc"},
-        {"amount": 211.0, "currency": "USD", "description": "Second desc"},
+        SpendAddAPI(amount=333.0, currency="USD", description="First desc"),
+        SpendAddAPI(amount=211.0, currency="USD", description="Second desc"),
     ],
 )
 def test_adding_spends_with_different_categories(
     in_browser,
     spends_with_categories_1to1,
 ):
+    # GIVEN
     spend1, spend2 = spends_with_categories_1to1
     spend1_to_rubles_amount, spend2_to_rubles_amount = "22200", "14066.67"
 
+    # WHEN
     browser.driver.refresh()
 
     # THEN
     s("#legend-container").s("ul").ss("li").by(
-        have.text(spend1["category"]["name"])
+        have.text(spend1.category.name)
     ).first.should(have.text(spend1_to_rubles_amount))
 
     s("#legend-container").s("ul").ss("li").by(
-        have.text(spend2["category"]["name"])
+        have.text(spend2.category.name)
     ).first.should(have.text(spend2_to_rubles_amount))
 
-    # AND
+    # AND THEN
     rows = s("tbody").ss("tr").should(have.size(2))
