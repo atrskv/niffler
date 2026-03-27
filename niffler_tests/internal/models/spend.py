@@ -14,8 +14,9 @@ class Spend(SQLModel, table=True):
     amount: float
     description: str
     category_id: str = Field(foreign_key="category.id")
-    spendDate: datetime
+    spend_date: str
     currency: str
+    username: str
 
 
 class CategoryAPI(BaseModel):
