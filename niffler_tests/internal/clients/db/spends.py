@@ -30,3 +30,7 @@ class SpendDb:
                 session.delete(category)
                 session.commit()
 
+    def get_spends_by_username(self, username: str) -> Sequence[Spend]:
+        with Session(self.engine) as session:
+            statement = select(Spend).where(Spend.username == username)
+            return session.exec(statement).all()
