@@ -49,11 +49,8 @@ class SpendingsPage:
         modal.ss("button").second.click()
         modal.wait.for_(be.not_.visible)
 
-    def save(self, timeout=20):
+    def save(self):
         s("#save").click()
-
-        self._alert.with_(timeout=timeout).wait.for_(be.visible)
-        self._alert.with_(timeout=timeout).wait.for_(be.hidden)
 
     def error_cagegory_should_be_visible(self):
         s(".input__helper-text").should(have.exact_text("Please choose category"))
@@ -77,6 +74,9 @@ class SpendingsPage:
             have.exact_text("Amount has to be not less then 0.01")
         )
 
-    def category_should_be_edited(self, timeout=20):
+    def wait_for_alert(self, timeout=20):
         self._alert.with_(timeout=timeout).wait.for_(be.visible)
         self._alert.with_(timeout=timeout).wait.for_(be.hidden)
+
+    def category_should_be_edited(self, timeout=20):
+        self.wait_for_alert(timeout)
