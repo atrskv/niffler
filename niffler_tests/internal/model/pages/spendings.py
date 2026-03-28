@@ -46,7 +46,7 @@ class SpendingsPage:
     def remove_spends(self):
         s("#delete").click()
         modal = s(".MuiDialogActions-root")
-        modal.ss("button").second.click()
+        modal.ss("button").second.with_(click_by_js=True).click()
         modal.wait.for_(be.not_.visible)
 
     def save(self):
