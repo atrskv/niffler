@@ -14,6 +14,7 @@ class SpendingsPage:
         self.table = SpendingsTable()
         self._legend = s("#legend-container")
         self._category = s("#category")
+        self._alert = s(".MuiAlert-standardSuccess")
 
     def open(self):
         browser.open("/main")
@@ -48,8 +49,11 @@ class SpendingsPage:
         modal.ss("button").second.click()
         modal.wait.for_(be.not_.visible)
 
-    def save(self):
+    def save(self, timeout=20):
         s("#save").click()
+
+        self._alert.with_(timeout=timeout).wait.for_(be.visible)
+        self._alert.with_(timeout=timeout).wait.for_(be.hidden)
 
     def error_cagegory_should_be_visible(self):
         s(".input__helper-text").should(have.exact_text("Please choose category"))
@@ -74,6 +78,5 @@ class SpendingsPage:
         )
 
     def category_should_be_edited(self, timeout=20):
-        alert = s(".MuiAlert-standardSuccess")
-        alert.with_(timeout=timeout).wait.for_(be.visible)
-        alert.with_(timeout=timeout).wait.for_(be.hidden)
+        self._alert.with_(timeout=timeout).wait.for_(be.visible)
+        self._alert.with_(timeout=timeout).wait.for_(be.hidden)
