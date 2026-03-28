@@ -13,9 +13,9 @@ from internal.clients.pb.niffler_currency_pb2_pbreflect import (
 from internal.clients.spends import SpendsHttpClient
 from internal.interceptors.allure import AllureInterceptor
 from internal.interceptors.logging import LoggingInterceptor
-from internal.models.currency import Currency
-from internal.models.user import User, fake
-from internal.models.spend import CategoryAPI, SpendAddAPI
+from internal.data.models.currency import Currency
+from internal.data.models.user import User, fake
+from internal.data.models.spend import CategoryAPI, SpendAddAPI
 from internal.utils import random_recent_days
 
 INTERCEPTORS = [LoggingInterceptor(), AllureInterceptor()]

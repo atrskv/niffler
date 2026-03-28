@@ -3,7 +3,7 @@ from urllib.parse import urljoin
 
 import requests
 
-from internal.models.spend import CategoryAPI, SpendAPI, SpendAddAPI
+from internal.data.models.spend import CategoryAPI, SpendAPI, SpendAddAPI
 
 
 class SpendsHttpClient:
