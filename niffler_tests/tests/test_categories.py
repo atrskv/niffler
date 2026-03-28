@@ -22,6 +22,7 @@ def test_adding_a_new_spend(in_browser, spend_db, as_a_registered_user):
     app.spendings_page.save()
 
     result = spend_db.get_spends_by_username(user.login)
+    app.spendings_page.wait_for_alert()
 
     assert len(result) == 1
     assert user.login == result[0].username
@@ -42,6 +43,7 @@ def test_adding_a_new_category(in_browser, spend_db, as_a_registered_user):
     app.spendings_page.fill_description(spend.description)
     app.spendings_page.save()
 
+    app.spendings_page.wait_for_alert()
     result = spend_db.get_user_categories(user.login)
 
     assert len(result) == 1
