@@ -1,5 +1,6 @@
 from selene.support.shared.jquery_style import s, ss
 from selene import have, be
+from internal.utils import step
 
 
 class CategoriesList:
@@ -17,6 +18,7 @@ class CategoriesList:
     def items(self):
         return self._categories
 
+    @step
     def should_have_empty(self):
         self._categories.should(have.size(0))
 
@@ -26,6 +28,7 @@ class CategoryItem:
         self._s = _s
         self._alert = s(".MuiAlert-standardSuccess")
 
+    @step
     def archive(self, timeout=20):
         self._s.s("[aria-label='Archive category']").click()
 
@@ -39,6 +42,7 @@ class CategoryItem:
         self._alert.with_(timeout=timeout).should(be.visible)
         self._alert.with_(timeout=timeout).should(be.hidden)
 
+    @step
     def edit(self, name):
         self._s.s("[aria-label='Edit category']").click()
         ss("[name=category]").second.clear().type(name)
