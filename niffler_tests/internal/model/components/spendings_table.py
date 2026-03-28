@@ -1,6 +1,7 @@
 from internal.model.components.table import Table
 from selene import have
 from selene.support.shared.jquery_style import s
+from internal.utils import step
 
 
 class SpendingsTable:
@@ -17,11 +18,13 @@ class SpendingsTable:
     def rows(self):
         return self._table.rows
 
+    @step
     def should_have_empty(self):
         s("#spendings").s(".MuiTypography-h6").should(
             have.exact_text("There are no spendings")
         )
 
+    @step
     def should_have_size(self, value):
         self.rows.should(have.size(value))
 
@@ -31,20 +34,26 @@ class SpendingsTableRow:
         self._s = _s
         self._columns = self._s.ss("td")
 
+    @step
     def open_editor(self):
         self._s.s("[aria-label='Edit spending']").click()
 
+    @step
     def select(self):
         self._s.click()
 
+    @step
     def should_have_category(self, value):
         self._columns.element(1).should(have.exact_text(value))
 
+    @step
     def should_have_amount(self, value):
         self._columns.element(2).should(have.text(value))
 
+    @step
     def should_have_description(self, value):
         self._columns.element(3).should(have.exact_text(value))
 
+    @step
     def should_have_display_date(self, dt):
         self._columns.element(4).should(have.exact_text(dt.strftime("%b %d, %Y")))
