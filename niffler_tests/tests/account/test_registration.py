@@ -1,5 +1,12 @@
 from internal.app import system_under_test as app
 from internal.data.models.user import fake
+import pytest
+
+
+pytestmark = [
+    pytest.mark.allure_label("Account", label_type="epic"),
+    pytest.mark.allure_label("Registration", label_type="story"),
+]
 
 
 def test_registering_a_user(in_browser, as_a_random_user):

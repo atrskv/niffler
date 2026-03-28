@@ -3,6 +3,13 @@ from internal.clients.pb.niffler_currency_pb2 import CurrencyValues
 from internal.clients.pb.niffler_currency_pb2_pbreflect import (
     NifflerCurrencyServiceClient,
 )
+import pytest
+
+
+pytestmark = [
+    pytest.mark.allure_label("GRPC: Rates and currencies", label_type="epic"),
+    pytest.mark.allure_label("Currencies", label_type="story"),
+]
 
 
 def test_get_all_currencies(
