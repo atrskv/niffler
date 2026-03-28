@@ -1,12 +1,13 @@
-from datetime import date
 from internal.app import system_under_test as app
-from selene import be
-from selene.support.shared.jquery_style import s
-from internal.data.models import currency
-from internal.data.models.currency import Currency
 from internal.data.models.spend import SpendAddUI
-from internal.data.models.user import fake
 from internal.marks import pages
+import pytest
+
+
+pytestmark = [
+    pytest.mark.allure_label("Spends and categories", label_type="epic"),
+    pytest.mark.allure_label("Categories", label_type="story"),
+]
 
 
 @pages.spending

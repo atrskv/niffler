@@ -1,4 +1,11 @@
 from internal.app import system_under_test as app
+import pytest
+
+
+pytestmark = [
+    pytest.mark.allure_label("Account", label_type="epic"),
+    pytest.mark.allure_label("Login", label_type="story"),
+]
 
 
 def test_a_registered_user_logging_in(in_browser, as_a_registered_user):

@@ -6,6 +6,12 @@ from internal.data.models.user import fake
 from internal.marks import pages, testdata
 
 
+pytestmark = [
+    pytest.mark.allure_label("Spends and categories", label_type="epic"),
+    pytest.mark.allure_label("Spends", label_type="story"),
+]
+
+
 @pages.spending
 def test_adding_a_new_spend(in_browser):
     spend = SpendAddUI.random()

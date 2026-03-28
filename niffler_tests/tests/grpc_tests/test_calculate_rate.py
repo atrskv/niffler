@@ -6,6 +6,12 @@ import grpc
 import pytest
 
 
+pytestmark = [
+    pytest.mark.allure_label("GRPC: Rates and currencies", label_type="epic"),
+    pytest.mark.allure_label("Rates", label_type="story"),
+]
+
+
 def test_calculate_rate(grpc_client: NifflerCurrencyServiceClient):
     response = grpc_client.calculate_rate(
         request=CalculateRequest(
