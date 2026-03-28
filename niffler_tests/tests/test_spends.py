@@ -1,122 +1,69 @@
-import sys
-from datetime import date
-
+from internal.app import system_under_test as app
 import pytest
-from selene import be, browser, have
-from selene.support.shared.jquery_style import s, ss
-from selenium.webdriver import Keys
 
-from internal.models.currency import Currency
-from internal.models.spend import SpendAPI, SpendAddAPI
-from internal.models.user import fake
+from internal.data.models.spend import SpendAddAPI, SpendAddUI
+from internal.data.models.user import fake
 from internal.marks import pages, testdata
 
 
 @pages.spending
 def test_adding_a_new_spend(in_browser):
-    # GIVEN
-    amount = str(fake.random_int(min=10, max=100))
-    currency = fake.random_element(list(Currency))
-    category = fake.word()
-    random_date = fake.date_between(start_date=date(2000, 1, 1), end_date=date.today())
-    input_date = random_date.strftime("%m/%d/%Y")
-    display_date = random_date.strftime("%b %d, %Y")
-    description = fake.sentence()
+    spend = SpendAddUI.random()
 
-    # WHEN
-    s("#amount").set_value(amount)
-    s("#currency").click()
-    s("[role=listbox]").ss("li")[currency.value].click()
-    s("#category").type(category)
+    app.spendings_page.fill_amount(spend.amount)
+    app.spendings_page.fill_currency(spend.currency.value)
+    app.spendings_page.fill_category(spend.category)
+    app.spendings_page.datepicker.fill_date_using_manual_input(spend.input_date)
+    app.spendings_page.fill_description(spend.description)
+    app.spendings_page.save()
 
-    datepicker = s("[name=date]")
-    datepicker.click()
-    datepicker.type(input_date)
-
-    s("#description").type(description)
-    s("#save").click()
-
-    # THEN
-    row = s("tbody").ss("tr").first
-    row.ss("td")[1].should(have.exact_text(category))
-    row.ss("td")[2].should(have.text(amount))
-    row.ss("td")[3].should(have.exact_text(description))
-    row.ss("td")[4].should(have.exact_text(display_date))
+    app.spendings_page.table.row(1).should_have_category(spend.category)
+    app.spendings_page.table.row(1).should_have_amount(spend.amount)
+    app.spendings_page.table.row(1).should_have_description(spend.description)
+    app.spendings_page.table.row(1).should_have_display_date(spend.input_date)
 
 
 @pages.spending
 def test_adding_a_new_spend_without_amount(in_browser):
-    # GIVEN
-    amount = str(fake.random_int(min=10, max=100))
-    currency = fake.random_element(list(Currency))
-    category = fake.word()
-    random_date = fake.date_between(start_date=date(2000, 1, 1), end_date=date.today())
-    input_date = random_date.strftime("%m/%d/%Y")
-    display_date = random_date.strftime("%b %d, %Y")
-    description = fake.sentence()
+    spend = SpendAddUI.random()
 
-    # WHEN
-    s("#currency").click()
-    s("[role=listbox]").ss("li")[currency.value].click()
-    s("#category").type(category)
+    app.spendings_page.fill_currency(spend.currency.value)
+    app.spendings_page.fill_category(spend.category)
+    app.spendings_page.datepicker.fill_date_using_manual_input(spend.input_date)
+    app.spendings_page.fill_description(spend.description)
+    app.spendings_page.save()
 
-    datepicker = s("[name=date]")
-    datepicker.click()
-    datepicker.type(input_date)
-
-    s("#description").type(description)
-    s("#save").click()
-
-    # THEN
-    s(".input__helper-text").should(
-        have.exact_text("Amount has to be not less then 0.01")
-    )
+    app.spendings_page.should_have_amount_error()
 
 
 @pages.spending
 def test_adding_a_new_spend_without_description(in_browser):
-    # GIVEN
-    amount = str(fake.random_int(min=10, max=100))
-    currency = fake.random_element(list(Currency))
-    category = fake.word()
-    random_date = fake.date_between(start_date=date(2000, 1, 1), end_date=date.today())
-    input_date = random_date.strftime("%m/%d/%Y")
-    display_date = random_date.strftime("%b %d, %Y")
-    description = fake.sentence()
+    spend = SpendAddUI.random()
+    spend.description = ""
 
-    # WHEN
-    s("#amount").set_value(amount)
-    s("#currency").click()
-    s("[role=listbox]").ss("li")[currency.value].click()
-    s("#category").type(category)
+    app.spendings_page.fill_amount(spend.amount)
+    app.spendings_page.fill_currency(spend.currency.value)
+    app.spendings_page.fill_category(spend.category)
+    app.spendings_page.datepicker.fill_date_using_manual_input(spend.input_date)
+    app.spendings_page.save()
 
-    datepicker = s("[name=date]")
-    datepicker.click()
-    datepicker.type(input_date)
-
-    s("#save").click()
-
-    # THEN
-    row = s("tbody").ss("tr").first
-    row.ss("td")[1].should(have.exact_text(category))
-    row.ss("td")[2].should(have.text(amount))
-    row.ss("td")[3].should(have.exact_text(""))
-    row.ss("td")[4].should(have.exact_text(display_date))
+    app.spendings_page.table.row(1).should_have_category(spend.category)
+    app.spendings_page.table.row(1).should_have_amount(spend.amount)
+    app.spendings_page.table.row(1).should_have_description(spend.description)
+    app.spendings_page.table.row(1).should_have_display_date(spend.input_date)
 
 
 @pages.spending
 def test_adding_a_new_spend_with_existing_category(in_browser, category):
-    amount = str(fake.random_int(min=10, max=100))
+    spend = SpendAddUI.random()
 
-    browser.driver.refresh()
-    s("#amount").set_value(amount)
-    s("#category + ul").ss("li").first.click()
+    app.refresh()
+    app.spendings_page.fill_amount(spend.amount)
+    app.spendings_page.fill_existing_category(category.name)
+    app.spendings_page.save()
 
-    s("#save").click()
-
-    s("#legend-container").s("ul").ss("li").first.should(have.text(category.name))
-    row = s("tbody").ss("tr").first
-    row.ss("td")[1].should(have.exact_text(category.name))
+    app.spendings_page.legend_should_have_category(category.name)
+    app.spendings_page.table.row(1).should_have_category(category.name)
 
 
 @testdata.spends_with_single_category(
@@ -127,17 +74,12 @@ def test_adding_a_new_spend_with_existing_category(in_browser, category):
 def test_saving_a_spend_after_removing_a_category(
     in_browser, spends_with_single_category
 ):
-    browser.driver.refresh()
-    s("[aria-label='Edit spending']").click()
-    s("#category").click()
-    s("#category").send_keys(
-        Keys.COMMAND if sys.platform == "darwin" else Keys.CONTROL,
-        "a",
-    )
-    s("#category").send_keys(Keys.DELETE)
-    s("#save").click()
+    app.refresh()
+    app.spendings_page.table.row(1).open_editor()
+    app.spendings_page.remove_category()
+    app.spendings_page.save()
 
-    s(".input__helper-text").should(have.exact_text("Please choose category"))
+    app.spendings_page.error_cagegory_should_be_visible()
 
 
 @testdata.spends_with_single_category(
@@ -149,24 +91,16 @@ def test_editing_a_spend_by_adding_a_new_category(
     in_browser, spends_with_single_category
 ):
     new_category_name = fake.word()
-    browser.driver.refresh()
-    s("[aria-label='Edit spending']").click()
-    s("#category").click()
-    s("#category").send_keys(
-        Keys.COMMAND if sys.platform == "darwin" else Keys.CONTROL,
-        "a",
-    )
-    s("#category").send_keys(Keys.DELETE)
-    s("#category").type(new_category_name)
-    s("#save").click()
-    alert = s(".MuiAlert-standardSuccess")
-    alert.with_(timeout=20).wait.for_(be.visible)
-    alert.with_(timeout=20).wait.for_(be.hidden)
 
-    # THEN
-    s("#legend-container").s("ul").ss("li").first.should(have.text(new_category_name))
-    row = s("tbody").ss("tr").first
-    row.ss("td")[1].should(have.exact_text(new_category_name))
+    app.refresh()
+    app.spendings_page.table.row(1).open_editor()
+    app.spendings_page.remove_category()
+    app.spendings_page.fill_category(new_category_name)
+    app.spendings_page.save()
+    app.spendings_page.category_should_be_edited()
+
+    app.spendings_page.legend_should_have_category(new_category_name)
+    app.spendings_page.table.row(1).should_have_category(new_category_name)
 
 
 @testdata.spends_with_single_category(
@@ -177,16 +111,11 @@ def test_editing_a_spend_by_adding_a_new_category(
 def test_removing_a_spend(in_browser, spends_with_single_category):
     spend = spends_with_single_category
 
-    browser.driver.refresh()
-    rows = s("tbody").ss("tr")
-    rows.first.click()
-    s("#delete").click()
-    s(".MuiDialogActions-root").ss("button").second.click()
-    s(".MuiDialogActions-root").wait.for_(be.not_.visible)
+    app.refresh()
+    app.spendings_page.table.row(1).select()
+    app.spendings_page.remove_spends()
 
-    s("#spendings").s(".MuiTypography-h6").should(
-        have.exact_text("There are no spendings")
-    )
+    app.spendings_page.table.should_have_empty()
 
 
 @testdata.spends_with_single_category(
@@ -197,17 +126,11 @@ def test_removing_a_spend(in_browser, spends_with_single_category):
 def test_archiving_a_category(in_browser, spends_with_single_category):
     spend = spends_with_single_category
 
-    browser.driver.refresh()
-    s("[aria-label=Menu]").click()
-    s(".MuiList-root").ss("li").first.click()
-    s("[aria-label='Archive category']").click()
-    s(".MuiPaper-root").wait.for_(be.visible)
-    s(".MuiDialogActions-root").ss("button").second.with_(click_by_js=True).click()
-    s(".MuiDialogActions-root").wait.for_(be.not_.visible)
+    app.refresh()
+    app.spendings_page.header.open_profile()
+    app.profile_page.categories.item(1).archive()
 
-    alert = s(".MuiAlert-standardSuccess")
-    alert.with_(timeout=20).should(be.visible)
-    alert.with_(timeout=20).should(be.hidden)
+    app.profile_page.should_categories_have_empty()
 
 
 @testdata.spends_with_single_category(
@@ -219,27 +142,14 @@ def test_renaming_a_category(in_browser, spends_with_single_category):
     spend = spends_with_single_category
     new_category_name = fake.word()
 
-    browser.driver.refresh()
-    s("[aria-label=Menu]").click()
-    s(".MuiList-root").ss("li").first.click()
-    s("[aria-label='Edit category']").click()
-    ss("[name=category]").second.clear().type(new_category_name)
-    s("[type=submit]").click()
-
-    # THEN
-    alert = s(".MuiAlert-standardSuccess")
-    alert.with_(timeout=20).should(be.visible)
-    alert.with_(timeout=30).should(be.hidden)
-
-    # AND
-    s("h1").click()
+    app.refresh()
+    app.spendings_page.header.open_profile()
+    app.profile_page.categories.item(1).edit(new_category_name)
+    app.profile_page.open_home_page()
 
     try:
-        s("#legend-container").s("ul").ss("li").first.should(
-            have.text(new_category_name)
-        )
-        row = s("tbody").ss("tr").first
-        row.ss("td")[1].should(have.exact_text(new_category_name))
+        app.spendings_page.legend_should_have_category(new_category_name)
+        app.spendings_page.table.row(1).should_have_category(new_category_name)
     except AssertionError:
         pytest.xfail("Cannot rename category")
 
@@ -258,15 +168,10 @@ def test_adding_spends_with_a_single_category(
     spend1, spend2 = spends_with_single_category
     expected_rubles_amount = "29600"
 
-    browser.driver.refresh()
+    app.refresh()
+    app.spendings_page.legend_should_have_spend(expected_rubles_amount)
 
-    # THEN
-    s("#legend-container").s("ul").ss("li").first.should(
-        have.text(expected_rubles_amount)
-    )
-
-    # AND
-    rows = s("tbody").ss("tr").should(have.size(2))
+    app.spendings_page.table.should_have_size(2)
 
 
 @testdata.category(["First category", "Second category"])
@@ -280,21 +185,15 @@ def test_adding_spends_with_different_categories(
     in_browser,
     spends_with_categories_1to1,
 ):
-    # GIVEN
     spend1, spend2 = spends_with_categories_1to1
     spend1_to_rubles_amount, spend2_to_rubles_amount = "22200", "14066.67"
 
-    # WHEN
-    browser.driver.refresh()
+    app.refresh()
 
-    # THEN
-    s("#legend-container").s("ul").ss("li").by(
-        have.text(spend1.category.name)
-    ).first.should(have.text(spend1_to_rubles_amount))
-
-    s("#legend-container").s("ul").ss("li").by(
-        have.text(spend2.category.name)
-    ).first.should(have.text(spend2_to_rubles_amount))
-
-    # AND THEN
-    rows = s("tbody").ss("tr").should(have.size(2))
+    app.spendings_page.legend_should_have_spend_by_category(
+        spend1.category.name, spend1_to_rubles_amount
+    )
+    app.spendings_page.legend_should_have_spend_by_category(
+        spend2.category.name, spend2_to_rubles_amount
+    )
+    app.spendings_page.table.should_have_size(2)
