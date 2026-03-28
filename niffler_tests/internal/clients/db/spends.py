@@ -3,7 +3,7 @@ from typing import Sequence
 from sqlalchemy import create_engine, Engine, delete
 from sqlmodel import Session, select
 
-from internal.models.spend import Category, Spend
+from internal.data.models.spend import Category, Spend
 
 
 class SpendDb:
@@ -34,3 +34,4 @@ class SpendDb:
         with Session(self.engine) as session:
             statement = select(Spend).where(Spend.username == username)
             return session.exec(statement).all()
+
