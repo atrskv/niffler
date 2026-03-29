@@ -13,7 +13,7 @@ pytestmark = [
 
 
 @pages.spending
-def test_adding_a_new_spend(in_browser):
+def test_adding_a_new_spend(as_a_logged_user):
     spend = SpendAddUI.random()
 
     app.spendings_page.fill_amount(spend.amount)
@@ -30,7 +30,7 @@ def test_adding_a_new_spend(in_browser):
 
 
 @pages.spending
-def test_adding_a_new_spend_without_amount(in_browser):
+def test_adding_a_new_spend_without_amount(in_browser, as_a_logged_user):
     spend = SpendAddUI.random()
 
     app.spendings_page.fill_currency(spend.currency.value)
@@ -43,7 +43,7 @@ def test_adding_a_new_spend_without_amount(in_browser):
 
 
 @pages.spending
-def test_adding_a_new_spend_without_description(in_browser):
+def test_adding_a_new_spend_without_description(as_a_logged_user):
     spend = SpendAddUI.random()
     spend.description = ""
 
@@ -60,7 +60,7 @@ def test_adding_a_new_spend_without_description(in_browser):
 
 
 @pages.spending
-def test_adding_a_new_spend_with_existing_category(in_browser, category):
+def test_adding_a_new_spend_with_existing_category(in_browser, category, as_a_logged_user):
     spend = SpendAddUI.random()
 
     app.refresh()
@@ -77,8 +77,9 @@ def test_adding_a_new_spend_with_existing_category(in_browser, category):
         SpendAddAPI(amount=100.0, currency="USD", description="Test desc"),
     ],
 )
+@pages.home
 def test_saving_a_spend_after_removing_a_category(
-    in_browser, spends_with_single_category
+    in_browser, spends_with_single_category, as_a_logged_user
 ):
     app.refresh()
     app.spendings_page.table.row(1).open_editor()
@@ -93,8 +94,9 @@ def test_saving_a_spend_after_removing_a_category(
         SpendAddAPI(amount=200.0, currency="KZT", description="Test desc"),
     ]
 )
+@pages.home
 def test_editing_a_spend_by_adding_a_new_category(
-    in_browser, spends_with_single_category
+    in_browser, spends_with_single_category, as_a_logged_user
 ):
     new_category_name = fake.word()
 
@@ -108,13 +110,13 @@ def test_editing_a_spend_by_adding_a_new_category(
     app.spendings_page.legend_should_have_category(new_category_name)
     app.spendings_page.table.row(1).should_have_category(new_category_name)
 
-
 @testdata.spends_with_single_category(
     [
         SpendAddAPI(amount=300.0, currency="USD", description="Test desc"),
     ]
 )
-def test_removing_a_spend(in_browser, spends_with_single_category):
+@pages.home
+def test_removing_a_spend(spends_with_single_category, as_a_logged_user):
     spend = spends_with_single_category
 
     app.refresh()
@@ -129,7 +131,8 @@ def test_removing_a_spend(in_browser, spends_with_single_category):
         SpendAddAPI(amount=300.0, currency="USD", description="Test desc"),
     ]
 )
-def test_archiving_a_category(in_browser, spends_with_single_category):
+@pages.spending
+def test_archiving_a_category(spends_with_single_category, as_a_logged_user):
     spend = spends_with_single_category
 
     app.refresh()
@@ -144,7 +147,8 @@ def test_archiving_a_category(in_browser, spends_with_single_category):
         SpendAddAPI(amount=300.0, currency="USD", description="Test desc"),
     ]
 )
-def test_renaming_a_category(in_browser, spends_with_single_category):
+@pages.spending
+def test_renaming_a_category(spends_with_single_category, as_a_logged_user):
     spend = spends_with_single_category
     new_category_name = fake.word()
 
@@ -167,9 +171,11 @@ def test_renaming_a_category(in_browser, spends_with_single_category):
         SpendAddAPI(amount=321.0, currency="USD", description="Second desc"),
     ]
 )
+@pages.home
 def test_adding_spends_with_a_single_category(
     in_browser,
     spends_with_single_category,
+        as_a_logged_user
 ):
     spend1, spend2 = spends_with_single_category
     expected_rubles_amount = "29600"
@@ -187,9 +193,11 @@ def test_adding_spends_with_a_single_category(
         SpendAddAPI(amount=211.0, currency="USD", description="Second desc"),
     ],
 )
+@pages.home
 def test_adding_spends_with_different_categories(
     in_browser,
     spends_with_categories_1to1,
+        as_a_logged_user
 ):
     spend1, spend2 = spends_with_categories_1to1
     spend1_to_rubles_amount, spend2_to_rubles_amount = "22200", "14066.67"

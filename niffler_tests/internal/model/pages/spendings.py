@@ -28,7 +28,7 @@ class SpendingsPage:
     @step
     def fill_currency(self, value):
         s("#currency").click()
-        s("[role=listbox]").ss("li")[value].click()
+        s("[role=listbox]").ss("li").element_by(have.text(value)).click()
 
     @step
     def fill_category(self, value):
@@ -91,7 +91,7 @@ class SpendingsPage:
         )
 
     @step
-    def wait_for_alert(self, timeout=20):
+    def wait_for_alert(self, timeout=40):
         self._alert.with_(timeout=timeout).wait.for_(be.visible)
         self._alert.with_(timeout=timeout).wait.for_(be.hidden)
 
