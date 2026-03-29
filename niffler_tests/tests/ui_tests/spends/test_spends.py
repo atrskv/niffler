@@ -7,7 +7,8 @@ from internal.marks import pages, testdata
 
 
 pytestmark = [
-    pytest.mark.allure_label("Spends and categories", label_type="epic"),
+    pytest.mark.allure_label("UI: Account and spends", label_type="epic"),
+    pytest.mark.allure_label("Spends and categories", label_type="feature"),
     pytest.mark.allure_label("Spends", label_type="story"),
 ]
 
@@ -60,7 +61,9 @@ def test_adding_a_new_spend_without_description(as_a_logged_user):
 
 
 @pages.spending
-def test_adding_a_new_spend_with_existing_category(in_browser, category, as_a_logged_user):
+def test_adding_a_new_spend_with_existing_category(
+    in_browser, category, as_a_logged_user
+):
     spend = SpendAddUI.random()
 
     app.refresh()
@@ -109,6 +112,7 @@ def test_editing_a_spend_by_adding_a_new_category(
 
     app.spendings_page.legend_should_have_category(new_category_name)
     app.spendings_page.table.row(1).should_have_category(new_category_name)
+
 
 @testdata.spends_with_single_category(
     [
@@ -173,9 +177,7 @@ def test_renaming_a_category(spends_with_single_category, as_a_logged_user):
 )
 @pages.home
 def test_adding_spends_with_a_single_category(
-    in_browser,
-    spends_with_single_category,
-        as_a_logged_user
+    in_browser, spends_with_single_category, as_a_logged_user
 ):
     spend1, spend2 = spends_with_single_category
     expected_rubles_amount = "29600"
@@ -195,9 +197,7 @@ def test_adding_spends_with_a_single_category(
 )
 @pages.home
 def test_adding_spends_with_different_categories(
-    in_browser,
-    spends_with_categories_1to1,
-        as_a_logged_user
+    in_browser, spends_with_categories_1to1, as_a_logged_user
 ):
     spend1, spend2 = spends_with_categories_1to1
     spend1_to_rubles_amount, spend2_to_rubles_amount = "22200", "14066.67"

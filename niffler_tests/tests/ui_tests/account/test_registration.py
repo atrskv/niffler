@@ -4,7 +4,8 @@ import pytest
 
 
 pytestmark = [
-    pytest.mark.allure_label("Account", label_type="epic"),
+    pytest.mark.allure_label("UI: Account and spends", label_type="epic"),
+    pytest.mark.allure_label("Account", label_type="feature"),
     pytest.mark.allure_label("Registration", label_type="story"),
 ]
 

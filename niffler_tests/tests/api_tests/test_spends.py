@@ -1,8 +1,16 @@
 from requests.exceptions import HTTPError
 from internal.data.models.spend import SpendAddAPI
 import pytest
+import allure
 
 
+pytestmark = [
+    pytest.mark.allure_label("API: Spends and users", label_type="epic"),
+    pytest.mark.allure_label("Spends", label_type="feature"),
+]
+
+
+@allure.story("Adding")
 class TestAdding:
     def test_add_spend(self, spends_client, user, rollback_spends, category):
         spend_data = SpendAddAPI.random(category_name=category.name)
@@ -25,6 +33,7 @@ class TestAdding:
         assert "Failed to read request" in e.value.response.text
 
 
+@allure.story("Updating")
 class TestUpdating:
     def test_update_spend_already_deleted(self, spends_client, user, category):
         spend_data = SpendAddAPI.random(category_name=category.name)
@@ -53,11 +62,13 @@ class TestUpdating:
         rollback_spends.append(edited)
 
 
-def test_delete_spend(spends_client, category,user):
-    spend_data = SpendAddAPI.random(category_name=category.name)
+@allure.story("Deleting")
+class TestDeleting:
+    def test_delete_spend(self, spends_client, category, user):
+        spend_data = SpendAddAPI.random(category_name=category.name)
 
-    created = spends_client.add_spend(spend_data, user.username)
-    spends_client.delete_spends([created.id])
+        created = spends_client.add_spend(spend_data, user.username)
+        spends_client.delete_spends([created.id])
 
-    all_spends = spends_client.get_spends()
-    assert not any(s.id == created.id for s in all_spends)
+        all_spends = spends_client.get_spends()
+        assert not any(s.id == created.id for s in all_spends)

@@ -8,7 +8,7 @@ import pytest
 
 pytestmark = [
     pytest.mark.allure_label("GRPC: Rates and currencies", label_type="epic"),
-    pytest.mark.allure_label("Currencies", label_type="story"),
+    pytest.mark.allure_label("Currencies", label_type="feature"),
 ]
 
 

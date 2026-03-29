@@ -8,7 +8,7 @@ import pytest
 
 pytestmark = [
     pytest.mark.allure_label("GRPC: Rates and currencies", label_type="epic"),
-    pytest.mark.allure_label("Rates", label_type="story"),
+    pytest.mark.allure_label("Rates", label_type="feature"),
 ]
 
 
@@ -34,6 +34,7 @@ def test_calculate_rate_without_desired_currency(
                 amount=100.0,
             )
         )
+
     except grpc.RpcError as e:
         assert e.code() == grpc.StatusCode.UNKNOWN
         assert e.details() == "Application error processing RPC"
@@ -49,6 +50,7 @@ def test_calculate_rate_without_amount(
                 desiredCurrency=CurrencyValues.RUB,
             )
         )
+
     except grpc.RpcError as e:
         assert e.code() == grpc.StatusCode.UNKNOWN
         assert e.details() == "Application error processing RPC"
@@ -76,6 +78,7 @@ def test_currency_conversion(
             amount=spend,
         )
     )
+
     assert response.calculatedAmount == expected_result, (
         f"Expected {expected_result}, got {response.calculatedAmount}"
     )
