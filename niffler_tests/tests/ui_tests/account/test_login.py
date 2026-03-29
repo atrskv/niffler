@@ -1,6 +1,7 @@
 from internal.app import system_under_test as app
 import pytest
 
+from internal.data.models.user import User
 
 pytestmark = [
     pytest.mark.allure_label("Account", label_type="epic"),
@@ -12,17 +13,17 @@ def test_a_registered_user_logging_in(in_browser, as_a_registered_user):
     user = as_a_registered_user
 
     app.auth_page.open()
-    app.auth_page.log_in(user.login, user.password)
+    app.auth_page.log_in(user.username, user.password)
 
     app.auth_page.should_be_logged()
 
 
-def test_a_random_user_logging_in(in_browser, as_a_random_user):
-    user = as_a_random_user
+def test_a_random_user_logging_in(in_browser):
+    user = User.random()
 
     app.auth_page.open()
 
-    app.auth_page.fill_login(user.login)
+    app.auth_page.fill_login(user.username)
     app.auth_page.fill_password(user.password)
     app.auth_page.submit()
 
@@ -34,8 +35,8 @@ def test_logging_in_with_invalid_password(in_browser, as_a_registered_user):
 
     app.auth_page.open()
 
-    app.auth_page.fill_login(user.login)
-    app.auth_page.fill_password(user.login)
+    app.auth_page.fill_login(user.username)
+    app.auth_page.fill_password(user.username)
     app.auth_page.submit()
 
     app.auth_page.should_display_invalid_credentials_message()

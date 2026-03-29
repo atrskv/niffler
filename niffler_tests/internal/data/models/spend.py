@@ -2,7 +2,7 @@ from datetime import date, datetime
 from pydantic import BaseModel
 from sqlmodel import SQLModel, Field
 from faker import Faker
-
+import random
 from internal.data.models.currency import Currency
 
 fake = Faker()
@@ -46,6 +46,19 @@ class SpendAddAPI(BaseModel):
     category: str | None = None
     spendDate: str | None = None
     currency: str
+
+    @classmethod
+    def random(cls, category_name: str | None = None) -> "SpendAddAPI":
+        random_date = fake.date_between(
+            start_date=date(2000, 1, 1), end_date=date.today()
+        )
+        return cls(
+            amount=random.randint(10, 1000),
+            description=fake.sentence(),
+            category=category_name or fake.word(),
+            spendDate=random_date.isoformat(),
+            currency=random.choice(list(Currency)).value,
+        )
 
 
 class SpendAddUI(BaseModel):

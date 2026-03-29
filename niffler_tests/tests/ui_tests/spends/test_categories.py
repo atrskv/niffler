@@ -9,10 +9,13 @@ pytestmark = [
     pytest.mark.allure_label("Categories", label_type="story"),
 ]
 
+import polling2
+
+
 
 @pages.spending
-def test_adding_a_new_spend(in_browser, spend_db, as_a_registered_user):
-    user = as_a_registered_user
+def test_adding_a_new_spend(spend_db, as_a_logged_user):
+    user = as_a_logged_user
     spend = SpendAddUI.random()
 
     app.spendings_page.fill_amount(spend.amount)
@@ -22,19 +25,27 @@ def test_adding_a_new_spend(in_browser, spend_db, as_a_registered_user):
     app.spendings_page.fill_description(spend.description)
     app.spendings_page.save()
 
-    result = spend_db.get_spends_by_username(user.login)
     app.spendings_page.wait_for_alert()
 
+    def _get_spends():
+        return spend_db.get_spends_by_username(user.username)
+
+    result = polling2.poll(
+        target=_get_spends,
+        check_success=lambda rows: len(rows) >= 1,
+        step=0.5,
+        timeout=10.0,
+    )
     assert len(result) == 1
-    assert user.login == result[0].username
+    assert user.username == result[0].username
     assert float(spend.amount) == result[0].amount
     assert spend.currency.name.upper() == result[0].currency
     assert spend.description == result[0].description
 
 
 @pages.spending
-def test_adding_a_new_category(in_browser, spend_db, as_a_registered_user):
-    user = as_a_registered_user
+def test_adding_a_new_category(spend_db, as_a_logged_user):
+    user = as_a_logged_user
     spend = SpendAddUI.random()
 
     app.spendings_page.fill_amount(spend.amount)
@@ -45,8 +56,16 @@ def test_adding_a_new_category(in_browser, spend_db, as_a_registered_user):
     app.spendings_page.save()
 
     app.spendings_page.wait_for_alert()
-    result = spend_db.get_user_categories(user.login)
 
+    def _get_categories():
+        return spend_db.get_user_categories(user.username)
+
+    result = polling2.poll(
+        target=_get_categories,
+        check_success=lambda rows: len(rows) >= 1,
+        step=0.5,
+        timeout=10.0,
+    )
     assert len(result) == 1
-    assert user.login == result[0].username
+    assert user.username == result[0].username
     assert result[0].name == spend.category

@@ -3,6 +3,7 @@ import pytest
 
 class pages:
     spending = pytest.mark.usefixtures("spending_page")
+    home = pytest.mark.usefixtures("home_page")
 
 
 class testdata:

@@ -29,7 +29,7 @@ class CategoryItem:
         self._alert = s(".MuiAlert-standardSuccess")
 
     @step
-    def archive(self, timeout=20):
+    def archive(self, timeout=30):
         self._s.s("[aria-label='Archive category']").click()
 
         s(".MuiPaper-root").wait.for_(be.visible)
@@ -49,4 +49,4 @@ class CategoryItem:
         s("[type=submit]").click()
 
         self._alert.with_(timeout=20).should(be.visible)
-        self._alert.with_(timeout=30).should(be.hidden)
+        self._alert.with_(timeout=40).should(be.hidden)

@@ -16,6 +16,10 @@ class Config(BaseSettings):
     gateway_port: str | None = None
     timeout: float = 5.0
     spend_db_url: str | None = None
+    auth_secret: str | None = None
+    test_username: str | None = None
+    test_password: str | None = None
+    test_fullname: str | None = None
 
 
 config = Config(_env_file=dotenv.find_dotenv(f"config.{Config().context}.env"))

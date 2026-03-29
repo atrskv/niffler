@@ -10,7 +10,7 @@ class Header:
     @step
     def open_profile(self):
         self._menu.click()
-        s(".MuiList-root").ss("li").first.click()
+        s(".MuiMenu-list").ss("li").first.click()
 
     @step
     def log_out(self):
