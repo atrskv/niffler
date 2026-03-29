@@ -1,16 +1,16 @@
+import pytest
+
 from internal.app import system_under_test as app
 from internal.data.models.spend import SpendAddUI
 from internal.marks import pages
-import pytest
-
-
-pytestmark = [
-    pytest.mark.allure_label("Spends and categories", label_type="epic"),
-    pytest.mark.allure_label("Categories", label_type="story"),
-]
 
 import polling2
 
+pytestmark = [
+    pytest.mark.allure_label("UI: Account and spends", label_type="epic"),
+    pytest.mark.allure_label("Spends and categories", label_type="feature"),
+    pytest.mark.allure_label("Categories", label_type="story"),
+]
 
 
 @pages.spending
@@ -24,7 +24,6 @@ def test_adding_a_new_spend(spend_db, as_a_logged_user):
     app.spendings_page.datepicker.fill_date_using_manual_input(spend.input_date)
     app.spendings_page.fill_description(spend.description)
     app.spendings_page.save()
-
     app.spendings_page.wait_for_alert()
 
     def _get_spends():
@@ -54,7 +53,6 @@ def test_adding_a_new_category(spend_db, as_a_logged_user):
     app.spendings_page.datepicker.fill_date_using_manual_input(spend.input_date)
     app.spendings_page.fill_description(spend.description)
     app.spendings_page.save()
-
     app.spendings_page.wait_for_alert()
 
     def _get_categories():

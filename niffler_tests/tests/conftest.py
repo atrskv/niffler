@@ -43,7 +43,9 @@ def pytest_runtest_call(item: Item):
 
 @pytest.hookimpl(hookwrapper=True, trylast=True)
 def pytest_fixture_setup(fixturedef: FixtureDef, request: FixtureRequest):
+
     yield
+
     logger = allure_logger(request.config)
     item = logger.get_last_item()
     scope_letter = fixturedef.scope[0].upper()

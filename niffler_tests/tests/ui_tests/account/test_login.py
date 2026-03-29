@@ -4,7 +4,8 @@ import pytest
 from internal.data.models.user import User
 
 pytestmark = [
-    pytest.mark.allure_label("Account", label_type="epic"),
+    pytest.mark.allure_label("UI: Account and spends", label_type="epic"),
+    pytest.mark.allure_label("Account", label_type="feature"),
     pytest.mark.allure_label("Login", label_type="story"),
 ]
 

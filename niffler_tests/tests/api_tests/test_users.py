@@ -1,7 +1,14 @@
 import pytest
 from requests import HTTPError
+import allure
+
+pytestmark = [
+    pytest.mark.allure_label("API: Spends and users", label_type="epic"),
+    pytest.mark.allure_label("Users", label_type="feature"),
+]
 
 
+@allure.story("Getting")
 class TestGetting:
     def test_get_current_user(self, users_client):
         user = users_client.get_current_user()
@@ -25,12 +32,15 @@ class TestGetting:
         assert e.value.response.status_code == 401
 
 
-def test_search_users_not_found(users_client):
-    users = users_client.get_all_users(search_query="nonexistent_user_12345")
+@allure.story("Searching")
+class TestSearching:
+    def test_search_users_not_found(self, users_client):
+        users = users_client.get_all_users(search_query="nonexistent_user_12345")
 
-    assert users == []
+        assert users == []
 
 
+@allure.story("Updating")
 class TestUpdating:
     @pytest.mark.usefixtures("rollback_user")
     def test_update_user(self, users_client, user):
