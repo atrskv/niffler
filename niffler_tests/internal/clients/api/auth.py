@@ -7,6 +7,7 @@ from urllib.parse import urlparse, parse_qs
 from requests import Session
 
 from internal.settings import Config
+from internal.utils import allure_attach
 
 
 class AuthSession(Session):
@@ -14,6 +15,7 @@ class AuthSession(Session):
         super().__init__()
         self.code = None
 
+    @allure_attach
     def request(self, method, url, **kwargs):
         response = super().request(method, url, **kwargs)
         for r in response.history:
