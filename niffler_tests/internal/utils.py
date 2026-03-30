@@ -1,5 +1,12 @@
 import random
 from datetime import datetime, timedelta, timezone
+import allure
+import json
+from json import JSONDecodeError
+
+import curlify
+from allure_commons.types import AttachmentType
+from requests import Response
 
 import re
 import inspect
@@ -94,3 +101,60 @@ class StepContext:
                 return func(*args, **kw)
 
         return impl
+
+
+def allure_attach(function):
+
+    def wrapper(*args, **kwargs):
+        method, url = args[1], args[2]
+
+        from jinja2 import Environment, PackageLoader, select_autoescape
+
+        env = Environment(
+            loader=PackageLoader("internal", "allure_templates"),
+            autoescape=select_autoescape(),
+        )
+
+        request_template = env.get_template("http-colored-request.ftl")
+        response_template = env.get_template("http-colored-response.ftl")
+
+        with allure.step(f"{method} {url}"):
+            response: Response = function(*args, **kwargs)
+
+            curl = curlify.to_curl(response.request)
+            request_render = request_template.render(
+                {
+                    "request": response.request,
+                    "curl": curl,
+                }
+            )
+
+            allure.attach(
+                body=request_render,
+                name="Request",
+                attachment_type=AttachmentType.HTML,
+                extension=".html",
+            )
+
+            try:
+                body = json.dumps(response.json(), indent=4, ensure_ascii=False)
+            except (JSONDecodeError, TypeError):
+                body = response.text
+
+            response_render = response_template.render(
+                {
+                    "response": response,
+                    "body": body,
+                }
+            )
+
+            allure.attach(
+                body=response_render,
+                name=f"Response {response.status_code}",
+                attachment_type=AttachmentType.HTML,
+                extension=".html",
+            )
+
+        return response
+
+    return wrapper

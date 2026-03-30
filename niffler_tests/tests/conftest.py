@@ -52,13 +52,6 @@ def pytest_fixture_setup(fixturedef: FixtureDef, request: FixtureRequest):
     item.name = f"[{scope_letter}] " + " ".join(fixturedef.argname.split("_")).title()
 
 
-@pytest.fixture(scope="session")
-def auth_api_token():
-    token = AuthClient(config).auth(config.test_username, config.test_password)
-    allure.attach(token, name="token.txt", attachment_type=AttachmentType.TEXT)
-    return token
-
-
 @pytest.fixture(scope="function", autouse=True)
 def in_browser():
     browser.config.base_url = settings.config.frontend_url
@@ -183,8 +176,8 @@ def spends_client(gateway_url, token) -> SpendsHttpClient:
 
 
 @pytest.fixture
-def users_client(gateway_url, auth_api_token) -> UsersHttpClient:
-    return UsersHttpClient(gateway_url, auth_api_token)
+def users_client(gateway_url, token) -> UsersHttpClient:
+    return UsersHttpClient(gateway_url, token)
 
 
 @pytest.fixture
@@ -297,4 +290,3 @@ def rollback_spends(spends_client):
     if created_spends:
         spend_ids = [spend.id for spend in created_spends]
         spends_client.delete_spends(spend_ids)
-
