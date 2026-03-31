@@ -3,13 +3,15 @@ import requests
 
 from urllib.parse import urlparse, parse_qs
 
+from requests import Session
 
-from internal.utils import allure_attach
+from internal.utils.allure import allure_attach
 
 
-class BaseSession(requests.Session):
+class TestSession(Session):
     def __init__(self, *args, **kwargs):
         super().__init__()
+        self.code = None
 
     @allure_attach
     def request(self, method, url, **kwargs):
@@ -24,9 +26,9 @@ class BaseSession(requests.Session):
 
 
 class BaseService:
-    def __init__(self, base_url: str, token: str):
+    def __init__(self, base_url: str, token: str = None):
         self.base_url = base_url
-        self.session = BaseSession()
+        self.session = TestSession()
         self.session.headers.update(
             {
                 "Accept": "application/json",
@@ -34,20 +36,6 @@ class BaseService:
                 "Content-Type": "application/json",
             }
         )
-        # self.session.hooks["response"].append(self.attach_response)
-
-    """
-    Alternative:
-
-    @settingsaticmethod
-    def attach_response(response: Response, *args, **kwargs):
-        attachment_name = response.request.method + " " + response.request.url
-        allure.attach(
-            dump_response(response),
-            attachment_name,
-            attachment_type=AttachmentType.TEXT,
-        )
-    """
 
     def _raise_for_status(self, response: requests.Response):
         try:
@@ -56,3 +44,4 @@ class BaseService:
             if response.status_code == 400:
                 e.add_note(response.text)
             raise
+

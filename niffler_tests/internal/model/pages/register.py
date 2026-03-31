@@ -1,7 +1,7 @@
 from selene import browser
 from selene.support.shared.jquery_style import s
 from selene import be, have
-from internal.utils import step
+from internal.utils.allure import step
 
 
 class RegisterPage:

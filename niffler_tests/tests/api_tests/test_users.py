@@ -1,6 +1,6 @@
+import allure
 import pytest
 from requests import HTTPError
-import allure
 
 pytestmark = [
     pytest.mark.allure_label("API: Spends and users", label_type="epic"),
@@ -43,8 +43,8 @@ class TestSearching:
 @allure.story("Updating")
 class TestUpdating:
     @pytest.mark.usefixtures("rollback_user")
-    def test_update_user(self, users_client, user):
-        user_for_edit = user
+    def test_update_user(self, users_client, as_a_registered_user):
+        user_for_edit = as_a_registered_user
         new_fullname = "New Fullname"
 
         user_for_edit.fullname = new_fullname
@@ -53,7 +53,8 @@ class TestUpdating:
         assert updated.fullname == new_fullname
 
     @pytest.mark.usefixtures("rollback_user")
-    def test_update_user_too_long_firstname(self, users_client, user):
+    def test_update_user_too_long_firstname(self, users_client, as_a_registered_user):
+        user = as_a_registered_user
         user.firstname = "A" * 31
 
         with pytest.raises(HTTPError) as e:

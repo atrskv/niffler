@@ -1,6 +1,6 @@
 from selene import browser
 from selene.support.shared.jquery_style import s
-from internal.utils import step
+from internal.utils.allure import step
 from internal.model.components.categories_list import CategoriesList
 
 

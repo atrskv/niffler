@@ -2,14 +2,37 @@ from typing import List
 import uuid
 from urllib.parse import urljoin
 
+import requests
 
-from internal.clients.api.base import BaseService
 from internal.data.models.spend import CategoryAPI, SpendAPI, SpendAddAPI
 
+import allure
+from allure_commons.types import AttachmentType
+from requests import Response
+from requests_toolbelt.utils.dump import dump_response
 
-class SpendsHttpClient(BaseService):
+
+class SpendsHttpClient:
     def __init__(self, base_url: str, token: str):
-        super().__init__(base_url, token)
+        self.base_url = base_url
+        self.session = requests.session()
+        self.session.headers.update(
+            {
+                "Accept": "application/json",
+                "Authorization": f"Bearer {token}",
+                "Content-Type": "application/json",
+            }
+        )
+        self.session.hooks["response"].append(self.attach_response)
+
+    @staticmethod
+    def attach_response(response: Response, *args, **kwargs):
+        attachment_name = response.request.method + " " + response.request.url
+        allure.attach(
+            dump_response(response),
+            attachment_name,
+            attachment_type=AttachmentType.TEXT,
+        )
 
     def get_categories(self, exclude_archived: bool = True) -> list[CategoryAPI]:
         response = self.session.get(
@@ -84,3 +107,11 @@ class SpendsHttpClient(BaseService):
             urljoin(self.base_url, "/api/spends/remove"), params=params
         )
         self._raise_for_status(resp)
+
+    def _raise_for_status(self, response: requests.Response):
+        try:
+            response.raise_for_status()
+        except requests.HTTPError as e:
+            if response.status_code == 400:
+                e.add_note(response.text)
+            raise

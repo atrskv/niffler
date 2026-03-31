@@ -2,8 +2,8 @@ import pytest
 
 
 @pytest.fixture
-def rollback_user(users_client, user):
-    original = user.model_copy()
+def rollback_user(users_client, as_a_registered_user):
+    original = as_a_registered_user.model_copy()
 
     yield
 
