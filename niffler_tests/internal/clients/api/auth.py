@@ -2,34 +2,16 @@ import base64
 import hashlib
 import os
 import re
-from urllib.parse import urlparse, parse_qs
 
-from requests import Session
+import requests
 
+from internal.clients.api.base import TestSession
 from internal.settings import Config
-from internal.utils import allure_attach
-
-
-class AuthSession(Session):
-    def __init__(self, *args, **kwargs):
-        super().__init__()
-        self.code = None
-
-    @allure_attach
-    def request(self, method, url, **kwargs):
-        response = super().request(method, url, **kwargs)
-        for r in response.history:
-            cookies = r.cookies.get_dict()
-            self.cookies.update(cookies)
-            code = parse_qs(urlparse(r.headers.get("Location")).query).get("code", None)
-            if code:
-                self.code = code
-        return response
 
 
 class AuthClient:
     def __init__(self, config: Config):
-        self.session = AuthSession()
+        self.session = TestSession()
         self.domain_url = f"{config.auth_url}:{config.auth_port}"
         self.code_verifier = base64.urlsafe_b64encode(os.urandom(32)).decode("utf-8")
         self.code_verifier = re.sub("[^a-zA-Z0-9]+", "", self.code_verifier)
@@ -49,9 +31,7 @@ class AuthClient:
         self.token = None
 
     def auth(self, username, password):
-        session = AuthSession()
-
-        session.get(
+        self.session.get(
             url=f"{self.domain_url}/oauth2/authorize",
             params={
                 "response_type": "code",
@@ -64,20 +44,20 @@ class AuthClient:
             allow_redirects=True,
         )
 
-        session.post(
+        self.session.post(
             url=f"{self.domain_url}/login",
             data={
                 "username": username,
                 "password": password,
-                "_csrf": session.cookies.get("XSRF-TOKEN"),
+                "_csrf": self.session.cookies.get("XSRF-TOKEN"),
             },
             allow_redirects=True,
         )
 
-        token_response = session.post(
+        token_response = self.session.post(
             url=f"{self.domain_url}/oauth2/token",
             data={
-                "code": session.code,
+                "code": self.session.code,
                 "redirect_uri": "http://frontend.niffler.dc/authorized",
                 "code_verifier": self.code_verifier,
                 "grant_type": "authorization_code",

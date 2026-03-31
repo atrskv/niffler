@@ -1,6 +1,6 @@
 from selene.support.shared.jquery_style import s, ss
 from selene import have, be
-from internal.utils import step
+from internal.utils.allure import step
 
 
 class CategoriesList:

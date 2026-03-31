@@ -1,6 +1,6 @@
 from selene import browser
 from internal.model.components.header import Header
-from internal.utils import step
+from internal.utils.allure import step
 
 
 class HomePage:

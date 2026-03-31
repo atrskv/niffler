@@ -5,7 +5,7 @@ from internal.model.components.header import Header
 from internal.model.components.spendings_table import SpendingsTable
 from selenium.webdriver import Keys
 import sys
-from internal.utils import step
+from internal.utils.allure import step
 
 
 class SpendingsPage:
@@ -91,10 +91,9 @@ class SpendingsPage:
         )
 
     @step
-    def wait_for_alert(self, timeout=40):
-        self._alert.with_(timeout=timeout).wait.for_(be.visible)
-        self._alert.with_(timeout=timeout).wait.for_(be.hidden)
+    def wait_for_alert(self):
+        self._alert.wait.for_(be.visible)
 
     @step
-    def category_should_be_edited(self, timeout=20):
-        self.wait_for_alert(timeout)
+    def category_should_be_edited(self):
+        self.wait_for_alert()

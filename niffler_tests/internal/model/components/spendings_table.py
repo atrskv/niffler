@@ -1,7 +1,7 @@
 from internal.model.components.table import Table
 from selene import have
 from selene.support.shared.jquery_style import s
-from internal.utils import step
+from internal.utils.allure import step
 
 
 class SpendingsTable:

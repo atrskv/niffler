@@ -1,13 +1,11 @@
 import pytest
-from selene import browser
-from selene import have
 
 import random
 from internal.clients.api.spends import SpendsHttpClient
 from internal.data.models.user import fake
 from internal.data.models.spend import CategoryAPI, SpendAddAPI
 from internal.data.models.currency import Currency
-from internal.utils import random_recent_days
+from internal.utils.common import random_recent_days
 
 
 @pytest.fixture
@@ -72,7 +70,7 @@ def spends_with_single_category(
     for spend in spends_params:
         if spend.category is None:
             spend.category = category.name
-        spend.spendDate = random_recent_days(60).isoformat()
+        spend.spendDate = random_recent_days(60).date().isoformat()
         created = spends_client.add_spend(spend, username=user.username)
         spends.append(created)
 
