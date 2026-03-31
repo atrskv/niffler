@@ -6,15 +6,9 @@ from internal.data.models.user import fake
 from internal.marks import pages, testdata
 
 
-pytestmark = [
-    pytest.mark.allure_label("UI: Account and spends", label_type="epic"),
-    pytest.mark.allure_label("Spends and categories", label_type="feature"),
-    pytest.mark.allure_label("Spends", label_type="story"),
-]
-
-
 @pages.spending
 def test_adding_a_new_spend(as_a_logged_user):
+    _ = as_a_logged_user
     spend = SpendAddUI.random()
 
     app.spendings_page.fill_amount(spend.amount)
@@ -31,7 +25,8 @@ def test_adding_a_new_spend(as_a_logged_user):
 
 
 @pages.spending
-def test_adding_a_new_spend_without_amount(in_browser, as_a_logged_user):
+def test_adding_a_new_spend_without_amount(as_a_logged_user, in_browser):
+    _ = as_a_logged_user, in_browser
     spend = SpendAddUI.random()
 
     app.spendings_page.fill_currency(spend.currency.value)
@@ -45,6 +40,7 @@ def test_adding_a_new_spend_without_amount(in_browser, as_a_logged_user):
 
 @pages.spending
 def test_adding_a_new_spend_without_description(as_a_logged_user):
+    _ = as_a_logged_user
     spend = SpendAddUI.random()
     spend.description = ""
 
@@ -62,8 +58,9 @@ def test_adding_a_new_spend_without_description(as_a_logged_user):
 
 @pages.spending
 def test_adding_a_new_spend_with_existing_category(
-    in_browser, category, as_a_logged_user
+    as_a_logged_user, in_browser, category
 ):
+    _ = as_a_logged_user, in_browser
     spend = SpendAddUI.random()
 
     app.refresh()
@@ -82,8 +79,10 @@ def test_adding_a_new_spend_with_existing_category(
 )
 @pages.home
 def test_saving_a_spend_after_removing_a_category(
-    in_browser, spends_with_single_category, as_a_logged_user
+    as_a_logged_user, in_browser, spends_with_single_category
 ):
+    _ = as_a_logged_user, in_browser, spends_with_single_category
+
     app.refresh()
     app.spendings_page.table.row(1).open_editor()
     app.spendings_page.remove_category()
@@ -99,9 +98,10 @@ def test_saving_a_spend_after_removing_a_category(
 )
 @pages.home
 def test_editing_a_spend_by_adding_a_new_category(
-    in_browser, spends_with_single_category, as_a_logged_user
+    as_a_logged_user, in_browser, spends_with_single_category
 ):
-    new_category_name = fake.word()
+    _ = as_a_logged_user, in_browser, spends_with_single_category
+    new_category_name = fake.name()
 
     app.refresh()
     app.spendings_page.table.row(1).open_editor()
@@ -120,8 +120,8 @@ def test_editing_a_spend_by_adding_a_new_category(
     ]
 )
 @pages.home
-def test_removing_a_spend(spends_with_single_category, as_a_logged_user):
-    spend = spends_with_single_category
+def test_removing_a_spend(as_a_logged_user, spends_with_single_category):
+    _ = as_a_logged_user, spends_with_single_category
 
     app.refresh()
     app.spendings_page.table.row(1).select()
@@ -136,8 +136,8 @@ def test_removing_a_spend(spends_with_single_category, as_a_logged_user):
     ]
 )
 @pages.spending
-def test_archiving_a_category(spends_with_single_category, as_a_logged_user):
-    spend = spends_with_single_category
+def test_archiving_a_category(as_a_logged_user, spends_with_single_category):
+    _ = as_a_logged_user, spends_with_single_category
 
     app.refresh()
     app.spendings_page.header.open_profile()
@@ -152,8 +152,8 @@ def test_archiving_a_category(spends_with_single_category, as_a_logged_user):
     ]
 )
 @pages.spending
-def test_renaming_a_category(spends_with_single_category, as_a_logged_user):
-    spend = spends_with_single_category
+def test_renaming_a_category(as_a_logged_user, spends_with_single_category):
+    _ = as_a_logged_user, spends_with_single_category
     new_category_name = fake.word()
 
     app.refresh()
@@ -177,9 +177,9 @@ def test_renaming_a_category(spends_with_single_category, as_a_logged_user):
 )
 @pages.home
 def test_adding_spends_with_a_single_category(
-    in_browser, spends_with_single_category, as_a_logged_user
+    as_a_logged_user, in_browser, spends_with_single_category
 ):
-    spend1, spend2 = spends_with_single_category
+    _ = as_a_logged_user, in_browser, spends_with_single_category
     expected_rubles_amount = "29600"
 
     app.refresh()
@@ -197,8 +197,11 @@ def test_adding_spends_with_a_single_category(
 )
 @pages.home
 def test_adding_spends_with_different_categories(
-    in_browser, spends_with_categories_1to1, as_a_logged_user
+    as_a_logged_user,
+    in_browser,
+    spends_with_categories_1to1,
 ):
+    _ = as_a_logged_user, in_browser
     spend1, spend2 = spends_with_categories_1to1
     spend1_to_rubles_amount, spend2_to_rubles_amount = "22200", "14066.67"
 
@@ -211,3 +214,10 @@ def test_adding_spends_with_different_categories(
         spend2.category.name, spend2_to_rubles_amount
     )
     app.spendings_page.table.should_have_size(2)
+
+
+pytestmark = [
+    pytest.mark.allure_label("UI: Account and spends", label_type="epic"),
+    pytest.mark.allure_label("Spends and categories", label_type="feature"),
+    pytest.mark.allure_label("Spends", label_type="story"),
+]

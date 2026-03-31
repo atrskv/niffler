@@ -1,20 +1,22 @@
-import random
-from datetime import datetime, timedelta, timezone
-import allure
+import inspect
 import json
+import random
+import re
+from datetime import datetime, timedelta, timezone
+from functools import wraps
 from json import JSONDecodeError
-from jinja2 import Environment, PackageLoader, select_autoescape
 
+import allure
 import curlify
+import requests
+from allure_commons import plugin_manager
 from allure_commons.types import AttachmentType
+from allure_commons.utils import func_parameters, uuid4
+from jinja2 import Environment, PackageLoader, select_autoescape
 from requests import Response
 
-import re
-import inspect
-from functools import wraps
-
-from allure_commons import plugin_manager
-from allure_commons.utils import uuid4, func_parameters
+from internal import settings
+from internal.data.models.user import User
 
 
 def random_recent_days(days=30):
@@ -162,3 +164,28 @@ def allure_attach(function):
         return response
 
     return wrapper
+
+
+def register_user(user: User):
+    session = requests.Session()
+
+    session.get(
+        f"{settings.config.auth_url}:{settings.config.auth_port}/register",
+        verify=False,
+    )
+    csrf_token = session.cookies.get("XSRF-TOKEN")
+
+    response = session.post(
+        f"{settings.config.auth_url}:{settings.config.auth_port}/register",
+        data={
+            "username": user.username,
+            "password": user.password,
+            "passwordSubmit": user.password,
+            "_csrf": csrf_token,
+        },
+        headers={"X-XSRF-TOKEN": csrf_token},
+        verify=False,
+    )
+
+    if response.status_code != 201:
+        raise Exception("Failed to register user")
