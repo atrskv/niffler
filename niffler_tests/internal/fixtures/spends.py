@@ -35,6 +35,10 @@ def category(
         if existing:
             result.append(existing)
         else:
+
+            if len(name) < 2:
+                name = name + "a"
+
             created = spends_client.add_category(name)
             result.append(created)
             existing_categories.append(created)
