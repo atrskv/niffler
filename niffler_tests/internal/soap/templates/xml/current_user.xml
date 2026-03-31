@@ -1,7 +1,7 @@
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-    <soap:Body>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Body>
         <currentUserRequest xmlns="niffler-userdata">
-            <username>john</username>
+            <username>{{ username }}</username>
         </currentUserRequest>
-    </soap:Body>
-</soap:Envelope>
+    </soapenv:Body>
+</soapenv:Envelope>
