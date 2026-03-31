@@ -20,6 +20,7 @@ class Config(BaseSettings):
     test_username: str | None = None
     test_password: str | None = None
     test_fullname: str | None = None
+    soap_url: str | None = None
 
 
 config = Config(_env_file=dotenv.find_dotenv(f"config.{Config().context}.env"))

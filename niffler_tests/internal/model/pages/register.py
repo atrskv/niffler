@@ -15,11 +15,13 @@ class RegisterPage:
 
     @step
     def fill_login(self, value):
-        self._form.s("#username").type(value)
+        input = self._form.s("#username")
+        input.type(value)
 
     @step
     def fill_password(self, value):
-        self._form.s("#password").type(value)
+        input = self._form.s("#password")
+        input.type(value)
 
     @step
     def fill_submut_password(self, value):
@@ -54,7 +56,7 @@ class RegisterPage:
 
     @step
     def should_password_mismatch_error_be_visible(self):
-        self._error_form.should(have.exact_text("Passwords should be equal"))
+        self._error_form.should(have.text("Passwords should be equal"))
 
     @step
     def should_be_registered(self):

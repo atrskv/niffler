@@ -6,18 +6,12 @@ from internal.marks import pages
 
 import polling2
 
-pytestmark = [
-    pytest.mark.allure_label("UI: Account and spends", label_type="epic"),
-    pytest.mark.allure_label("Spends and categories", label_type="feature"),
-    pytest.mark.allure_label("Categories", label_type="story"),
-]
-
 
 @pages.spending
-def test_adding_a_new_spend(spend_db, as_a_logged_user):
+def test_adding_a_new_spend(as_a_logged_user, in_browser, spend_db):
     user = as_a_logged_user
+    _ = in_browser
     spend = SpendAddUI.random()
-
     app.spendings_page.fill_amount(spend.amount)
     app.spendings_page.fill_currency(spend.currency.value)
     app.spendings_page.fill_category(spend.category)
@@ -43,10 +37,10 @@ def test_adding_a_new_spend(spend_db, as_a_logged_user):
 
 
 @pages.spending
-def test_adding_a_new_category(spend_db, as_a_logged_user):
+def test_adding_a_new_category(as_a_logged_user, in_browser, spend_db):
     user = as_a_logged_user
     spend = SpendAddUI.random()
-
+    _ = in_browser
     app.spendings_page.fill_amount(spend.amount)
     app.spendings_page.fill_currency(spend.currency.value)
     app.spendings_page.fill_category(spend.category)
@@ -67,3 +61,10 @@ def test_adding_a_new_category(spend_db, as_a_logged_user):
     assert len(result) == 1
     assert user.username == result[0].username
     assert result[0].name == spend.category
+
+
+pytestmark = [
+    pytest.mark.allure_label("UI: Account and spends", label_type="epic"),
+    pytest.mark.allure_label("Spends and categories", label_type="feature"),
+    pytest.mark.allure_label("Categories", label_type="story"),
+]

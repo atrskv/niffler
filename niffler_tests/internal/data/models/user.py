@@ -1,9 +1,11 @@
+import string
 from uuid import uuid4
 from faker import Faker
 from pydantic import BaseModel
 
 from internal.data.models.currency import Currency
 from internal.data.models.fiends import FriendshipStatus
+import random
 
 fake = Faker()
 
@@ -32,11 +34,18 @@ class User(BaseModel):
 
     @classmethod
     def random(cls, username: str = "") -> "User":
+        password_length = random.randint(5, 12)
+        username_length = random.randint(5, 12)
+
+        fake_username = "".join(
+            random.choices(string.ascii_lowercase, k=username_length)
+        )
+
         return cls(
             id=str(uuid4()),
-            username=username or fake.user_name(),
+            username=username or fake_username,
             firstname=fake.first_name(),
-            password=fake.word(),
+            password=fake.password(length=password_length),
             surname=fake.last_name(),
             fullname=fake.name(),
             currency=fake.random_element(list(Currency)),

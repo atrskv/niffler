@@ -3,15 +3,9 @@ from internal.data.models.user import fake, User
 import pytest
 
 
-pytestmark = [
-    pytest.mark.allure_label("UI: Account and spends", label_type="epic"),
-    pytest.mark.allure_label("Account", label_type="feature"),
-    pytest.mark.allure_label("Registration", label_type="story"),
-]
-
-
 def test_registering_a_user(in_browser):
     user = User.random()
+    _ = in_browser
 
     app.auth_page.open()
     app.auth_page.go_to_register()
@@ -22,6 +16,7 @@ def test_registering_a_user(in_browser):
 
 def test_registering_with_a_short_username(in_browser):
     user = User.random()
+    _ = in_browser
 
     app.auth_page.open()
     app.auth_page.go_to_register()
@@ -36,6 +31,7 @@ def test_registering_with_a_short_username(in_browser):
 def test_registering_with_a_long_username(in_browser):
     user = User.random()
     user.username = fake.pystr(min_chars=51, max_chars=51)
+    _ = in_browser
 
     app.auth_page.open()
     app.auth_page.go_to_register()
@@ -50,6 +46,7 @@ def test_registering_with_a_long_username(in_browser):
 def test_registering_with_a_short_password(in_browser):
     user = User.random()
     user.password = user.password[:2]
+    _ = in_browser
 
     app.auth_page.open()
     app.auth_page.go_to_register()
@@ -63,6 +60,7 @@ def test_registering_with_a_short_password(in_browser):
 
 def test_registering_with_a_password_mismatch(in_browser):
     user = User.random()
+    _ = in_browser
 
     app.auth_page.open()
     app.auth_page.go_to_register()
@@ -74,8 +72,9 @@ def test_registering_with_a_password_mismatch(in_browser):
     app.register_page.should_password_mismatch_error_be_visible()
 
 
-def test_registering_an_existing_user(in_browser, user):
-    user = user
+def test_registering_an_existing_user(as_a_registered_user, in_browser):
+    user = as_a_registered_user
+    _ = in_browser
 
     app.auth_page.open()
     app.auth_page.go_to_register()
@@ -85,3 +84,10 @@ def test_registering_an_existing_user(in_browser, user):
     app.register_page.submut()
 
     app.register_page.should_user_already_exists_error_be_visible(user.username)
+
+
+pytestmark = [
+    pytest.mark.allure_label("UI: Account and spends", label_type="epic"),
+    pytest.mark.allure_label("Account", label_type="feature"),
+    pytest.mark.allure_label("Registration", label_type="story"),
+]

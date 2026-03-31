@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:nif="niffler-userdata">
+    <soapenv:Body>
+        <nif:sendInvitationRequest>
+            <nif:username>{{ username }}</nif:username>
+            <nif:friendToBeRequested>{{ friend }}</nif:friendToBeRequested>
+        </nif:sendInvitationRequest>
+    </soapenv:Body>
+</soapenv:Envelope>
