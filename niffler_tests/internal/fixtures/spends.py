@@ -1,7 +1,8 @@
 import pytest
 
 import random
-from internal.clients.api.spends import SpendsHttpClient
+
+from internal.clients.api.spends import SpendsService
 from internal.data.models.user import fake
 from internal.data.models.spend import CategoryAPI, SpendAddAPI
 from internal.data.models.currency import Currency
@@ -10,7 +11,7 @@ from internal.utils.common import random_recent_days
 
 @pytest.fixture
 def category(
-    request, spends_client: SpendsHttpClient, spend_db
+    request, spends_client: SpendsService, spend_db
 ) -> CategoryAPI | list[CategoryAPI]:
     if hasattr(request, "param"):
         param = request.param

@@ -1,8 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="niffler-userdata"
-           xmlns:nif="niffler-userdata"
-           elementFormDefault="qualified">
+<xs:schema
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:tns="niffler-userdata"
+        targetNamespace="niffler-userdata"
+        elementFormDefault="qualified">
+
+    <xs:element name="userResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="user" type="tns:user"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="user">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string" minOccurs="0"/>
+
+            <xs:element name="username" type="xs:string"/>
+            <xs:element name="currency" type="tns:currency"/>
+
+            <xs:element name="friendshipStatus" type="tns:friendshipStatus" minOccurs="0"/>
+            <xs:element name="firstname" type="xs:string" minOccurs="0"/>
+            <xs:element name="surname" type="xs:string" minOccurs="0"/>
+            <xs:element name="fullname" type="xs:string" minOccurs="0"/>
+            <xs:element name="photo" type="xs:string" minOccurs="0"/>
+            <xs:element name="photoSmall" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
 
     <xs:simpleType name="currency">
         <xs:restriction base="xs:string">
@@ -21,27 +46,5 @@
             <xs:enumeration value="VOID"/>
         </xs:restriction>
     </xs:simpleType>
-
-    <xs:element name="userResponse">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="user">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="id" type="xs:string"/>
-                            <xs:element name="username" type="xs:string"/>
-                            <xs:element minOccurs="0" name="firstname" type="xs:string"/>
-                            <xs:element minOccurs="0" name="surname" type="xs:string"/>
-                            <xs:element minOccurs="0" name="fullname" type="xs:string"/>
-                            <xs:element name="currency" type="nif:currency"/>
-                            <xs:element minOccurs="0" name="photo" type="xs:string"/>
-                            <xs:element minOccurs="0" name="photoSmall" type="xs:string"/>
-                            <xs:element minOccurs="0" name="friendshipStatus" type="nif:friendshipStatus"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
 
 </xs:schema>
