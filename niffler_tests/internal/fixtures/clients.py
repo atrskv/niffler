@@ -2,34 +2,32 @@ import pytest
 from grpc import insecure_channel, intercept_channel
 
 from internal import settings
-from internal.clients.api.base import BaseService
-from internal.clients.api.spends import SpendsHttpClient
-from internal.clients.api.users import UsersHttpClient
+from internal.clients.api.spends import SpendsService
+from internal.clients.api.users import UsersService, UsersSoapService
 from internal.clients.db.spends import SpendDb
 from internal.clients.pb.niffler_currency_pb2_pbreflect import (
     NifflerCurrencyServiceClient,
 )
+from tests.conftest import INTERCEPTORS
 
 
 @pytest.fixture
-def spends_client(token) -> SpendsHttpClient:
-    return SpendsHttpClient(
+def spends_client(token) -> SpendsService:
+    return SpendsService(
         f"{settings.config.gateway_url}:{settings.config.gateway_port}", token
     )
 
 
 @pytest.fixture
-def users_client(token) -> UsersHttpClient:
-    return UsersHttpClient(
+def users_client(token) -> UsersService:
+    return UsersService(
         f"{settings.config.gateway_url}:{settings.config.gateway_port}", token
     )
 
 
 @pytest.fixture
-def soap_users_client(token):
-    service = BaseService(settings.config.soap_url)
-    service.session.headers.update({"Content-Type": "text/xml; charset=utf-8"})
-    return service
+def soap_users_client():
+    return UsersSoapService(settings.config.soap_url)
 
 
 @pytest.fixture(scope="session")

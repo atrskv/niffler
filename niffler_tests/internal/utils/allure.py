@@ -95,14 +95,15 @@ class StepContext:
 
 
 def allure_attach(function):
-
     def wrapper(*args, **kwargs):
-        method = kwargs.get("method") or (args[1] if len(args) > 1 else "UNKNOWN")
+        self_obj = args[0] if args else None
 
-        url = kwargs.get("url")
-        if url is None:
-            self_obj = args[0] if args else None
-            url = getattr(self_obj, "base_url", "UNKNOWN")
+        method = kwargs.get("method") or (function.__name__.upper())
+
+        endpoint = args[1] if len(args) > 1 else ""
+        base_url = getattr(self_obj, "base_url", "")
+
+        url = kwargs.get("url") or f"{base_url}{endpoint}"
 
         env = Environment(
             loader=PackageLoader("internal", "allure_templates"),
