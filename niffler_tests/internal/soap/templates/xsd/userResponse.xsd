@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="niffler-userdata"
+           xmlns:nif="niffler-userdata"
+           elementFormDefault="qualified">
+
+    <xs:simpleType name="currency">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="RUB"/>
+            <xs:enumeration value="EUR"/>
+            <xs:enumeration value="USD"/>
+            <xs:enumeration value="KZT"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="friendshipStatus">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="INVITE_SENT"/>
+            <xs:enumeration value="INVITE_RECEIVED"/>
+            <xs:enumeration value="FRIEND"/>
+            <xs:enumeration value="VOID"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name="userResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="user">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="id" type="xs:string"/>
+                            <xs:element name="username" type="xs:string"/>
+                            <xs:element minOccurs="0" name="firstname" type="xs:string"/>
+                            <xs:element minOccurs="0" name="surname" type="xs:string"/>
+                            <xs:element minOccurs="0" name="fullname" type="xs:string"/>
+                            <xs:element name="currency" type="nif:currency"/>
+                            <xs:element minOccurs="0" name="photo" type="xs:string"/>
+                            <xs:element minOccurs="0" name="photoSmall" type="xs:string"/>
+                            <xs:element minOccurs="0" name="friendshipStatus" type="nif:friendshipStatus"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
