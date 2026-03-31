@@ -3,6 +3,7 @@ from datetime import datetime, timedelta, timezone
 import allure
 import json
 from json import JSONDecodeError
+from jinja2 import Environment, PackageLoader, select_autoescape
 
 import curlify
 from allure_commons.types import AttachmentType
@@ -106,9 +107,12 @@ class StepContext:
 def allure_attach(function):
 
     def wrapper(*args, **kwargs):
-        method, url = args[1], args[2]
+        method = kwargs.get("method") or (args[1] if len(args) > 1 else "UNKNOWN")
 
-        from jinja2 import Environment, PackageLoader, select_autoescape
+        url = kwargs.get("url")
+        if url is None:
+            self_obj = args[0] if args else None
+            url = getattr(self_obj, "base_url", "UNKNOWN")
 
         env = Environment(
             loader=PackageLoader("internal", "allure_templates"),
