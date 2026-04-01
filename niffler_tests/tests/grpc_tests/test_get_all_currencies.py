@@ -6,12 +6,6 @@ from internal.clients.pb.niffler_currency_pb2_pbreflect import (
 import pytest
 
 
-pytestmark = [
-    pytest.mark.allure_label("GRPC: Rates and currencies", label_type="epic"),
-    pytest.mark.allure_label("Currencies", label_type="feature"),
-]
-
-
 def test_get_all_currencies(
     grpc_client: NifflerCurrencyServiceClient,
 ):
@@ -29,3 +23,9 @@ def test_get_all_currencies(
     assert set(currencies.keys()) == expected
     for rate in currencies.values():
         assert rate > 0, f"Currency rate {rate} should be positive"
+
+
+pytestmark = [
+    pytest.mark.allure_label("GRPC: Rates and currencies", label_type="epic"),
+    pytest.mark.allure_label("Currencies", label_type="feature"),
+]

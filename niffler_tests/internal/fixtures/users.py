@@ -24,3 +24,13 @@ def friend():
     friend = User.random()
     register_user(friend)
     return friend
+
+
+@pytest.fixture()
+def created_user(users_client, rollback_user):
+    user = users_client.create_user()
+
+    rollback_user.append(user)
+
+    return user
+

@@ -6,12 +6,6 @@ import grpc
 import pytest
 
 
-pytestmark = [
-    pytest.mark.allure_label("GRPC: Rates and currencies", label_type="epic"),
-    pytest.mark.allure_label("Rates", label_type="feature"),
-]
-
-
 def test_calculate_rate(grpc_client: NifflerCurrencyServiceClient):
     response = grpc_client.calculate_rate(
         request=CalculateRequest(
@@ -82,3 +76,10 @@ def test_currency_conversion(
     assert response.calculatedAmount == expected_result, (
         f"Expected {expected_result}, got {response.calculatedAmount}"
     )
+
+
+pytestmark = [
+    pytest.mark.allure_label("GRPC: Rates and currencies", label_type="epic"),
+    pytest.mark.allure_label("Rates", label_type="feature"),
+]
+
