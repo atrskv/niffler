@@ -35,7 +35,6 @@ def category(
         if existing:
             result.append(existing)
         else:
-
             if len(name) < 2:
                 name = name + "a"
 
@@ -96,3 +95,18 @@ def spends_with_categories_1to1(as_a_logged_user, request, spends_client, catego
         spends.append(created)
 
     return spends
+
+
+@pytest.fixture()
+def spend_payload(category):
+    return SpendAddAPI.random(category_name=category.name)
+
+
+@pytest.fixture()
+def created_spend(spends_client, as_a_registered_user, spend_payload, rollback_spends):
+    created = spends_client.add_spend(spend_payload, as_a_registered_user.username)
+
+    rollback_spends.append(created)
+
+    return created
+
