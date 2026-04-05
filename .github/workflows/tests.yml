@@ -2,9 +2,9 @@ name: Python E2E Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [ kafka ]
   pull_request:
-    branches: [ main ]
+    branches: [ kafka ]
   workflow_dispatch:
 
 env:
@@ -43,6 +43,7 @@ jobs:
           echo "127.0.0.1 frontend.niffler.dc" | sudo tee -a /etc/hosts
           echo "127.0.0.1 gateway.niffler.dc" | sudo tee -a /etc/hosts
           echo "127.0.0.1 userdata.niffler.dc" | sudo tee -a /etc/hosts
+          echo "127.0.0.1 kafka" | sudo tee -a /etc/hosts
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
