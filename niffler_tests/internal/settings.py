@@ -4,7 +4,7 @@ from pydantic_settings import BaseSettings
 
 
 class Config(BaseSettings):
-    context: Literal["local", "remote"] = "local"
+    context: Literal["local", "remote"] = "remote"
     use_mock: bool = False
     frontend_url: str = "http://frontend.niffler.dc"
     wiremock_host: str = "localhost:8094"
@@ -29,4 +29,4 @@ class Config(BaseSettings):
     enable_VNC: bool| None = None
 
 
-config = Config(_env_file=f"config.{Config().context}.env")
+config = Config(_env_file=dotenv.find_dotenv(f"config.{Config().context}.env"))

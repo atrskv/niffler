@@ -45,10 +45,7 @@ class SpendingsPage:
     @step
     def remove_category(self):
         self._category.click()
-        self._category.send_keys(
-            Keys.COMMAND if sys.platform == "darwin" else Keys.CONTROL,
-            "a",
-        )
+        self._category.send_keys(Keys.END, Keys.SHIFT, Keys.HOME, Keys.DELETE)
         self._category.send_keys(Keys.DELETE)
 
     @step
