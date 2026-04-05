@@ -1,0 +1,80 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset = UTF-8">
+    <script src="https://yastatic.net/jquery/2.2.3/jquery.min.js" crossorigin="anonymous"></script>
+
+    <link href="https://yastatic.net/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://yastatic.net/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <link type="text/css" href="https://yandex.st/highlightjs/8.0/styles/github.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/bash.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/json.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/xml.min.js"></script>
+    <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
+    <style>
+        pre {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <pre><code>POST to http://gateway.niffler.dc:8090/api/spends/add</code></pre>
+</div>
+
+
+    <h4>Body</h4>
+    <div>
+        <pre><code>b'{"spendDate": "2015-12-19", "category": {"name": "career", "username": "zubrrvr"}, "currency": "USD", "amount": 79.0, "description": "Read you doctor strategy us today.", "username": "zubrrvr"}'</code></pre>
+    </div>
+
+
+
+
+    <h4>Headers</h4>
+    <div>
+    
+        <div>
+            <pre><code><b>User-Agent</b>: python-requests/2.32.5</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept-Encoding</b>: gzip, deflate</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Connection</b>: keep-alive</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Type</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Authorization</b>: Bearer eyJraWQiOiIyOWU1NDkzMi0wM2Y4LTQ4YjMtYWViNS0wMmI5NTdjYTRmMzAiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ6dWJycnZyIiwiYXVkIjoiY2xpZW50IiwibmJmIjoxNzc1NDI3NzEyLCJzY29wZSI6WyJvcGVuaWQiXSwiaXNzIjoiaHR0cDovL2F1dGgubmlmZmxlci5kYzo5MDAwIiwiZXhwIjoxNzc1NDMxMzEyLCJpYXQiOjE3NzU0Mjc3MTIsImp0aSI6IjVkMDBiMTA2LWRjMmMtNDg5ZS05OTk4LTBmYjYyZmYyMjFkMCJ9.oToZPEBUwgjyKLl04R49uo08QKh1HrCOpsj7q_qDEsUQHOxAq5CifUlmX9UhpX7utF1JhIbQXoCQVH6kX7WicZ0l-wZTwsZ_QeD44T-nq1APlDMpMbCj8eNHH5kerdLu9y9BDJbMeMOV9bgXXPk2jcnC9ed-2PJJ35Fo4_b-JJ5lKxhXf2Hs1DDbC5Dv7rqyU3_fnkqcrGzX1bqq6edorGO3h5xNGmbuvQEE2R9GhzBFM88SSD_CmG3JfnVRPbJDjuyWZsSPvmBSHy3oqVe11Su4AkDwffsY1K998T6-LwnFT0OlDD95ekpFhdPqYTPAo9CEAQUFcunOACEQ-HSAzA</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Length</b>: 193</code></pre>
+        </div>
+    
+    </div>
+
+
+
+
+
+
+    <h4>Curl</h4>
+    <div>
+        <pre><code>curl -H 'User-Agent: python-requests/2.32.5' -H 'Accept-Encoding: gzip, deflate' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJraWQiOiIyOWU1NDkzMi0wM2Y4LTQ4YjMtYWViNS0wMmI5NTdjYTRmMzAiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ6dWJycnZyIiwiYXVkIjoiY2xpZW50IiwibmJmIjoxNzc1NDI3NzEyLCJzY29wZSI6WyJvcGVuaWQiXSwiaXNzIjoiaHR0cDovL2F1dGgubmlmZmxlci5kYzo5MDAwIiwiZXhwIjoxNzc1NDMxMzEyLCJpYXQiOjE3NzU0Mjc3MTIsImp0aSI6IjVkMDBiMTA2LWRjMmMtNDg5ZS05OTk4LTBmYjYyZmYyMjFkMCJ9.oToZPEBUwgjyKLl04R49uo08QKh1HrCOpsj7q_qDEsUQHOxAq5CifUlmX9UhpX7utF1JhIbQXoCQVH6kX7WicZ0l-wZTwsZ_QeD44T-nq1APlDMpMbCj8eNHH5kerdLu9y9BDJbMeMOV9bgXXPk2jcnC9ed-2PJJ35Fo4_b-JJ5lKxhXf2Hs1DDbC5Dv7rqyU3_fnkqcrGzX1bqq6edorGO3h5xNGmbuvQEE2R9GhzBFM88SSD_CmG3JfnVRPbJDjuyWZsSPvmBSHy3oqVe11Su4AkDwffsY1K998T6-LwnFT0OlDD95ekpFhdPqYTPAo9CEAQUFcunOACEQ-HSAzA' -H 'Content-Length: 193' -d '{"spendDate": "2015-12-19", "category": {"name": "career", "username": "zubrrvr"}, "currency": "USD", "amount": 79.0, "description": "Read you doctor strategy us today.", "username": "zubrrvr"}' http://gateway.niffler.dc:8090/api/spends/add</code></pre>
+    </div>
+
+</body>
+</html>
