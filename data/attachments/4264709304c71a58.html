@@ -1,0 +1,80 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset = UTF-8">
+    <script src="https://yastatic.net/jquery/2.2.3/jquery.min.js" crossorigin="anonymous"></script>
+
+    <link href="https://yastatic.net/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://yastatic.net/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <link type="text/css" href="https://yandex.st/highlightjs/8.0/styles/github.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/bash.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/json.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/xml.min.js"></script>
+    <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
+    <style>
+        pre {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <pre><code>POST to http://gateway.niffler.dc:8090/api/spends/add</code></pre>
+</div>
+
+
+    <h4>Body</h4>
+    <div>
+        <pre><code>b'{"spendDate": "2001-02-20", "category": {"name": "table", "username": "mahpgd"}, "currency": "USD", "amount": 816.0, "description": "Make international power key leave sea long.", "username": "mahpgd"}'</code></pre>
+    </div>
+
+
+
+
+    <h4>Headers</h4>
+    <div>
+    
+        <div>
+            <pre><code><b>User-Agent</b>: python-requests/2.32.5</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept-Encoding</b>: gzip, deflate</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Connection</b>: keep-alive</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Type</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Authorization</b>: Bearer eyJraWQiOiI2NTcyYTlkZC00ZWFlLTRlZTItYWQ0MC03NDU0ZTE1NGM0ZjQiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJtYWhwZ2QiLCJhdWQiOiJjbGllbnQiLCJuYmYiOjE3NzU0MzA1NTMsInNjb3BlIjpbIm9wZW5pZCJdLCJpc3MiOiJodHRwOi8vYXV0aC5uaWZmbGVyLmRjOjkwMDAiLCJleHAiOjE3NzU0MzQxNTMsImlhdCI6MTc3NTQzMDU1MywianRpIjoiZDBkNDZlN2MtYjdkMi00Mzg2LTk1MTgtMmE5ZGMwMmE0ZDFjIn0.m4zjxAtMfSb-J2uOFhOVV87HADRIAQEYWK6J618vpugwMdN7_ZjnImTQrkK3eUnjpXwsuWhLS-DaBbj4MiZupeuzVbzUKQ8lk4Hus0giGm3hN1iHhwMiKqGKlGemf4Tp5NU58-prmcGzAf_piL3j57RVV2GQEAnIMmB74IDKC0OkkuL_3tEwwmcThOSRbgVpZYSXIYvRilwSMEyOgAYF0oi0kSh-nWP6c_sE7ggMP-u8jrgC-7Y6xnRfHjhucOsiMRza8ETbNFKhS_slWyVn0TXbp6oTDEY2W4rc2AKj7xXjnxdkY3YahI6Xh6cOMPnrhKDRt9BZgucCeoV34A7thA</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Length</b>: 201</code></pre>
+        </div>
+    
+    </div>
+
+
+
+
+
+
+    <h4>Curl</h4>
+    <div>
+        <pre><code>curl -H 'User-Agent: python-requests/2.32.5' -H 'Accept-Encoding: gzip, deflate' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJraWQiOiI2NTcyYTlkZC00ZWFlLTRlZTItYWQ0MC03NDU0ZTE1NGM0ZjQiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJtYWhwZ2QiLCJhdWQiOiJjbGllbnQiLCJuYmYiOjE3NzU0MzA1NTMsInNjb3BlIjpbIm9wZW5pZCJdLCJpc3MiOiJodHRwOi8vYXV0aC5uaWZmbGVyLmRjOjkwMDAiLCJleHAiOjE3NzU0MzQxNTMsImlhdCI6MTc3NTQzMDU1MywianRpIjoiZDBkNDZlN2MtYjdkMi00Mzg2LTk1MTgtMmE5ZGMwMmE0ZDFjIn0.m4zjxAtMfSb-J2uOFhOVV87HADRIAQEYWK6J618vpugwMdN7_ZjnImTQrkK3eUnjpXwsuWhLS-DaBbj4MiZupeuzVbzUKQ8lk4Hus0giGm3hN1iHhwMiKqGKlGemf4Tp5NU58-prmcGzAf_piL3j57RVV2GQEAnIMmB74IDKC0OkkuL_3tEwwmcThOSRbgVpZYSXIYvRilwSMEyOgAYF0oi0kSh-nWP6c_sE7ggMP-u8jrgC-7Y6xnRfHjhucOsiMRza8ETbNFKhS_slWyVn0TXbp6oTDEY2W4rc2AKj7xXjnxdkY3YahI6Xh6cOMPnrhKDRt9BZgucCeoV34A7thA' -H 'Content-Length: 201' -d '{"spendDate": "2001-02-20", "category": {"name": "table", "username": "mahpgd"}, "currency": "USD", "amount": 816.0, "description": "Make international power key leave sea long.", "username": "mahpgd"}' http://gateway.niffler.dc:8090/api/spends/add</code></pre>
+    </div>
+
+</body>
+</html>
