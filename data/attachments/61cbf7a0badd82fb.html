@@ -1,0 +1,71 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset = UTF-8">
+    <script src="https://yastatic.net/jquery/2.2.3/jquery.min.js" crossorigin="anonymous"></script>
+
+    <link href="https://yastatic.net/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://yastatic.net/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <link type="text/css" href="https://yandex.st/highlightjs/8.0/styles/github.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/bash.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/json.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/xml.min.js"></script>
+    <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
+    <style>
+        pre {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <pre><code>GET to http://gateway.niffler.dc:8090/api/users/current</code></pre>
+</div>
+
+
+
+
+
+    <h4>Headers</h4>
+    <div>
+    
+        <div>
+            <pre><code><b>User-Agent</b>: python-requests/2.32.5</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept-Encoding</b>: gzip, deflate</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Connection</b>: keep-alive</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Type</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Authorization</b>: Bearer eyJraWQiOiI1OGJiMTBmYy1mMmQ1LTQyN2MtOGJlYy1mNjQzNmZkOGE3ZjUiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmdXF0c3ZybXR1ZSIsImF1ZCI6ImNsaWVudCIsIm5iZiI6MTc3NTQwNzY3NCwic2NvcGUiOlsib3BlbmlkIl0sImlzcyI6Imh0dHA6Ly9hdXRoLm5pZmZsZXIuZGM6OTAwMCIsImV4cCI6MTc3NTQxMTI3NCwiaWF0IjoxNzc1NDA3Njc0LCJqdGkiOiIwOWE3ODYyYy1kNzNkLTRiNzAtYmJiYS02ZTNhY2NjOGU3MjcifQ.Y6gQn0XlD5CnYMbY3WrS8BQqnWL9Z3lsHvxZGcMLRaaZxSXOwE3gdtoXuLY4wnWUwdS4OXcrTK4y_TLhx8M3yf1UXQ205buXSjomytN67WcXMNv23EwAYcNd9D1lmkaeBBI3606H3IUSIglxYYT3WlWDm0LNccqxJPZm5yGYNVXlqI2n-xN5DoX4sP6nW1Ld9cCO6GHb9DZ8TPHoOl1Et5VHp0Gb0M8rl3mrJjS4vcQFII-JIiviIDPVIsgziIsVQnA6Y5b2rMci63KmTxWkkIpK-dygktroiLsPoJuIwCjJ7XIMEw8fgxqQA3ImEAaFoCbFPpBm_GsQB6-V47PSsw</code></pre>
+        </div>
+    
+    </div>
+
+
+
+
+
+
+    <h4>Curl</h4>
+    <div>
+        <pre><code>curl -H 'User-Agent: python-requests/2.32.5' -H 'Accept-Encoding: gzip, deflate' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJraWQiOiI1OGJiMTBmYy1mMmQ1LTQyN2MtOGJlYy1mNjQzNmZkOGE3ZjUiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmdXF0c3ZybXR1ZSIsImF1ZCI6ImNsaWVudCIsIm5iZiI6MTc3NTQwNzY3NCwic2NvcGUiOlsib3BlbmlkIl0sImlzcyI6Imh0dHA6Ly9hdXRoLm5pZmZsZXIuZGM6OTAwMCIsImV4cCI6MTc3NTQxMTI3NCwiaWF0IjoxNzc1NDA3Njc0LCJqdGkiOiIwOWE3ODYyYy1kNzNkLTRiNzAtYmJiYS02ZTNhY2NjOGU3MjcifQ.Y6gQn0XlD5CnYMbY3WrS8BQqnWL9Z3lsHvxZGcMLRaaZxSXOwE3gdtoXuLY4wnWUwdS4OXcrTK4y_TLhx8M3yf1UXQ205buXSjomytN67WcXMNv23EwAYcNd9D1lmkaeBBI3606H3IUSIglxYYT3WlWDm0LNccqxJPZm5yGYNVXlqI2n-xN5DoX4sP6nW1Ld9cCO6GHb9DZ8TPHoOl1Et5VHp0Gb0M8rl3mrJjS4vcQFII-JIiviIDPVIsgziIsVQnA6Y5b2rMci63KmTxWkkIpK-dygktroiLsPoJuIwCjJ7XIMEw8fgxqQA3ImEAaFoCbFPpBm_GsQB6-V47PSsw' http://gateway.niffler.dc:8090/api/users/current</code></pre>
+    </div>
+
+</body>
+</html>

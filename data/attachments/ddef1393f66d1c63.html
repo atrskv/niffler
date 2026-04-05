@@ -1,0 +1,80 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset = UTF-8">
+    <script src="https://yastatic.net/jquery/2.2.3/jquery.min.js" crossorigin="anonymous"></script>
+
+    <link href="https://yastatic.net/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://yastatic.net/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <link type="text/css" href="https://yandex.st/highlightjs/8.0/styles/github.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/bash.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/json.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/xml.min.js"></script>
+    <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
+    <style>
+        pre {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <pre><code>POST to http://gateway.niffler.dc:8090/api/users/update</code></pre>
+</div>
+
+
+    <h4>Body</h4>
+    <div>
+        <pre><code>b'{"id": "7d91c0a1-c497-4581-bdbf-13bc27448c18", "username": "rivwqbeprnu", "firstname": "Jeffrey", "password": "8qH5IEuK_", "surname": "Bennett", "fullname": "Ruth Lopez", "currency": "EUR"}'</code></pre>
+    </div>
+
+
+
+
+    <h4>Headers</h4>
+    <div>
+    
+        <div>
+            <pre><code><b>User-Agent</b>: python-requests/2.32.5</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept-Encoding</b>: gzip, deflate</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Connection</b>: keep-alive</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Type</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Authorization</b>: Bearer eyJraWQiOiI1OGJiMTBmYy1mMmQ1LTQyN2MtOGJlYy1mNjQzNmZkOGE3ZjUiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1amhqdGtuaWRjIiwiYXVkIjoiY2xpZW50IiwibmJmIjoxNzc1NDA3Njc1LCJzY29wZSI6WyJvcGVuaWQiXSwiaXNzIjoiaHR0cDovL2F1dGgubmlmZmxlci5kYzo5MDAwIiwiZXhwIjoxNzc1NDExMjc1LCJpYXQiOjE3NzU0MDc2NzUsImp0aSI6ImUzY2I3MjViLWUwMDctNGUzYy1iYjQwLWNkMGRiOWE0YmYxMiJ9.taIb47v5nwIg1bAJbjGXE_f_wWyUKmMzm1sfAzZa7FPlbD9e0L_RY_Zog-s2qhPaW_NFdcpdEzB1a8KFGnJ6Xv5B0u6jb57Q8_tlZW8Cob91BNorgrDZIDb---olbEjgjQlaBvzSm10xnVA_guOkFPn2RXEN6i2gPNYuJBAWT1RA9fqanZuJFx15x64fqsqY99W_9rBFd_vPMjOuGLlUmfQMr7LJGAhbH6Xf5tIrRF7h0sgN82qjL6RNutAXYEnhimZqvAgGFjAmedyvcworpneFsOcTKRBm7XMD5kCSAXWh1a8TBKtk0y8pxMuTkH_Wy_Ftd-2DXPwGOe5rcs5iKA</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Length</b>: 189</code></pre>
+        </div>
+    
+    </div>
+
+
+
+
+
+
+    <h4>Curl</h4>
+    <div>
+        <pre><code>curl -H 'User-Agent: python-requests/2.32.5' -H 'Accept-Encoding: gzip, deflate' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJraWQiOiI1OGJiMTBmYy1mMmQ1LTQyN2MtOGJlYy1mNjQzNmZkOGE3ZjUiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1amhqdGtuaWRjIiwiYXVkIjoiY2xpZW50IiwibmJmIjoxNzc1NDA3Njc1LCJzY29wZSI6WyJvcGVuaWQiXSwiaXNzIjoiaHR0cDovL2F1dGgubmlmZmxlci5kYzo5MDAwIiwiZXhwIjoxNzc1NDExMjc1LCJpYXQiOjE3NzU0MDc2NzUsImp0aSI6ImUzY2I3MjViLWUwMDctNGUzYy1iYjQwLWNkMGRiOWE0YmYxMiJ9.taIb47v5nwIg1bAJbjGXE_f_wWyUKmMzm1sfAzZa7FPlbD9e0L_RY_Zog-s2qhPaW_NFdcpdEzB1a8KFGnJ6Xv5B0u6jb57Q8_tlZW8Cob91BNorgrDZIDb---olbEjgjQlaBvzSm10xnVA_guOkFPn2RXEN6i2gPNYuJBAWT1RA9fqanZuJFx15x64fqsqY99W_9rBFd_vPMjOuGLlUmfQMr7LJGAhbH6Xf5tIrRF7h0sgN82qjL6RNutAXYEnhimZqvAgGFjAmedyvcworpneFsOcTKRBm7XMD5kCSAXWh1a8TBKtk0y8pxMuTkH_Wy_Ftd-2DXPwGOe5rcs5iKA' -H 'Content-Length: 189' -d '{"id": "7d91c0a1-c497-4581-bdbf-13bc27448c18", "username": "rivwqbeprnu", "firstname": "Jeffrey", "password": "8qH5IEuK_", "surname": "Bennett", "fullname": "Ruth Lopez", "currency": "EUR"}' http://gateway.niffler.dc:8090/api/users/update</code></pre>
+    </div>
+
+</body>
+</html>
