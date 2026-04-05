@@ -1,0 +1,133 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset = UTF-8">
+
+    <link href="https://yastatic.net/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" href="https://yandex.st/highlightjs/8.0/styles/github.min.css" rel="stylesheet"/>
+
+    <script src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <style>
+        pre { white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+
+<h3>Status: 200</h3>
+
+
+<h4>Headers</h4>
+
+<pre><code><b>Vary</b>: Origin, Access-Control-Request-Method, Access-Control-Request-Headers</code></pre>
+
+<pre><code><b>Set-Cookie</b>: XSRF-TOKEN=3c41f2b8-02d9-4674-bd1d-93d5443b7e85; Path=/</code></pre>
+
+<pre><code><b>X-XSRF-TOKEN</b>: 3c41f2b8-02d9-4674-bd1d-93d5443b7e85</code></pre>
+
+<pre><code><b>X-Content-Type-Options</b>: nosniff</code></pre>
+
+<pre><code><b>X-XSS-Protection</b>: 0</code></pre>
+
+<pre><code><b>Cache-Control</b>: no-cache, no-store, max-age=0, must-revalidate</code></pre>
+
+<pre><code><b>Pragma</b>: no-cache</code></pre>
+
+<pre><code><b>Expires</b>: 0</code></pre>
+
+<pre><code><b>X-Frame-Options</b>: DENY</code></pre>
+
+<pre><code><b>Content-Type</b>: text/html;charset=UTF-8</code></pre>
+
+<pre><code><b>Content-Language</b>: en-US</code></pre>
+
+<pre><code><b>Transfer-Encoding</b>: chunked</code></pre>
+
+<pre><code><b>Date</b>: Sun, 05 Apr 2026 22:59:36 GMT</code></pre>
+
+<pre><code><b>Keep-Alive</b>: timeout=60</code></pre>
+
+<pre><code><b>Connection</b>: keep-alive</code></pre>
+
+
+
+
+<h4>Body</h4>
+<pre><code><!DOCTYPE HTML>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Login to Niffler</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/favicon.ico"/>
+    <link href="styles/styles.css" rel="stylesheet"
+          type="text/css"/>
+</head>
+<body>
+<main class="content">
+    <div class="content__wrapper">
+        <div class="main__hero"></div>
+        <section class="main__form">
+            <div class="logo-section">
+                <img class="logo-section__logo" src="images/coin.svg" width="36" alt="Niffler logo"/>
+                <p class="logo-section__text">
+                    Niffler
+                </p>
+            </div>
+            <div class="form-section">
+                <form class="form" action="/login" method="post"><input type="hidden" name="_csrf" value="3c41f2b8-02d9-4674-bd1d-93d5443b7e85"/>
+                    <h1 class="header">Log in</h1>
+                    
+                    
+                    <label class="form__label">Username
+                        <input class="form__input"
+                               type="text"
+                               name="username"
+                               placeholder="Type your username"
+                               autocomplete="false"
+                               required/>
+                    </label>
+                    <label class="form__label">Password
+                        <input class="form__input"
+                               type="password"
+                               name="password"
+                               placeholder="Type your password"
+                               autocomplete="false"
+                               required/>
+                        <button type="button" class="form__password-button"></button>
+                    </label>
+                    <button class="form__submit" type="submit">
+                        Log in
+                    </button>
+                    <span class="divider"></span>
+                    <a class="form__register" href="/register">Create new account</a>
+                </form>
+            </div>
+        </section>
+    </div>
+</main>
+<script>
+    const passwordButton = document.querySelector(".form__password-button");
+    const passwordInput = document.querySelector("[name=password]");
+
+    const togglePasswordInputType = (inputType) => {
+        return inputType === "password" ? "text" : "password";
+    }
+
+    const togglePasswordButtonClass = () => {
+        passwordButton.classList.toggle("form__password-button_active");
+    }
+
+    const handlePasswordButtonClick = () => {
+        passwordInput.setAttribute("type", togglePasswordInputType(passwordInput.getAttribute("type")));
+        togglePasswordButtonClass();
+    }
+
+    passwordButton.addEventListener("click", handlePasswordButtonClick);
+</script>
+</body>
+</html>
+</code></pre>
+
+
+</body>
+</html>

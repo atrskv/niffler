@@ -1,0 +1,1 @@
+DELETE FROM spend WHERE spend.category_id = 7a44fd61-adba-45ef-a85d-d6e0047268be

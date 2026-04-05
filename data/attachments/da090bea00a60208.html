@@ -1,0 +1,80 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset = UTF-8">
+    <script src="https://yastatic.net/jquery/2.2.3/jquery.min.js" crossorigin="anonymous"></script>
+
+    <link href="https://yastatic.net/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://yastatic.net/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <link type="text/css" href="https://yandex.st/highlightjs/8.0/styles/github.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/bash.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/json.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/xml.min.js"></script>
+    <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
+    <style>
+        pre {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <pre><code>POST to http://gateway.niffler.dc:8090/api/users/update</code></pre>
+</div>
+
+
+    <h4>Body</h4>
+    <div>
+        <pre><code>b'{"id": "0fef4987-6710-4877-b9b2-0c30e8ca22d3", "username": "pijon", "firstname": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "password": "I(2VWQbc(5", "surname": "Saunders", "fullname": "Ms. Megan Richardson", "currency": "EUR"}'</code></pre>
+    </div>
+
+
+
+
+    <h4>Headers</h4>
+    <div>
+    
+        <div>
+            <pre><code><b>User-Agent</b>: python-requests/2.32.5</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept-Encoding</b>: gzip, deflate</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Connection</b>: keep-alive</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Type</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Authorization</b>: Bearer eyJraWQiOiJkNjQ4NGUwYy1iZjBkLTRmODgtOWM1Ny00YjMxNjU3NTY5ZGIiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ6cmRua3pwZHp2ZmkiLCJhdWQiOiJjbGllbnQiLCJuYmYiOjE3NzU0Mjk5MzEsInNjb3BlIjpbIm9wZW5pZCJdLCJpc3MiOiJodHRwOi8vYXV0aC5uaWZmbGVyLmRjOjkwMDAiLCJleHAiOjE3NzU0MzM1MzEsImlhdCI6MTc3NTQyOTkzMSwianRpIjoiODc5MTU2MGQtYzA1NS00MzE5LWE2MjEtYWNiYzRiNDUyM2MzIn0.HC4R4GapLbNRyzHTVgBaMWmjmw71RlXLV_xImD1FCiCpIlnMCWlwjZIKCjBSP74RWjCa7B9wcjTPKoc83kbsTfVX-jdz9MHZChsDaiZKpQBQbL31RJ_abvlEgtdEDt2OXDz1jByQKCepCqv88J6i2yxoYKi46lQBMoHZpfcoLupFvlaf3fMOH6rtew1fjTuzzdK81nzWO2ON7xgFFhlhP2h8EH1n_M2v_rhQu5b4sJjOE2j_K8_1lFKyVhys4f3v2OD2YgHrzxO3ERdB_KAYGITmAYJozR4o-Y8OZWXpI9mYxewPIXBdGxCP7IGWaHdsoysl7FA3bi7KCVDsS0GCBg</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Length</b>: 219</code></pre>
+        </div>
+    
+    </div>
+
+
+
+
+
+
+    <h4>Curl</h4>
+    <div>
+        <pre><code>curl -H 'User-Agent: python-requests/2.32.5' -H 'Accept-Encoding: gzip, deflate' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJraWQiOiJkNjQ4NGUwYy1iZjBkLTRmODgtOWM1Ny00YjMxNjU3NTY5ZGIiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ6cmRua3pwZHp2ZmkiLCJhdWQiOiJjbGllbnQiLCJuYmYiOjE3NzU0Mjk5MzEsInNjb3BlIjpbIm9wZW5pZCJdLCJpc3MiOiJodHRwOi8vYXV0aC5uaWZmbGVyLmRjOjkwMDAiLCJleHAiOjE3NzU0MzM1MzEsImlhdCI6MTc3NTQyOTkzMSwianRpIjoiODc5MTU2MGQtYzA1NS00MzE5LWE2MjEtYWNiYzRiNDUyM2MzIn0.HC4R4GapLbNRyzHTVgBaMWmjmw71RlXLV_xImD1FCiCpIlnMCWlwjZIKCjBSP74RWjCa7B9wcjTPKoc83kbsTfVX-jdz9MHZChsDaiZKpQBQbL31RJ_abvlEgtdEDt2OXDz1jByQKCepCqv88J6i2yxoYKi46lQBMoHZpfcoLupFvlaf3fMOH6rtew1fjTuzzdK81nzWO2ON7xgFFhlhP2h8EH1n_M2v_rhQu5b4sJjOE2j_K8_1lFKyVhys4f3v2OD2YgHrzxO3ERdB_KAYGITmAYJozR4o-Y8OZWXpI9mYxewPIXBdGxCP7IGWaHdsoysl7FA3bi7KCVDsS0GCBg' -H 'Content-Length: 219' -d '{"id": "0fef4987-6710-4877-b9b2-0c30e8ca22d3", "username": "pijon", "firstname": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "password": "I(2VWQbc(5", "surname": "Saunders", "fullname": "Ms. Megan Richardson", "currency": "EUR"}' http://gateway.niffler.dc:8090/api/users/update</code></pre>
+    </div>
+
+</body>
+</html>
