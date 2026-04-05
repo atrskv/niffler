@@ -1,0 +1,80 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset = UTF-8">
+    <script src="https://yastatic.net/jquery/2.2.3/jquery.min.js" crossorigin="anonymous"></script>
+
+    <link href="https://yastatic.net/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://yastatic.net/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <link type="text/css" href="https://yandex.st/highlightjs/8.0/styles/github.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/bash.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/json.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/xml.min.js"></script>
+    <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
+    <style>
+        pre {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <pre><code>POST to http://gateway.niffler.dc:8090/api/spends/add</code></pre>
+</div>
+
+
+    <h4>Body</h4>
+    <div>
+        <pre><code>b'{"spendDate": "2016-12-15", "category": {"name": "enjoy", "username": "lysgnoxt"}, "currency": "USD", "amount": "abc", "description": "Low past write behind.", "username": "lysgnoxt"}'</code></pre>
+    </div>
+
+
+
+
+    <h4>Headers</h4>
+    <div>
+    
+        <div>
+            <pre><code><b>User-Agent</b>: python-requests/2.32.5</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept-Encoding</b>: gzip, deflate</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Connection</b>: keep-alive</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Type</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Authorization</b>: Bearer eyJraWQiOiI0ZWY1NzYzYy1jOTNlLTQ4YzEtYTM1OS01NDgzZTdjNWJiYTQiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJseXNnbm94dCIsImF1ZCI6ImNsaWVudCIsIm5iZiI6MTc3NTQxMzE1NCwic2NvcGUiOlsib3BlbmlkIl0sImlzcyI6Imh0dHA6Ly9hdXRoLm5pZmZsZXIuZGM6OTAwMCIsImV4cCI6MTc3NTQxNjc1NCwiaWF0IjoxNzc1NDEzMTU0LCJqdGkiOiJmMDVhOTBmOS0xMDEwLTQyMzUtYjA2OC1kOTYyN2ExNjYzMTIifQ.ZmeMzo3War8OriXZgLSh0MBuZMAzk7uMUTFsPGyaBj0-4PAtM3wCDfVPDQpxjwubGB_RdnAXVkBu55WpX0T_s9Bnl1nQvZ7483AmlR2LYbDTCQgXzOWWu8k6IY3EDbBKkd-HM5wgN_ves2ZKzRClM8qmwpd0qv0kTk7JVmhfzwuEkcOnqVQAWfz15EgrzcW9smEFaBDwFImnelqlNuN7Ep5fdWYza4JY2YHlIde4YBOD4Uhmku2to-gdtUS4mLCKQwi2vtjSl3Z50r4xXQxsxo5SGLIDzpkCxbIMEH42P_oQrVI6Ad8KGRxVMP9lGYjrfWVV892AaflWL8Z_DbFXSQ</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Length</b>: 183</code></pre>
+        </div>
+    
+    </div>
+
+
+
+
+
+
+    <h4>Curl</h4>
+    <div>
+        <pre><code>curl -H 'User-Agent: python-requests/2.32.5' -H 'Accept-Encoding: gzip, deflate' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJraWQiOiI0ZWY1NzYzYy1jOTNlLTQ4YzEtYTM1OS01NDgzZTdjNWJiYTQiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJseXNnbm94dCIsImF1ZCI6ImNsaWVudCIsIm5iZiI6MTc3NTQxMzE1NCwic2NvcGUiOlsib3BlbmlkIl0sImlzcyI6Imh0dHA6Ly9hdXRoLm5pZmZsZXIuZGM6OTAwMCIsImV4cCI6MTc3NTQxNjc1NCwiaWF0IjoxNzc1NDEzMTU0LCJqdGkiOiJmMDVhOTBmOS0xMDEwLTQyMzUtYjA2OC1kOTYyN2ExNjYzMTIifQ.ZmeMzo3War8OriXZgLSh0MBuZMAzk7uMUTFsPGyaBj0-4PAtM3wCDfVPDQpxjwubGB_RdnAXVkBu55WpX0T_s9Bnl1nQvZ7483AmlR2LYbDTCQgXzOWWu8k6IY3EDbBKkd-HM5wgN_ves2ZKzRClM8qmwpd0qv0kTk7JVmhfzwuEkcOnqVQAWfz15EgrzcW9smEFaBDwFImnelqlNuN7Ep5fdWYza4JY2YHlIde4YBOD4Uhmku2to-gdtUS4mLCKQwi2vtjSl3Z50r4xXQxsxo5SGLIDzpkCxbIMEH42P_oQrVI6Ad8KGRxVMP9lGYjrfWVV892AaflWL8Z_DbFXSQ' -H 'Content-Length: 183' -d '{"spendDate": "2016-12-15", "category": {"name": "enjoy", "username": "lysgnoxt"}, "currency": "USD", "amount": "abc", "description": "Low past write behind.", "username": "lysgnoxt"}' http://gateway.niffler.dc:8090/api/spends/add</code></pre>
+    </div>
+
+</body>
+</html>

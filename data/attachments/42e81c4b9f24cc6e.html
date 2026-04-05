@@ -1,0 +1,80 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset = UTF-8">
+    <script src="https://yastatic.net/jquery/2.2.3/jquery.min.js" crossorigin="anonymous"></script>
+
+    <link href="https://yastatic.net/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://yastatic.net/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <link type="text/css" href="https://yandex.st/highlightjs/8.0/styles/github.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/bash.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/json.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/xml.min.js"></script>
+    <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
+    <style>
+        pre {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <pre><code>POST to http://gateway.niffler.dc:8090/api/users/update</code></pre>
+</div>
+
+
+    <h4>Body</h4>
+    <div>
+        <pre><code>b'{"id": "4b1eafd7-8d5c-4416-8d26-1a858eb14b32", "username": "ggdznv", "firstname": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "password": "@g1I@o", "surname": "Collins", "fullname": "Dr. Kevin Scott", "currency": "RUB"}'</code></pre>
+    </div>
+
+
+
+
+    <h4>Headers</h4>
+    <div>
+    
+        <div>
+            <pre><code><b>User-Agent</b>: python-requests/2.32.5</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept-Encoding</b>: gzip, deflate</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Connection</b>: keep-alive</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Type</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Authorization</b>: Bearer eyJraWQiOiI0ZWY1NzYzYy1jOTNlLTQ4YzEtYTM1OS01NDgzZTdjNWJiYTQiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1eWN1bHB4YXZsaCIsImF1ZCI6ImNsaWVudCIsIm5iZiI6MTc3NTQxMzE1Niwic2NvcGUiOlsib3BlbmlkIl0sImlzcyI6Imh0dHA6Ly9hdXRoLm5pZmZsZXIuZGM6OTAwMCIsImV4cCI6MTc3NTQxNjc1NiwiaWF0IjoxNzc1NDEzMTU2LCJqdGkiOiJmM2MwNzA1Yy1kNWMzLTRlOWYtYjI4ZS1kOGRiNGU3NjkyYTQifQ.JuRVFFnie191-8w1MF1bb6T9iBQATmXuRz27-4D0U60PbZ0yhG_nff209QM7lYUA39O08RNomrEzViKMsAon859-oMzl8LmyNMj2ZF37QHfGqJWkMmxufN-gY0ccWYoWvVbOjZy3LI94QJYMLoaW1d6gG8-BWcYdH5HF6GRZfEf9gb59S8Knt2UEz4z09vqzPOlDCky2HZPtMEG5ol0zGAqYWAHLqFSV8_ftldK3aTDtP1WLaiURxrGi0HfXxGhtZ6uRrQukfZM5VBtJ6diCVNZAuIz16BL_w5XPirkIlXG2qOiCWbRypi92qQEAW3k8ONfj63i7gamPQQjQgl8Q2g</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Length</b>: 210</code></pre>
+        </div>
+    
+    </div>
+
+
+
+
+
+
+    <h4>Curl</h4>
+    <div>
+        <pre><code>curl -H 'User-Agent: python-requests/2.32.5' -H 'Accept-Encoding: gzip, deflate' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJraWQiOiI0ZWY1NzYzYy1jOTNlLTQ4YzEtYTM1OS01NDgzZTdjNWJiYTQiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1eWN1bHB4YXZsaCIsImF1ZCI6ImNsaWVudCIsIm5iZiI6MTc3NTQxMzE1Niwic2NvcGUiOlsib3BlbmlkIl0sImlzcyI6Imh0dHA6Ly9hdXRoLm5pZmZsZXIuZGM6OTAwMCIsImV4cCI6MTc3NTQxNjc1NiwiaWF0IjoxNzc1NDEzMTU2LCJqdGkiOiJmM2MwNzA1Yy1kNWMzLTRlOWYtYjI4ZS1kOGRiNGU3NjkyYTQifQ.JuRVFFnie191-8w1MF1bb6T9iBQATmXuRz27-4D0U60PbZ0yhG_nff209QM7lYUA39O08RNomrEzViKMsAon859-oMzl8LmyNMj2ZF37QHfGqJWkMmxufN-gY0ccWYoWvVbOjZy3LI94QJYMLoaW1d6gG8-BWcYdH5HF6GRZfEf9gb59S8Knt2UEz4z09vqzPOlDCky2HZPtMEG5ol0zGAqYWAHLqFSV8_ftldK3aTDtP1WLaiURxrGi0HfXxGhtZ6uRrQukfZM5VBtJ6diCVNZAuIz16BL_w5XPirkIlXG2qOiCWbRypi92qQEAW3k8ONfj63i7gamPQQjQgl8Q2g' -H 'Content-Length: 210' -d '{"id": "4b1eafd7-8d5c-4416-8d26-1a858eb14b32", "username": "ggdznv", "firstname": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "password": "@g1I@o", "surname": "Collins", "fullname": "Dr. Kevin Scott", "currency": "RUB"}' http://gateway.niffler.dc:8090/api/users/update</code></pre>
+    </div>
+
+</body>
+</html>
