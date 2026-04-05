@@ -2,9 +2,9 @@ name: Python E2E Tests
 
 on:
   push:
-    branches: [ kafka ]
+    branches: [ main ]
   pull_request:
-    branches: [ kafka ]
+    branches: [ main ]
   workflow_dispatch:
 
 env:
