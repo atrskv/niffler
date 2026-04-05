@@ -1,0 +1,154 @@
+name: Python E2E Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  ALLURE_VERSION: '2.29.0'
+
+jobs:
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: e2e tests
+
+    strategy:
+      matrix:
+        python-version: ['3.12']
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Start docker compose services
+        run: |
+          bash docker-compose-dev.sh
+
+      - name: Add hosts
+        run: |
+          echo "127.0.0.1 auth.niffler.dc" | sudo tee -a /etc/hosts
+          echo "127.0.0.1 frontend.niffler.dc" | sudo tee -a /etc/hosts
+          echo "127.0.0.1 gateway.niffler.dc" | sudo tee -a /etc/hosts
+          echo "127.0.0.1 userdata.niffler.dc" | sudo tee -a /etc/hosts
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Cache Poetry dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pypoetry
+            .venv
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
+
+      - name: Install dependencies
+        run: |
+          cd niffler_tests
+          poetry config virtualenvs.in-project true
+          poetry install --no-interaction --no-root
+
+      - name: Install Allure
+        run: |
+          wget https://github.com/allure-framework/allure2/releases/download/${{ env.ALLURE_VERSION }}/allure-2.29.0.tgz
+          tar -zxvf allure-2.29.0.tgz -C /opt/
+          echo "/opt/allure-2.29.0/bin" >> $GITHUB_PATH
+
+      - name: Pull browser image
+        run: |
+          docker pull selenoid/vnc_chrome:124.0
+
+      - name: Start Selenoid
+        run: |
+          docker rm -f selenoid || true
+          docker run -d --name selenoid \
+            --network host \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v "$(pwd)/niffler_tests/etc/selenoid:/etc/selenoid:ro" \
+            aerokube/selenoid:latest-release
+          for i in {1..15}; do
+            if curl -s http://localhost:4444/status > /dev/null; then
+              echo "Selenoid is ready"
+              break
+            fi
+            echo "Waiting for Selenoid... (attempt $i)"
+            sleep 2
+          done
+
+      - name: Run tests with Allure
+        run: |
+          cd niffler_tests && \
+          poetry run pytest \
+            -n auto \
+            --dist loadgroup \
+            --alluredir=allure-results \
+            --clean-alluredir \
+            -v \
+            --tb=short
+        env:
+          context: remote
+          AUTH_URL: ${{ vars.AUTH_URL }}
+          AUTH_PORT: ${{ vars.AUTH_PORT }}
+          AUTH_DOMAIN: ${{ vars.AUTH_DOMAIN }}
+          FRONTEND_URL: ${{ vars.FRONTEND_URL }}
+          GATEWAY_URL: ${{ vars.GATEWAY_URL }}
+          GATEWAY_PORT: ${{ vars.GATEWAY_PORT }}
+          WIREMOCK_HOST: ${{ vars.WIREMOCK_HOST }}
+          CURRENCY_SERVICE_HOST: ${{ vars.CURRENCY_SERVICE_HOST }}
+          USE_MOCK: ${{ vars.USE_MOCK }}
+          TIMEOUT: ${{ vars.TIMEOUT }}
+          SOAP_URL: ${{ vars.SOAP_URL }}
+          SELENOID_URL: ${{ vars.SELENOID_URL }}
+          DRIVER_NAME: ${{ vars.DRIVER_NAME }}
+          DRIVER_VERSION: ${{ vars.DRIVER_VERSION }}
+          ENABLE_VNC: ${{ vars.ENABLE_VNC }}
+          ENABLE_VIDEO: ${{ vars.ENABLE_VIDEO }}
+          SPEND_DB_URL: ${{ secrets.SPEND_DB_URL }}
+          WINDOW_HEIGHT: ${{ vars.WINDOW_HEIGHT }}
+          WINDOW_WIDTH: ${{ vars.WINDOW_WIDTH }}
+
+      - name: Generate Allure Report
+        if: always()
+        uses: simple-elf/allure-report-action@master
+        with:
+          allure_results: niffler_tests/allure-results
+          allure_report: niffler_tests/allure-report
+          keep_reports: 20
+
+      - name: Deploy Allure Report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: niffler_tests/allure-report
+          keep_files: true
+
+      - name: Upload Allure Report as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: niffler_tests/allure-report
