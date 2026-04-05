@@ -1,0 +1,80 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset = UTF-8">
+    <script src="https://yastatic.net/jquery/2.2.3/jquery.min.js" crossorigin="anonymous"></script>
+
+    <link href="https://yastatic.net/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://yastatic.net/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <link type="text/css" href="https://yandex.st/highlightjs/8.0/styles/github.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/bash.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/json.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/xml.min.js"></script>
+    <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
+    <style>
+        pre {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <pre><code>POST to http://gateway.niffler.dc:8090/api/spends/add</code></pre>
+</div>
+
+
+    <h4>Body</h4>
+    <div>
+        <pre><code>b'{"spendDate": "2014-01-21", "category": {"name": "property", "username": "avpzy"}, "currency": "USD", "amount": 757.0, "description": "Color officer since.", "username": "avpzy"}'</code></pre>
+    </div>
+
+
+
+
+    <h4>Headers</h4>
+    <div>
+    
+        <div>
+            <pre><code><b>User-Agent</b>: python-requests/2.32.5</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept-Encoding</b>: gzip, deflate</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Connection</b>: keep-alive</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Type</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Authorization</b>: Bearer eyJraWQiOiJjMDUxY2ExYy0zNjYxLTQwYTgtYWQxNS1kNDc3MGFlYzg0NmIiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhdnB6eSIsImF1ZCI6ImNsaWVudCIsIm5iZiI6MTc3NTQxMzcxNiwic2NvcGUiOlsib3BlbmlkIl0sImlzcyI6Imh0dHA6Ly9hdXRoLm5pZmZsZXIuZGM6OTAwMCIsImV4cCI6MTc3NTQxNzMxNiwiaWF0IjoxNzc1NDEzNzE2LCJqdGkiOiI2MmM5ZGMwZS1lNmY3LTQ5ZGItYTVjYi01YzEzZGZiZTE2ZjEifQ.Vz5dcFSUPeUKzT-QrnDpiANq5hmM9biRDp-xgIczeHGEKg7AjlD7oLtU8SUwT1K4YE8ACO3jQi62jGBBQmSywGStBwj7h85Pv4qlAL0OlboxFQjziYdAhaozM57lpP6pE08Ou87PBrbl-GIheovVs4x3bLvHlEfS7JrgmUT3X4QDEZGFROKBm3U3TU4cQiLCg8OFRgZdUFUj9xIFL_PpF_GZsKx5Cf8fLnyxaOvzRRYnNbcjboFdVa-3zvixj6cMrl3flMc1aA-c9EIkTtIiNA9zPYYzFkZk_VA8NGdsrm1Kkntbf2sikAa-0Lnee6sFpUL3JLlo1F-ssERe5Ob3pg</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Length</b>: 178</code></pre>
+        </div>
+    
+    </div>
+
+
+
+
+
+
+    <h4>Curl</h4>
+    <div>
+        <pre><code>curl -H 'User-Agent: python-requests/2.32.5' -H 'Accept-Encoding: gzip, deflate' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJraWQiOiJjMDUxY2ExYy0zNjYxLTQwYTgtYWQxNS1kNDc3MGFlYzg0NmIiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhdnB6eSIsImF1ZCI6ImNsaWVudCIsIm5iZiI6MTc3NTQxMzcxNiwic2NvcGUiOlsib3BlbmlkIl0sImlzcyI6Imh0dHA6Ly9hdXRoLm5pZmZsZXIuZGM6OTAwMCIsImV4cCI6MTc3NTQxNzMxNiwiaWF0IjoxNzc1NDEzNzE2LCJqdGkiOiI2MmM5ZGMwZS1lNmY3LTQ5ZGItYTVjYi01YzEzZGZiZTE2ZjEifQ.Vz5dcFSUPeUKzT-QrnDpiANq5hmM9biRDp-xgIczeHGEKg7AjlD7oLtU8SUwT1K4YE8ACO3jQi62jGBBQmSywGStBwj7h85Pv4qlAL0OlboxFQjziYdAhaozM57lpP6pE08Ou87PBrbl-GIheovVs4x3bLvHlEfS7JrgmUT3X4QDEZGFROKBm3U3TU4cQiLCg8OFRgZdUFUj9xIFL_PpF_GZsKx5Cf8fLnyxaOvzRRYnNbcjboFdVa-3zvixj6cMrl3flMc1aA-c9EIkTtIiNA9zPYYzFkZk_VA8NGdsrm1Kkntbf2sikAa-0Lnee6sFpUL3JLlo1F-ssERe5Ob3pg' -H 'Content-Length: 178' -d '{"spendDate": "2014-01-21", "category": {"name": "property", "username": "avpzy"}, "currency": "USD", "amount": 757.0, "description": "Color officer since.", "username": "avpzy"}' http://gateway.niffler.dc:8090/api/spends/add</code></pre>
+    </div>
+
+</body>
+</html>
