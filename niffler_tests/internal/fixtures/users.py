@@ -26,11 +26,11 @@ def friend():
     return friend
 
 
-@pytest.fixture()
-def created_user(users_client, rollback_user):
-    user = users_client.create_user()
-
-    rollback_user.append(user)
-
-    return user
+@pytest.fixture
+def created_user(users_client):
+    user = User.random()
+    register_user(user)
+    original = user.model_copy()
+    yield user
+    users_client.update_user(original)
 

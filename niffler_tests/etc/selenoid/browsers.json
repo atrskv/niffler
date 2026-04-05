@@ -1,9 +1,9 @@
 {
   "chrome": {
-    "default": "91.0",
+    "default": "124.0",
     "versions": {
-      "91.0": {
-        "image": "dumbdumbych/selenium_vnc_chrome_arm64:91.0.b",
+      "124.0": {
+        "image": "seleniarm/standalone-chromium:124.0",
         "port": "4444",
         "path": "/",
         "env": [

@@ -1,14 +1,17 @@
+from contextlib import contextmanager
+
 import pytest
 
 
 @pytest.fixture
-def rollback_user(users_client, as_a_registered_user):
-    original = as_a_registered_user.model_copy()
+def rollback_user(users_client):
+    @contextmanager
+    def _rollback(user):
+        original = user.model_copy()
+        yield user
+        users_client.update_user(original)
 
-    yield
-
-    users_client.update_user(original)
-
+    return _rollback
 
 @pytest.fixture
 def rollback_spends(spends_client):
