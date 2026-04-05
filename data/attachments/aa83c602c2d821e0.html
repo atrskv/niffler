@@ -1,0 +1,80 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset = UTF-8">
+    <script src="https://yastatic.net/jquery/2.2.3/jquery.min.js" crossorigin="anonymous"></script>
+
+    <link href="https://yastatic.net/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://yastatic.net/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <link type="text/css" href="https://yandex.st/highlightjs/8.0/styles/github.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/bash.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/json.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/xml.min.js"></script>
+    <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
+    <style>
+        pre {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <pre><code>POST to http://gateway.niffler.dc:8090/api/categories/add</code></pre>
+</div>
+
+
+    <h4>Body</h4>
+    <div>
+        <pre><code>b'{"id": "60eec9b0-9916-45aa-87d9-ec273cc72e49", "name": "put"}'</code></pre>
+    </div>
+
+
+
+
+    <h4>Headers</h4>
+    <div>
+    
+        <div>
+            <pre><code><b>User-Agent</b>: python-requests/2.32.5</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept-Encoding</b>: gzip, deflate</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Connection</b>: keep-alive</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Type</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Authorization</b>: Bearer eyJraWQiOiJlZjgxMDkyMC00YzQ0LTQ4MTktYjQ2NC0yNjc3ZmY5NzRjOTciLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJydHN5YWpjIiwiYXVkIjoiY2xpZW50IiwibmJmIjoxNzc1NDE0NTg1LCJzY29wZSI6WyJvcGVuaWQiXSwiaXNzIjoiaHR0cDovL2F1dGgubmlmZmxlci5kYzo5MDAwIiwiZXhwIjoxNzc1NDE4MTg1LCJpYXQiOjE3NzU0MTQ1ODUsImp0aSI6IjQzNGU4YzI3LWZhNjUtNGQ5MC1iYmE1LTlhYTZlYmYwNzFjMiJ9.ZuDhTm2vThu1Xf6o_MK4tPfwtUIYswrUiGwv8qiqUi6KZ-LN8AuMC1v9LiMuGl8neqv3uvH2AG1j3ZM1bnnUc-Hw9xH5LNQBy3Ci7PMBL4E0CekC-Qf-Atagk6ODVsFRr8nh_VHTRnk7BOGVq3wbOQlu2qbPnEBlRKHZUcWKFqHYdYtA0TM7hPeCD2emsOaRD0d9styQjby8PnG1fvETycjgVW9KxYEg9BN-TIdJoGvrJ5iR4i_NlT2UsCKU62azbq3QNYqkUDQ29hfk6T1-0_u4Clwb9nuMmmcwios8o6LCKQ7u0zU1o80KbmseyiiTEY8F87KlRJ93j7JMEmPbKg</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Length</b>: 61</code></pre>
+        </div>
+    
+    </div>
+
+
+
+
+
+
+    <h4>Curl</h4>
+    <div>
+        <pre><code>curl -H 'User-Agent: python-requests/2.32.5' -H 'Accept-Encoding: gzip, deflate' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJraWQiOiJlZjgxMDkyMC00YzQ0LTQ4MTktYjQ2NC0yNjc3ZmY5NzRjOTciLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJydHN5YWpjIiwiYXVkIjoiY2xpZW50IiwibmJmIjoxNzc1NDE0NTg1LCJzY29wZSI6WyJvcGVuaWQiXSwiaXNzIjoiaHR0cDovL2F1dGgubmlmZmxlci5kYzo5MDAwIiwiZXhwIjoxNzc1NDE4MTg1LCJpYXQiOjE3NzU0MTQ1ODUsImp0aSI6IjQzNGU4YzI3LWZhNjUtNGQ5MC1iYmE1LTlhYTZlYmYwNzFjMiJ9.ZuDhTm2vThu1Xf6o_MK4tPfwtUIYswrUiGwv8qiqUi6KZ-LN8AuMC1v9LiMuGl8neqv3uvH2AG1j3ZM1bnnUc-Hw9xH5LNQBy3Ci7PMBL4E0CekC-Qf-Atagk6ODVsFRr8nh_VHTRnk7BOGVq3wbOQlu2qbPnEBlRKHZUcWKFqHYdYtA0TM7hPeCD2emsOaRD0d9styQjby8PnG1fvETycjgVW9KxYEg9BN-TIdJoGvrJ5iR4i_NlT2UsCKU62azbq3QNYqkUDQ29hfk6T1-0_u4Clwb9nuMmmcwios8o6LCKQ7u0zU1o80KbmseyiiTEY8F87KlRJ93j7JMEmPbKg' -H 'Content-Length: 61' -d '{"id": "60eec9b0-9916-45aa-87d9-ec273cc72e49", "name": "put"}' http://gateway.niffler.dc:8090/api/categories/add</code></pre>
+    </div>
+
+</body>
+</html>
