@@ -1,3 +1,7 @@
+import json
+import time
+from typing import Callable, Optional
+
 from confluent_kafka import TopicPartition
 from confluent_kafka.admin import AdminClient
 from confluent_kafka.cimpl import NewTopic, Consumer, Producer
@@ -72,3 +76,32 @@ class KafkaClient:
         logging.info(f'{topic} offsets: {partitions_offsets_event}')
         topic_partitions = [TopicPartition(topic, k, v) for k, v in partitions_offsets_event.items()]
         return topic_partitions
+
+    def consume_message_filtered(
+            self,
+            topic_partitions: list[TopicPartition],
+            predicate: Callable[[dict], bool],
+            timeout: float = 10.0,
+            poll_interval: float = 1.0
+    ) -> Optional[dict]:
+        self.consumer.assign(topic_partitions)
+
+        start = time.time()
+        while time.time() - start < timeout:
+            msg = self.consumer.poll(poll_interval)
+            if msg is None:
+                continue
+            if msg.error():
+                logging.warning(f"Consumer error: {msg.error()}")
+                continue
+
+            try:
+                data = json.loads(msg.value().decode('utf-8'))
+                if predicate(data):
+                    return data
+            except Exception as e:
+                logging.debug(f"Skipping malformed message: {e}")
+                continue
+
+        logging.warning(f"No matching message found within {timeout}s")
+        return None

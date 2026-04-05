@@ -7,20 +7,20 @@ from internal.data.models.user import User, KafkaUserEvent
 
 
 def test_message_should_be_produced_to_kafka_after_successful_registration(auth_client, kafka_client):
-        user = User.random()
-        topic_partitions = kafka_client.subscribe_listen_new_offsets("users")
+    user = User.random()
 
-        result = auth_client.register(user.username, user.password)
-        assert result.status_code == 201
+    topic_partitions = kafka_client.subscribe_listen_new_offsets("users")
 
-        event = kafka_client.consume_message(topic_partitions)
+    result = auth_client.register(user.username, user.password)
+    assert result.status_code == 201
 
-        with step("Check that message from kafka exist"):
-            assert event != '' and event != b''
+    def predicate(data):
+        return data.get('username') == user.username
 
-        with step("Check message content"):
-            KafkaUserEvent.model_validate(json.loads(event.decode('utf8')))
-            assert json.loads(event.decode('utf8'))['username'] == user.username
+    event_data = kafka_client.consume_message_filtered(topic_partitions, predicate, timeout=10.0)
+
+    assert event_data is not None, f"Сообщение для {user.username} не найдено"
+    assert event_data['username'] == user.username
 
 
 pytestmark = [

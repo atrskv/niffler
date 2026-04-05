@@ -129,6 +129,7 @@ jobs:
           SPEND_DB_URL: ${{ secrets.SPEND_DB_URL }}
           WINDOW_HEIGHT: ${{ vars.WINDOW_HEIGHT }}
           WINDOW_WIDTH: ${{ vars.WINDOW_WIDTH }}
+          KAFKA_ADDRESS: ${{ vars.KAFKA_ADDRESS }}
 
       - name: Generate Allure Report
         if: always()
