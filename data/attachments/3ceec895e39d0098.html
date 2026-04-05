@@ -1,0 +1,80 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset = UTF-8">
+    <script src="https://yastatic.net/jquery/2.2.3/jquery.min.js" crossorigin="anonymous"></script>
+
+    <link href="https://yastatic.net/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://yastatic.net/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <link type="text/css" href="https://yandex.st/highlightjs/8.0/styles/github.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/bash.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/json.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/xml.min.js"></script>
+    <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
+    <style>
+        pre {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <pre><code>POST to http://gateway.niffler.dc:8090/api/spends/add</code></pre>
+</div>
+
+
+    <h4>Body</h4>
+    <div>
+        <pre><code>b'{"spendDate": "2017-06-20", "category": {"name": "edge", "username": "zfkjgc"}, "currency": "EUR", "amount": 993.0, "description": "Keep listen ready thing drive consider beat much.", "username": "zfkjgc"}'</code></pre>
+    </div>
+
+
+
+
+    <h4>Headers</h4>
+    <div>
+    
+        <div>
+            <pre><code><b>User-Agent</b>: python-requests/2.32.5</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept-Encoding</b>: gzip, deflate</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Connection</b>: keep-alive</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Type</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Authorization</b>: Bearer eyJraWQiOiI4YzRkM2I3Yi02YTU1LTQxZDYtOGJiNS0yNzIzZDUzNTgyZDciLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ6ZmtqZ2MiLCJhdWQiOiJjbGllbnQiLCJuYmYiOjE3NzU0MTA0NjYsInNjb3BlIjpbIm9wZW5pZCJdLCJpc3MiOiJodHRwOi8vYXV0aC5uaWZmbGVyLmRjOjkwMDAiLCJleHAiOjE3NzU0MTQwNjYsImlhdCI6MTc3NTQxMDQ2NiwianRpIjoiZTVkMzM2MTMtY2RiMC00ZDVjLWE2MTItNGFlODQ2ZTYzZTQ2In0.eKocQ4mVmQdzDjOn7mUG6Thvr-9__C6Obk0refZoA7XWaT0bB-7om1jKBLhLE_CpqG8t8nZAzDrVJUUOqWWbIMKwGH2qCZI5WPbYq27K4YPt3LdL5bOOD3ZPqwZ1GX0MZHZ_0BjF_1Cv9paG1f7xsXfcG10tWF8YaKAZTtlkgLQ8j3UwY--JD1WvsXhq27sgwrDCynfL9W-FPcQJaAgdNBqjQctSEWPvb5jnJya0WxfKunIX05YslEt8lKd70602rpZuvLeEtY3TO-VG4z8vgM0kTuYXy5RsJykvPa-u_0R5nannvBX1_Gy0xSf_OTxzD3h9MXK15bzsWD7cCRImKg</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Length</b>: 205</code></pre>
+        </div>
+    
+    </div>
+
+
+
+
+
+
+    <h4>Curl</h4>
+    <div>
+        <pre><code>curl -H 'User-Agent: python-requests/2.32.5' -H 'Accept-Encoding: gzip, deflate' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJraWQiOiI4YzRkM2I3Yi02YTU1LTQxZDYtOGJiNS0yNzIzZDUzNTgyZDciLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ6ZmtqZ2MiLCJhdWQiOiJjbGllbnQiLCJuYmYiOjE3NzU0MTA0NjYsInNjb3BlIjpbIm9wZW5pZCJdLCJpc3MiOiJodHRwOi8vYXV0aC5uaWZmbGVyLmRjOjkwMDAiLCJleHAiOjE3NzU0MTQwNjYsImlhdCI6MTc3NTQxMDQ2NiwianRpIjoiZTVkMzM2MTMtY2RiMC00ZDVjLWE2MTItNGFlODQ2ZTYzZTQ2In0.eKocQ4mVmQdzDjOn7mUG6Thvr-9__C6Obk0refZoA7XWaT0bB-7om1jKBLhLE_CpqG8t8nZAzDrVJUUOqWWbIMKwGH2qCZI5WPbYq27K4YPt3LdL5bOOD3ZPqwZ1GX0MZHZ_0BjF_1Cv9paG1f7xsXfcG10tWF8YaKAZTtlkgLQ8j3UwY--JD1WvsXhq27sgwrDCynfL9W-FPcQJaAgdNBqjQctSEWPvb5jnJya0WxfKunIX05YslEt8lKd70602rpZuvLeEtY3TO-VG4z8vgM0kTuYXy5RsJykvPa-u_0R5nannvBX1_Gy0xSf_OTxzD3h9MXK15bzsWD7cCRImKg' -H 'Content-Length: 205' -d '{"spendDate": "2017-06-20", "category": {"name": "edge", "username": "zfkjgc"}, "currency": "EUR", "amount": 993.0, "description": "Keep listen ready thing drive consider beat much.", "username": "zfkjgc"}' http://gateway.niffler.dc:8090/api/spends/add</code></pre>
+    </div>
+
+</body>
+</html>

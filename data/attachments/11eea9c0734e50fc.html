@@ -1,0 +1,80 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset = UTF-8">
+    <script src="https://yastatic.net/jquery/2.2.3/jquery.min.js" crossorigin="anonymous"></script>
+
+    <link href="https://yastatic.net/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://yastatic.net/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <link type="text/css" href="https://yandex.st/highlightjs/8.0/styles/github.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/bash.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/json.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/xml.min.js"></script>
+    <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
+    <style>
+        pre {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <pre><code>POST to http://auth.niffler.dc:9000/oauth2/token</code></pre>
+</div>
+
+
+    <h4>Body</h4>
+    <div>
+        <pre><code>code=1unHxLaNh-eAf-nHxljgM2tmCx2DKjg_Ofi_G2WsEEd3lPqPMPY34gmrKOoPityx8Cesl7XNXEjNDQlxHdUrTRZ4t3ep_BCzEnwTF5_6pyldwq2ZWBbErzeXYVl75Vog&redirect_uri=http%3A%2F%2Ffrontend.niffler.dc%2Fauthorized&code_verifier=DC7WPbhyK9Tj5dpLrtWSlrra1hU65aHxoSlqMO4otI&grant_type=authorization_code&client_id=client</code></pre>
+    </div>
+
+
+
+
+    <h4>Headers</h4>
+    <div>
+    
+        <div>
+            <pre><code><b>User-Agent</b>: python-requests/2.32.5</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept-Encoding</b>: gzip, deflate</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept</b>: */*</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Connection</b>: keep-alive</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Cookie</b>: JSESSIONID=91f8d4c0-b9cb-4f44-b9b5-85cccfd43857; JSESSIONID=91f8d4c0-b9cb-4f44-b9b5-85cccfd43857</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Length</b>: 296</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Type</b>: application/x-www-form-urlencoded</code></pre>
+        </div>
+    
+    </div>
+
+
+
+
+
+
+    <h4>Curl</h4>
+    <div>
+        <pre><code>curl -H 'User-Agent: python-requests/2.32.5' -H 'Accept-Encoding: gzip, deflate' -H 'Accept: */*' -H 'Connection: keep-alive' -H 'Cookie: JSESSIONID=91f8d4c0-b9cb-4f44-b9b5-85cccfd43857; JSESSIONID=91f8d4c0-b9cb-4f44-b9b5-85cccfd43857' -H 'Content-Length: 296' -H 'Content-Type: application/x-www-form-urlencoded' -d 'code=1unHxLaNh-eAf-nHxljgM2tmCx2DKjg_Ofi_G2WsEEd3lPqPMPY34gmrKOoPityx8Cesl7XNXEjNDQlxHdUrTRZ4t3ep_BCzEnwTF5_6pyldwq2ZWBbErzeXYVl75Vog&redirect_uri=http%3A%2F%2Ffrontend.niffler.dc%2Fauthorized&code_verifier=DC7WPbhyK9Tj5dpLrtWSlrra1hU65aHxoSlqMO4otI&grant_type=authorization_code&client_id=client' http://auth.niffler.dc:9000/oauth2/token</code></pre>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset = UTF-8">
+    <script src="https://yastatic.net/jquery/2.2.3/jquery.min.js" crossorigin="anonymous"></script>
+
+    <link href="https://yastatic.net/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://yastatic.net/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <link type="text/css" href="https://yandex.st/highlightjs/8.0/styles/github.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/bash.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/json.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/xml.min.js"></script>
+    <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
+    <style>
+        pre {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <pre><code>POST to http://gateway.niffler.dc:8090/api/spends/add</code></pre>
+</div>
+
+
+    <h4>Body</h4>
+    <div>
+        <pre><code>b'{"spendDate": "2022-03-26", "category": {"name": "today", "username": "jzjglso"}, "currency": "USD", "amount": "abc", "description": "Save anyone own nice.", "username": "jzjglso"}'</code></pre>
+    </div>
+
+
+
+
+    <h4>Headers</h4>
+    <div>
+    
+        <div>
+            <pre><code><b>User-Agent</b>: python-requests/2.32.5</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept-Encoding</b>: gzip, deflate</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Connection</b>: keep-alive</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Type</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Authorization</b>: Bearer eyJraWQiOiI4YzRkM2I3Yi02YTU1LTQxZDYtOGJiNS0yNzIzZDUzNTgyZDciLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqempnbHNvIiwiYXVkIjoiY2xpZW50IiwibmJmIjoxNzc1NDEwNDY2LCJzY29wZSI6WyJvcGVuaWQiXSwiaXNzIjoiaHR0cDovL2F1dGgubmlmZmxlci5kYzo5MDAwIiwiZXhwIjoxNzc1NDE0MDY2LCJpYXQiOjE3NzU0MTA0NjYsImp0aSI6ImI0NmM2ZjY5LTUxMDQtNGY0MC1hYTU0LTAyYTBmOTlkYzljNiJ9.TRAXbhqPAM0l0yc76ZPBulnx6wq1Mst7dOOIK3__tUcF4Thc0lr97W5vQQc9TnwUBL7TQwNNS3XhHzVh8rfWPkYrOVJFMb4sSm9KJFn2io3h79z8Mx6INoH3MdpMGVTxgQQOxnwV56B0BDmGrgebvTlstU2blMo-pDpEUw0Vgc-nc10P2KiKBaN5OFSYycyCArUCSC6yIQMr6q17cl-xP39iPpF_sbK8ZCIbEBDUpTar8lEVBvhl4hQxe9EDxXcgOt9NG4VzoFLNVOJfPCUV2DOcGMKxY5VZuQlNOew6T1JpU8dD072hB9HJzTZrui31Ox-XvIkziyoEXfqoSY_OWg</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Length</b>: 180</code></pre>
+        </div>
+    
+    </div>
+
+
+
+
+
+
+    <h4>Curl</h4>
+    <div>
+        <pre><code>curl -H 'User-Agent: python-requests/2.32.5' -H 'Accept-Encoding: gzip, deflate' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJraWQiOiI4YzRkM2I3Yi02YTU1LTQxZDYtOGJiNS0yNzIzZDUzNTgyZDciLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqempnbHNvIiwiYXVkIjoiY2xpZW50IiwibmJmIjoxNzc1NDEwNDY2LCJzY29wZSI6WyJvcGVuaWQiXSwiaXNzIjoiaHR0cDovL2F1dGgubmlmZmxlci5kYzo5MDAwIiwiZXhwIjoxNzc1NDE0MDY2LCJpYXQiOjE3NzU0MTA0NjYsImp0aSI6ImI0NmM2ZjY5LTUxMDQtNGY0MC1hYTU0LTAyYTBmOTlkYzljNiJ9.TRAXbhqPAM0l0yc76ZPBulnx6wq1Mst7dOOIK3__tUcF4Thc0lr97W5vQQc9TnwUBL7TQwNNS3XhHzVh8rfWPkYrOVJFMb4sSm9KJFn2io3h79z8Mx6INoH3MdpMGVTxgQQOxnwV56B0BDmGrgebvTlstU2blMo-pDpEUw0Vgc-nc10P2KiKBaN5OFSYycyCArUCSC6yIQMr6q17cl-xP39iPpF_sbK8ZCIbEBDUpTar8lEVBvhl4hQxe9EDxXcgOt9NG4VzoFLNVOJfPCUV2DOcGMKxY5VZuQlNOew6T1JpU8dD072hB9HJzTZrui31Ox-XvIkziyoEXfqoSY_OWg' -H 'Content-Length: 180' -d '{"spendDate": "2022-03-26", "category": {"name": "today", "username": "jzjglso"}, "currency": "USD", "amount": "abc", "description": "Save anyone own nice.", "username": "jzjglso"}' http://gateway.niffler.dc:8090/api/spends/add</code></pre>
+    </div>
+
+</body>
+</html>
