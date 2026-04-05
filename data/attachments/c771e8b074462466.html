@@ -1,0 +1,80 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset = UTF-8">
+    <script src="https://yastatic.net/jquery/2.2.3/jquery.min.js" crossorigin="anonymous"></script>
+
+    <link href="https://yastatic.net/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://yastatic.net/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <link type="text/css" href="https://yandex.st/highlightjs/8.0/styles/github.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/bash.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/json.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/xml.min.js"></script>
+    <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
+    <style>
+        pre {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <pre><code>POST to http://gateway.niffler.dc:8090/api/spends/add</code></pre>
+</div>
+
+
+    <h4>Body</h4>
+    <div>
+        <pre><code>b'{"spendDate": "2005-11-14", "category": {"name": "early", "username": "rufxyxoi"}, "currency": "EUR", "amount": 788.0, "description": "Me effort according necessary.", "username": "rufxyxoi"}'</code></pre>
+    </div>
+
+
+
+
+    <h4>Headers</h4>
+    <div>
+    
+        <div>
+            <pre><code><b>User-Agent</b>: python-requests/2.32.5</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept-Encoding</b>: gzip, deflate</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Connection</b>: keep-alive</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Type</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Authorization</b>: Bearer eyJraWQiOiJkMDgzOTNkMC0yZWZiLTRiMmQtYmE4Ny00ZjYzYzM0N2Y0NjgiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJydWZ4eXhvaSIsImF1ZCI6ImNsaWVudCIsIm5iZiI6MTc3NTQwOTYxMSwic2NvcGUiOlsib3BlbmlkIl0sImlzcyI6Imh0dHA6Ly9hdXRoLm5pZmZsZXIuZGM6OTAwMCIsImV4cCI6MTc3NTQxMzIxMSwiaWF0IjoxNzc1NDA5NjExLCJqdGkiOiI4MWZlM2YyMC00YjM1LTRmZmEtYmJhOS1lOTcyNGMyZjE1NDIifQ.We2tbNz70FXzmKEnPx8i11XX9D_TYv9peOBfAkDXBBcC41n0xWD4NwFRPvDcnlXVJvOasUaWPDLuBtbcUxWU60tMErWk4T8_Hs4ODh7nFTQ9L7bdbbs3g4WpWfyI1hUK12h5VsMQGQRBoYeyfZ0HOadG9V1l57AyPycQl3Ni2SCzyfUaOF9N0pK0TLIQBmZLMJkHrqKleOhFW58JybzWYBTMDst2lVlyK1QFwjTBkRiOaVA3q-rapioHGUagSs69WpCp9ERcr8oN-maQnWDinWghN0-GbwLmJY7vRNRQF7Wp6hxF4OikrMan-3BYfUCMFKeOVNy9_6nkHaqpQ-oQyg</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Length</b>: 191</code></pre>
+        </div>
+    
+    </div>
+
+
+
+
+
+
+    <h4>Curl</h4>
+    <div>
+        <pre><code>curl -H 'User-Agent: python-requests/2.32.5' -H 'Accept-Encoding: gzip, deflate' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJraWQiOiJkMDgzOTNkMC0yZWZiLTRiMmQtYmE4Ny00ZjYzYzM0N2Y0NjgiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJydWZ4eXhvaSIsImF1ZCI6ImNsaWVudCIsIm5iZiI6MTc3NTQwOTYxMSwic2NvcGUiOlsib3BlbmlkIl0sImlzcyI6Imh0dHA6Ly9hdXRoLm5pZmZsZXIuZGM6OTAwMCIsImV4cCI6MTc3NTQxMzIxMSwiaWF0IjoxNzc1NDA5NjExLCJqdGkiOiI4MWZlM2YyMC00YjM1LTRmZmEtYmJhOS1lOTcyNGMyZjE1NDIifQ.We2tbNz70FXzmKEnPx8i11XX9D_TYv9peOBfAkDXBBcC41n0xWD4NwFRPvDcnlXVJvOasUaWPDLuBtbcUxWU60tMErWk4T8_Hs4ODh7nFTQ9L7bdbbs3g4WpWfyI1hUK12h5VsMQGQRBoYeyfZ0HOadG9V1l57AyPycQl3Ni2SCzyfUaOF9N0pK0TLIQBmZLMJkHrqKleOhFW58JybzWYBTMDst2lVlyK1QFwjTBkRiOaVA3q-rapioHGUagSs69WpCp9ERcr8oN-maQnWDinWghN0-GbwLmJY7vRNRQF7Wp6hxF4OikrMan-3BYfUCMFKeOVNy9_6nkHaqpQ-oQyg' -H 'Content-Length: 191' -d '{"spendDate": "2005-11-14", "category": {"name": "early", "username": "rufxyxoi"}, "currency": "EUR", "amount": 788.0, "description": "Me effort according necessary.", "username": "rufxyxoi"}' http://gateway.niffler.dc:8090/api/spends/add</code></pre>
+    </div>
+
+</body>
+</html>
