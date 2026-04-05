@@ -1,0 +1,71 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset = UTF-8">
+    <script src="https://yastatic.net/jquery/2.2.3/jquery.min.js" crossorigin="anonymous"></script>
+
+    <link href="https://yastatic.net/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://yastatic.net/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <link type="text/css" href="https://yandex.st/highlightjs/8.0/styles/github.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/bash.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/json.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/xml.min.js"></script>
+    <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
+    <style>
+        pre {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <pre><code>GET to http://gateway.niffler.dc:8090/api/categories/all?excludeArchived=true</code></pre>
+</div>
+
+
+
+
+
+    <h4>Headers</h4>
+    <div>
+    
+        <div>
+            <pre><code><b>User-Agent</b>: python-requests/2.32.5</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept-Encoding</b>: gzip, deflate</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Connection</b>: keep-alive</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Type</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Authorization</b>: Bearer eyJraWQiOiIzOWQ3OTIzOC1mNDc2LTQyZGEtOTcwNS0zZmU5MTE2OWY4YzAiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ2aXJtdnV6eWVtbGwiLCJhdWQiOiJjbGllbnQiLCJuYmYiOjE3NzU0MTE0MTMsInNjb3BlIjpbIm9wZW5pZCJdLCJpc3MiOiJodHRwOi8vYXV0aC5uaWZmbGVyLmRjOjkwMDAiLCJleHAiOjE3NzU0MTUwMTMsImlhdCI6MTc3NTQxMTQxMywianRpIjoiOWU2MTEwMjEtNzdjOC00YWNhLTgyNjAtMWRkOTk1MThjZWZiIn0.O4cI3GuSBr0R4cOzKNk32iOQ8NX5N91Q_TsD1f6Yx_z59Stg1RXB8YVaH8U6VmxVkl7bKaKMOrE3sJHoyr7_YtG4YOJvvbjJVO8vaSIZoPOdGscTUIBASFjpiT8CMz4ZPXce3qdyvvOvD_pU2lSnZoflLiJHB2v6VHXk0TbREQhKMAAIjG1eHcihqauPy2AkCwID06uw8egHEXDjv8EssEaBuQmk4VatiC2FDrHb_xAw_oRvjdP8G0Z3GYc6ql2HG0dNk_UyDyrBpcKy19eNOY-9sQvd09VSMtzLJgWrR94AB8uXRZztUm84ehYsCvK4dxNn6I8DEDd5-fkCo_nS4w</code></pre>
+        </div>
+    
+    </div>
+
+
+
+
+
+
+    <h4>Curl</h4>
+    <div>
+        <pre><code>curl -H 'User-Agent: python-requests/2.32.5' -H 'Accept-Encoding: gzip, deflate' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJraWQiOiIzOWQ3OTIzOC1mNDc2LTQyZGEtOTcwNS0zZmU5MTE2OWY4YzAiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ2aXJtdnV6eWVtbGwiLCJhdWQiOiJjbGllbnQiLCJuYmYiOjE3NzU0MTE0MTMsInNjb3BlIjpbIm9wZW5pZCJdLCJpc3MiOiJodHRwOi8vYXV0aC5uaWZmbGVyLmRjOjkwMDAiLCJleHAiOjE3NzU0MTUwMTMsImlhdCI6MTc3NTQxMTQxMywianRpIjoiOWU2MTEwMjEtNzdjOC00YWNhLTgyNjAtMWRkOTk1MThjZWZiIn0.O4cI3GuSBr0R4cOzKNk32iOQ8NX5N91Q_TsD1f6Yx_z59Stg1RXB8YVaH8U6VmxVkl7bKaKMOrE3sJHoyr7_YtG4YOJvvbjJVO8vaSIZoPOdGscTUIBASFjpiT8CMz4ZPXce3qdyvvOvD_pU2lSnZoflLiJHB2v6VHXk0TbREQhKMAAIjG1eHcihqauPy2AkCwID06uw8egHEXDjv8EssEaBuQmk4VatiC2FDrHb_xAw_oRvjdP8G0Z3GYc6ql2HG0dNk_UyDyrBpcKy19eNOY-9sQvd09VSMtzLJgWrR94AB8uXRZztUm84ehYsCvK4dxNn6I8DEDd5-fkCo_nS4w' 'http://gateway.niffler.dc:8090/api/categories/all?excludeArchived=true'</code></pre>
+    </div>
+
+</body>
+</html>

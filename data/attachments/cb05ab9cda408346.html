@@ -1,0 +1,80 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset = UTF-8">
+    <script src="https://yastatic.net/jquery/2.2.3/jquery.min.js" crossorigin="anonymous"></script>
+
+    <link href="https://yastatic.net/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://yastatic.net/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <link type="text/css" href="https://yandex.st/highlightjs/8.0/styles/github.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/bash.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/json.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/xml.min.js"></script>
+    <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
+    <style>
+        pre {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <pre><code>POST to http://gateway.niffler.dc:8090/api/categories/add</code></pre>
+</div>
+
+
+    <h4>Body</h4>
+    <div>
+        <pre><code>b'{"id": "6019fdc2-3c9d-4d8c-8705-87ac2f1d662a", "name": "concern"}'</code></pre>
+    </div>
+
+
+
+
+    <h4>Headers</h4>
+    <div>
+    
+        <div>
+            <pre><code><b>User-Agent</b>: python-requests/2.32.5</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept-Encoding</b>: gzip, deflate</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Connection</b>: keep-alive</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Type</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Authorization</b>: Bearer eyJraWQiOiIzOWQ3OTIzOC1mNDc2LTQyZGEtOTcwNS0zZmU5MTE2OWY4YzAiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJubGZ0cCIsImF1ZCI6ImNsaWVudCIsIm5iZiI6MTc3NTQxMTQ0Miwic2NvcGUiOlsib3BlbmlkIl0sImlzcyI6Imh0dHA6Ly9hdXRoLm5pZmZsZXIuZGM6OTAwMCIsImV4cCI6MTc3NTQxNTA0MiwiaWF0IjoxNzc1NDExNDQyLCJqdGkiOiJhNDQ5NDU0Mi04MTZjLTQ3MjUtYjAyMi0yZjkwY2NiOGI1YmQifQ.qt9CmePdGFDZo_WnoU2dJ60e5vagjRDYSz6bXEfu8lsbwwny92VD6vImyXd9nRpVCwoPCVRoG4WDTbvbLlyoiEH47krnEChYI3SGUcXQWnNLZzzObze83sC61ez_vNM3kMeeDXE_otGenDIBU1krLpf0wMr2moHW0zcqc6T1G0-Vt9HSuC7-6JOCySXZOEDmnxTJB1sQ6TFk6gzJ5YhuUwOhfViD2g-UwigThzRC8AksW1WqXdzUzP5Cij0p1KC_htbSUuE1ogErZdau1ljBWYRO4IjTyO-vLL4Y8d-evH0m1nEtaZRS2rGc6pGirtYbimw1I7M9g-ljdvGPsTnQJg</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Length</b>: 65</code></pre>
+        </div>
+    
+    </div>
+
+
+
+
+
+
+    <h4>Curl</h4>
+    <div>
+        <pre><code>curl -H 'User-Agent: python-requests/2.32.5' -H 'Accept-Encoding: gzip, deflate' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJraWQiOiIzOWQ3OTIzOC1mNDc2LTQyZGEtOTcwNS0zZmU5MTE2OWY4YzAiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJubGZ0cCIsImF1ZCI6ImNsaWVudCIsIm5iZiI6MTc3NTQxMTQ0Miwic2NvcGUiOlsib3BlbmlkIl0sImlzcyI6Imh0dHA6Ly9hdXRoLm5pZmZsZXIuZGM6OTAwMCIsImV4cCI6MTc3NTQxNTA0MiwiaWF0IjoxNzc1NDExNDQyLCJqdGkiOiJhNDQ5NDU0Mi04MTZjLTQ3MjUtYjAyMi0yZjkwY2NiOGI1YmQifQ.qt9CmePdGFDZo_WnoU2dJ60e5vagjRDYSz6bXEfu8lsbwwny92VD6vImyXd9nRpVCwoPCVRoG4WDTbvbLlyoiEH47krnEChYI3SGUcXQWnNLZzzObze83sC61ez_vNM3kMeeDXE_otGenDIBU1krLpf0wMr2moHW0zcqc6T1G0-Vt9HSuC7-6JOCySXZOEDmnxTJB1sQ6TFk6gzJ5YhuUwOhfViD2g-UwigThzRC8AksW1WqXdzUzP5Cij0p1KC_htbSUuE1ogErZdau1ljBWYRO4IjTyO-vLL4Y8d-evH0m1nEtaZRS2rGc6pGirtYbimw1I7M9g-ljdvGPsTnQJg' -H 'Content-Length: 65' -d '{"id": "6019fdc2-3c9d-4d8c-8705-87ac2f1d662a", "name": "concern"}' http://gateway.niffler.dc:8090/api/categories/add</code></pre>
+    </div>
+
+</body>
+</html>
