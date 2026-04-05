@@ -8,9 +8,7 @@
         "path": "/",
         "env": [
         "TZ=Europe/Moscow",
-        "LANG=ru_RU.UTF-8",
-        "LANGUAGE=ru:en",
-        "LC_ALL=ru_RU.UTF-8"
+        "LANG=ru_RU.UTF-8"
         ],
         "hosts": [
           "frontend.niffler.dc:host-gateway",
