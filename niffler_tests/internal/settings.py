@@ -21,6 +21,8 @@ class Config(BaseSettings):
     test_password: str | None = None
     test_fullname: str | None = None
     soap_url: str | None = None
+    window_height: str | None = '1920'
+    window_width: str | None = '1080'
 
     selenoid_url: str | None = None
     driver_name: str | None = None

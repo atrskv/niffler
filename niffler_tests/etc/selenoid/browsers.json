@@ -3,7 +3,7 @@
     "default": "124.0",
     "versions": {
       "124.0": {
-        "image": "seleniarm/standalone-chromium:124.0",
+        "image": "selenoid/vnc_chrome:124.0",
         "port": "4444",
         "path": "/",
         "env": [
