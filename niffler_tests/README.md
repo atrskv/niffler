@@ -43,6 +43,8 @@ poetry install
 context='local' pytest tests
 ```
 
+Или удаленно на Selenoid:
+
 ```
 context='remote' pytest tests
 ```
