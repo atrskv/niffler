@@ -4,7 +4,7 @@ from pydantic_settings import BaseSettings
 
 
 class Config(BaseSettings):
-    context: Literal["local", "remote"] = "remote"
+    context: Literal["local", "remote"] = "local"
     use_mock: bool = False
     frontend_url: str = "http://frontend.niffler.dc"
     wiremock_host: str = "localhost:8094"
@@ -29,6 +29,8 @@ class Config(BaseSettings):
     driver_version: str | None = None
     enable_video: bool | None = None
     enable_VNC: bool| None = None
+
+    kafka_address: str | None = None
 
 
 config = Config(_env_file=dotenv.find_dotenv(f"config.{Config().context}.env"))

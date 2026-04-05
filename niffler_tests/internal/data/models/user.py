@@ -53,3 +53,7 @@ class User(BaseModel):
             photoSmall=None,
             friendshipStatus=None,
         )
+
+
+class KafkaUserEvent(BaseModel):
+    username: str

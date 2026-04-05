@@ -2,6 +2,8 @@ import pytest
 from grpc import insecure_channel, intercept_channel
 
 from internal import settings
+from internal.clients.api.auth import AuthClient
+from internal.clients.api.kafka import KafkaClient
 from internal.clients.api.spends import SpendsService
 from internal.clients.api.users import UsersService, UsersSoapService
 from internal.clients.db.spends import SpendDb
@@ -26,6 +28,11 @@ def users_client(token) -> UsersService:
 
 
 @pytest.fixture
+def auth_client() -> AuthClient:
+    return AuthClient(config=settings.config)
+
+
+@pytest.fixture
 def soap_users_client():
     return UsersSoapService(settings.config.soap_url)
 
@@ -46,3 +53,9 @@ def grpc_client() -> NifflerCurrencyServiceClient:
     intercepted_channel = intercept_channel(channel, *INTERCEPTORS)
 
     return NifflerCurrencyServiceClient(intercepted_channel)
+
+
+@pytest.fixture(scope="session")
+def kafka_client():
+    with KafkaClient() as k:
+        yield k
