@@ -11,6 +11,7 @@ from internal.clients.api.auth import AuthClient
 from internal.interceptors.allure import AllureInterceptor
 from internal.interceptors.logging import LoggingInterceptor
 from internal.settings import config
+from internal.utils.allure import add_screenshot, add_html, add_video
 
 INTERCEPTORS = [LoggingInterceptor(), AllureInterceptor()]
 
@@ -47,10 +48,25 @@ def pytest_fixture_setup(fixturedef: FixtureDef, request: FixtureRequest):
     item.name = f"[{scope_letter}] " + " ".join(fixturedef.argname.split("_")).title()
 
 
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    report = outcome.get_result()
+    if report.when == "call" and report.failed:
+        try:
+            if hasattr(browser, 'driver') and browser.driver:
+                add_screenshot()
+                add_html()
+        except Exception as e:
+            print(f"Failed to capture failure artifacts: {e}")
+
+
 @pytest.fixture(scope="function", autouse=False)
 def in_browser():
     browser.config.base_url = settings.config.frontend_url
     browser.config.timeout = settings.config.timeout
+    browser.config.window_width = settings.config.window_width
+    browser.config.window_height = settings.config.window_height
 
     if settings.config.context == 'remote':
         selenoid_capabilities = {
@@ -74,6 +90,12 @@ def in_browser():
         )
 
     yield
+
+    add_screenshot()
+    add_html()
+
+    if settings.config.context == 'remote':
+        add_video()
 
     for url in [
         settings.config.frontend_url,
