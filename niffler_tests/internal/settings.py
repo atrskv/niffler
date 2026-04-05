@@ -22,5 +22,11 @@ class Config(BaseSettings):
     test_fullname: str | None = None
     soap_url: str | None = None
 
+    selenoid_url: str | None = None
+    driver_name: str | None = None
+    driver_version: str | None = None
+    enable_video: bool | None = None
+    enable_VNC: bool| None = None
 
-config = Config(_env_file=dotenv.find_dotenv(f"config.{Config().context}.env"))
+
+config = Config(_env_file=f"config.{Config().context}.env")
