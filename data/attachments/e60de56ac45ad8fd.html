@@ -1,0 +1,145 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset = UTF-8">
+
+    <link href="https://yastatic.net/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" href="https://yandex.st/highlightjs/8.0/styles/github.min.css" rel="stylesheet"/>
+
+    <script src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <style>
+        pre { white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+
+<h3>Status: 200</h3>
+
+
+<h4>Headers</h4>
+
+<pre><code><b>Vary</b>: Origin, Access-Control-Request-Method, Access-Control-Request-Headers</code></pre>
+
+<pre><code><b>Set-Cookie</b>: XSRF-TOKEN=7ad609e7-1938-4e8e-842f-46ca7b047646; Path=/</code></pre>
+
+<pre><code><b>X-XSRF-TOKEN</b>: 7ad609e7-1938-4e8e-842f-46ca7b047646</code></pre>
+
+<pre><code><b>X-Content-Type-Options</b>: nosniff</code></pre>
+
+<pre><code><b>X-XSS-Protection</b>: 0</code></pre>
+
+<pre><code><b>Cache-Control</b>: no-cache, no-store, max-age=0, must-revalidate</code></pre>
+
+<pre><code><b>Pragma</b>: no-cache</code></pre>
+
+<pre><code><b>Expires</b>: 0</code></pre>
+
+<pre><code><b>X-Frame-Options</b>: DENY</code></pre>
+
+<pre><code><b>Content-Type</b>: text/html;charset=UTF-8</code></pre>
+
+<pre><code><b>Content-Language</b>: en-US</code></pre>
+
+<pre><code><b>Transfer-Encoding</b>: chunked</code></pre>
+
+<pre><code><b>Date</b>: Sun, 05 Apr 2026 21:22:04 GMT</code></pre>
+
+<pre><code><b>Keep-Alive</b>: timeout=60</code></pre>
+
+<pre><code><b>Connection</b>: keep-alive</code></pre>
+
+
+
+
+<h4>Body</h4>
+<pre><code><!DOCTYPE HTML>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Register to Niffler</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/favicon.ico"/>
+    <link href="styles/styles.css" rel="stylesheet"
+          type="text/css"/>
+</head>
+<body>
+<main class="content">
+    <div class="content__wrapper">
+        <div class="main__hero"></div>
+        <section class="main__form">
+            <div class="logo-section">
+                <img class="logo-section__logo" src="images/coin.svg" width="36" alt="Niffler logo"/>
+                <p class="logo-section__text">
+                    Niffler
+                </p>
+            </div>
+            <div class="form-section">
+                <form class="form" id="register-form" action="/register" method="post"><input type="hidden" name="_csrf" value="7ad609e7-1938-4e8e-842f-46ca7b047646"/>
+                    <h1 class="header">
+                        Sign up
+                    </h1>
+                    <p class="header__additional">
+                        Already have an account? <a class="form__link" href="http://frontend.niffler.dc/main">Log in!</a>
+                    </p>
+                    <label class="form__label">Username
+                        <input class="form__input" type="text" id="username" name="username"
+                               placeholder="Type your username" required value=""/>
+                        
+                    </label>
+                    <label class="form__label">Password
+                        <input class="form__input" type="password" id="password" name="password"
+                               placeholder="Type your password" required value=""/>
+                        <button type="button" class="form__password-button" id="passwordBtn"></button>
+                        
+                    </label>
+                    <label class="form__label">Submit password
+                        <input class="form__input" type="password" id="passwordSubmit" name="passwordSubmit"
+                               placeholder="Submit your password" required value=""/>
+                        <button type="button" class="form__password-button" id="passwordSubmitBtn"></button>
+                        
+                    </label>
+                    <button class="form__submit" type="submit">
+                        Sign Up
+                    </button>
+                </form>
+                
+            </div>
+        </section>
+    </div>
+</main>
+<script>
+    const passwordButton = document.getElementById("passwordBtn");
+    const passwordInput = document.getElementById("password");
+
+    const passwordSubmitButton = document.getElementById("passwordSubmitBtn");
+    const passwordSubmitInput = document.getElementById("passwordSubmit");
+
+    const togglePasswordInputType = (inputType) => {
+        return inputType === "password" ? "text" : "password";
+    }
+
+    const togglePasswordButtonClass = (passwordBtn) => {
+        passwordBtn.classList.toggle("form__password-button_active");
+    }
+
+    const handlePasswordButtonClick = () => {
+        passwordInput.setAttribute("type", togglePasswordInputType(passwordInput.getAttribute("type")));
+        togglePasswordButtonClass(passwordButton);
+    }
+
+    const handleSubmitPasswordButtonClick = () => {
+        passwordSubmitInput.setAttribute("type", togglePasswordInputType(passwordSubmitInput.getAttribute("type")));
+        togglePasswordButtonClass(passwordSubmitButton);
+    }
+
+    passwordButton.addEventListener("click", handlePasswordButtonClick);
+    passwordSubmitButton.addEventListener("click", handleSubmitPasswordButtonClick);
+
+</script>
+</body>
+</html>
+</code></pre>
+
+
+</body>
+</html>

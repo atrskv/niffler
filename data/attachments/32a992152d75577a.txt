@@ -1,0 +1,3 @@
+SELECT category.id AS category_id, category.username AS category_username, category.name AS category_name 
+FROM category 
+WHERE category.id = d099942d-3416-4571-9a38-584040338f59

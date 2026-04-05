@@ -1,0 +1,119 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset = UTF-8">
+
+    <link href="https://yastatic.net/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" href="https://yandex.st/highlightjs/8.0/styles/github.min.css" rel="stylesheet"/>
+
+    <script src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <style>
+        pre { white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+
+<h3>Status: 201</h3>
+
+
+<h4>Headers</h4>
+
+<pre><code><b>Vary</b>: Origin, Access-Control-Request-Method, Access-Control-Request-Headers</code></pre>
+
+<pre><code><b>X-XSRF-TOKEN</b>: 7ad609e7-1938-4e8e-842f-46ca7b047646</code></pre>
+
+<pre><code><b>X-Content-Type-Options</b>: nosniff</code></pre>
+
+<pre><code><b>X-XSS-Protection</b>: 0</code></pre>
+
+<pre><code><b>Cache-Control</b>: no-cache, no-store, max-age=0, must-revalidate</code></pre>
+
+<pre><code><b>Pragma</b>: no-cache</code></pre>
+
+<pre><code><b>Expires</b>: 0</code></pre>
+
+<pre><code><b>X-Frame-Options</b>: DENY</code></pre>
+
+<pre><code><b>Content-Type</b>: text/html;charset=UTF-8</code></pre>
+
+<pre><code><b>Content-Language</b>: en-US</code></pre>
+
+<pre><code><b>Transfer-Encoding</b>: chunked</code></pre>
+
+<pre><code><b>Date</b>: Sun, 05 Apr 2026 21:22:05 GMT</code></pre>
+
+<pre><code><b>Keep-Alive</b>: timeout=60</code></pre>
+
+<pre><code><b>Connection</b>: keep-alive</code></pre>
+
+
+
+
+<h4>Body</h4>
+<pre><code><!DOCTYPE HTML>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Register to Niffler</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/favicon.ico"/>
+    <link href="styles/styles.css" rel="stylesheet"
+          type="text/css"/>
+</head>
+<body>
+<main class="content">
+    <div class="content__wrapper">
+        <div class="main__hero"></div>
+        <section class="main__form">
+            <div class="logo-section">
+                <img class="logo-section__logo" src="images/coin.svg" width="36" alt="Niffler logo"/>
+                <p class="logo-section__text">
+                    Niffler
+                </p>
+            </div>
+            <div class="form-section">
+                
+                <div class="form">
+                    <p class="form__paragraph form__paragraph_success">Congratulations! You've registered!</p>
+                    <a class="form_sign-in" href="http://frontend.niffler.dc/main">Sign in</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+<script>
+    const passwordButton = document.getElementById("passwordBtn");
+    const passwordInput = document.getElementById("password");
+
+    const passwordSubmitButton = document.getElementById("passwordSubmitBtn");
+    const passwordSubmitInput = document.getElementById("passwordSubmit");
+
+    const togglePasswordInputType = (inputType) => {
+        return inputType === "password" ? "text" : "password";
+    }
+
+    const togglePasswordButtonClass = (passwordBtn) => {
+        passwordBtn.classList.toggle("form__password-button_active");
+    }
+
+    const handlePasswordButtonClick = () => {
+        passwordInput.setAttribute("type", togglePasswordInputType(passwordInput.getAttribute("type")));
+        togglePasswordButtonClass(passwordButton);
+    }
+
+    const handleSubmitPasswordButtonClick = () => {
+        passwordSubmitInput.setAttribute("type", togglePasswordInputType(passwordSubmitInput.getAttribute("type")));
+        togglePasswordButtonClass(passwordSubmitButton);
+    }
+
+    passwordButton.addEventListener("click", handlePasswordButtonClick);
+    passwordSubmitButton.addEventListener("click", handleSubmitPasswordButtonClick);
+
+</script>
+</body>
+</html>
+</code></pre>
+
+
+</body>
+</html>
