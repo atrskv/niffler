@@ -24,7 +24,7 @@ def test_message_should_be_produced_to_kafka_after_successful_registration(auth_
 
 
 pytestmark = [
-    pytest.mark.allure_label("KAFKA: auth", label_type="epic"),
+    pytest.mark.allure_label("KAFKA: Auth", label_type="epic"),
     pytest.mark.allure_label("Auth", label_type="feature"),
 ]
 
